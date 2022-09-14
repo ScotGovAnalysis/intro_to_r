@@ -1,0 +1,1050 @@
+---
+title: "Intro R training"
+output: html_document
+---
+  
+  
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE, 
+	eval = FALSE
+)
+```
+
+
+
+## Basic setup
+
+
+
+This document was created by the Ministry of Justice Analytical Services R training group and has been adapted for use by Scottish Government. The original document can be found at https://moj-analytical-services.github.io/platform_user_guidance/getting-started.html. 
+
+
+
+This guide is hosted on Github: https://github.com/moj-analytical-services/IntroRTraining
+
+
+
+## Contents
+
+
+
+1. Introduction - in this section you will be introduced to R, the RStudio Environment and some of the basic R commands
+
+2. Processing data - this section introduces R packages, importing data into R,  inspecting data and data classes
+
+3. Data wrangling and 'group by' calculations - this section covers the most useful data manipulation functions using the dplyr package
+
+4. Dates - this section explores working with dates
+
+5. Merging data, missing values and exporting - This section explores some more advanced data wrangling techniques, as well as exporting data
+
+6. Extra resources
+
+
+
+## 1. Introduction
+
+
+
+### 1.1 Session aims
+
+
+
+* Overview of R
+
+* Get new R users up and running with confidence
+
+* Introduce key functions needed in analytical work
+
+
+
+### 1.2 What is R?
+
+
+
+R is an open-source programming language and software environment, designed primarily for statistical computing. It has a long history - it is based on the S language, which was developed in 1976 in Bell Labs, where the UNIX operating system and the C and C++ languages were developed. The R language itself was developed in the 1990s, with the first stable version release in 2000.
+
+
+
+R has grown rapidly in popularity particularly in the last five years, due to the increased interest in the data science field. It is now a key tool in the MoJ's Analytical Platform.
+
+
+
+Some of the advantages:
+
+
+
+* It is **popular** - there is a large, active and rapidly growing community of R programmers, which has resulted in a plethora of resources and extensions.
+
+* It is **powerful** - the history as a statistical language means it is well suited for data analysis and manipulation.
+
+* It is **extensible** - there are a vast array of **packages** that can be added to extend the functionality of R, produced by statisticians and programmers around the world. These can range from obscure statistical techniques to tools for making interactive charts.
+
+* It's **free and open source** - a large part of its popularity can be owed to its low cost, particularly relative to proprietary software such as SAS.
+
+
+
+### 1.3 How is it used?
+
+
+
+There a number of areas in the Government where R is making an impact:
+  
+  
+  
+  1. The Reproducible Analytical Pipeline (RAP) is a set of tools and standards for producing statistical publications in a more automated and reproducible way. 
+
+2. A number of webapps using Shiny have been produced, allowing customers to explore data in an interactive way. 
+  
+  3. It has enabled more technical analysis to be done with the help of packages written by academics and statisticians, which would have to be coded from scratch using SAS.
+
+
+
+
+
+### 1.4 Command console
+
+
+
+The window in which commands are entered is called the "console" window. It is used to input and execute code. Results, errors and warnings are shown directly in the same window. 
+
+
+
+A command which is entered into the console is executed by simply pressing enter. 
+
+
+
+Code appears in blue text.
+
+Results appear in black text. 
+
+Warnings and errors appear as red text. 
+
+
+
+For instance if you type:
+  
+  
+  
+```{r}
+
+x <- 3
+
+```
+
+
+
+
+
+(and press return) R creates an object called x which takes the value 3. You can see this in the 'workplace' (the environment window in the top right) and if you type: 
+  
+  
+
+```{r}
+
+x 
+
+```
+
+
+
+The results are then shown in the console.  
+
+
+
+Note - to assign a name to an object in R you need to use an arrow and a hyphen:
+  
+  <-
+  
+  
+  
+  Furthermore, R is case sensitive so if you were to type X, an error would be displayed as you have not yet created and object called X.
+
+
+
+As well as storing single values, you can also create vectors. The below statement creates a vector object with the values 3, 2 and 4:
+  
+  
+  
+```{r}
+
+x <- c(3, 2, 4)
+
+```
+
+
+
+This uses the "c" function - the c is short for "concatenate". You can now see the new object x in the 'workplace'. Note that the old object x has been overwritten and that the new object is of class numeric. 
+
+
+
+The console will remember your most recent commands, if you want to reuse one, just use the up and down arrows to scroll through them. When you have found the one that you want, press return, R will repeat that line of code and display the results. 
+
+
+
+
+
+### 1.5 Script file
+
+
+
+While commands can be written into the console, it is a good idea to use a "script". This is a code file that can be saved and reused in future. 
+
+
+
+To create a new file: click 'file', 
+
+'New file',
+
+'R Script'.
+
+
+
+In R, these files have a '.R' extension. The code file should appear in the top left of the screen. These files can be saved and used again in future. 
+
+
+
+To execute the code, click run at the top of the screen. R will run the line of code that the cursor is currently on, if you want to run several lines of code, highlight them and then press run.
+
+
+
+
+
+### 1.6 Other windows and getting help
+
+
+
+The top right panel shows all "objects" that are in your working environment. This will become clearer throughout the session but typically, this will be any data that you have created or imported, additional variables and values that you have created. For instance, if you have run the code above, 'x' should be shown here. Other objects such as regression models that you have created would also appear here. From here you can also use a drop down menu to import more data. 
+
+
+
+The bottom right window has several tabs. You can see your files and any plots that you have created. It also shows what packages are available and what ones are loaded, more on packages later. 
+
+
+
+There is also a help menu. You can either use this or type ? into the console and then the name of what it is you want help on in brackets. For instance, the following line would give you help on the function called 'mean':
+  
+  
+  
+```{r results = "hide"}
+
+?mean
+
+```
+
+
+
+Of course, you can also use Google, Stack Overflow, R-Yammer or the R-user group to try and find the solution to the problem. 
+
+
+
+### 1.7 Exercises
+
+
+
+1.	Create a new R script file in which you can store all commands you make during this exercise. Save it as 'Intro_R_Exercises.R'.
+
+2.  Create a new value called y which is equal to 17.
+
+3.  Now multiply y by 78. What answer do you get?
+  
+  4.	What does the command "head" do?
+  
+  
+  
+  
+  
+##   2. Processing data
+  
+### 2.1 Setting up a working directory
+  
+  
+  
+  The default behaviour of RStudio for the handling of files e.g. datasets, code scripts etc. is to use a working directory which is a folder where RStudio reads and saves files. Therefore, before we start writing any code we should set up a working directory so that everything we are going to import into RStudio or export from RStudio will be saved by default into this folder. 
+
+
+
+You can check what the working directory currently is by using the getwd() command (which stands for get working directory):
+  
+  
+  
+```{r results="hide"}
+
+getwd()
+
+```
+
+
+If you want to change the working directory you can use the setwd() command:
+  
+  
+
+```{r}
+
+setwd("C:/Users/u446122/Documents/OFFLINE/Training/intro_to_r/intro_to_r")
+
+
+```
+
+Note that R uses "/".
+
+
+You can set your working directory manually following the steps below:
+  
+  
+  
+  1. Create a folder with an appropriate name containing any files you need for your RStudio session.
+
+2. From RStudio, use the menu to change your working directory under Session > Set Working Directory > Choose Directory. 
+
+3. Choose the directory (folder) you've just created in step 1.
+
+
+
+Projects are a means of organising work for reproducible analysis. A project file (.RProj) allows RStudio to refer to files relative to the project directory. You can create a new project using RStudio and upload files from a folder in your laptop into this new project. Opening a project sets you up in the appropriate working directory automatically. Steps to create a new project are detailed below:  
+  
+  
+  
+1. Click on the File Menu and select New Project.
+
+2. Select New Directory
+
+3. Select New Project
+
+4. Write an appropriate name for your project in the Directory Name text box and select Create Project. The project name will now appear in the top right corner of RStudio to indicate that you are in the new project.
+
+5. Upload files to your new project by clicking Upload in the Files window menu (bottom right window) and select Browse to upload any files saved in a folder e.g. data csv files saved in a folder in your OneDrive.
+
+To switch between R projects, you can select a .Rproj file, use the menu "File" and open project, or use the drop down in the top right corner of RStudio. 
+
+
+### 2.2 Packages
+
+
+
+A lot of pre-programmed routines are included in R, and you can add a lot more through packages. One characteristic that's important to recognise is that just as there are many ways of getting from Waverley Station to Victoria Quay, there are many ways of doing the same thing in R. Some ways are (computationally) faster, some are simpler to program, and some may be more conducive to your taste.  
+
+
+
+Packages extend R's functionality enormously and are a key factor in making R so popular. 
+
+Packages have to be approved before the can be installed on SCOTS. Instructions can be found here: https://erdm.scotland.gov.uk:8443/documents/A23744528/details
+
+
+Once a package is installed, you should be able to see it in the packages tab. If you want to use it, you can load it by ticking the appropriate box in the packages window. You can also load packages using the library command, which you can inside your script, so they will automatically load when you run it:
+  
+  
+  
+```{r message=FALSE, warning=FALSE, comment=FALSE, results=FALSE}
+
+library("tidyverse")
+
+```
+
+
+
+The package tidyverse contains many useful packages such as dplyr which is a particularly useful package for manipulating and processing data. Many of the functions in the rest of this training course are from this package.
+
+
+
+To know more about a package, it is always useful to read the associated documentation:
+  
+  
+  
+```{r results="hide"}
+
+help(package=dplyr)
+
+```
+
+
+
+
+
+### 2.3 Importing data
+
+You can import data in .csv files using the readr package (you have already loaded the readr package as it is part of the tidyverse package - see section 2.2)
+
+
+```{r eval = FALSE, results="hide"}
+
+chick_weights <- read_csv("chickweights.csv")
+
+```
+
+You can now see by looking in the 'environment' window that an object has been created (the 'chick_weights' dataset), and that it has 578 observations and 5 variables.
+
+Note that the above assumes that the csv file is in your working directory, otherwise you will need to include the file path - see section 2.1.
+
+
+There are other commands and various packages that can be used to import datasets with other extensions (e.g. .xls) e.g. see http://www.statmethods.net/input/importingdata.html 
+
+
+
+### Pre-loaded datasets
+R has a number of pre-loaded R datasets that you can use to learn R.
+
+We will be using the iris dataset which gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginica.
+
+By running the code chunk below you will load this dataset into your environment. You can see that it is made up of 150 observations of 5 variables.
+
+```{r eval = FALSE, results="hide"}
+data(iris)
+iris
+
+```
+
+### 2.4 Inspecting the dataset
+
+
+
+As noted in the previous section, you can see by looking in the 'environment' window that the 'iris' dataset has 150 observations and 5 variables. To view this dataset, click the icon to the right of this information (or anywhere on that row), which you can see from the console is the equivalent of using the command:
+
+
+
+```{r eval = FALSE}
+
+View(iris)
+
+```
+
+
+
+To obtain a summary of the meta-data  of your dataset (i.e. the "structure") you can click on the arrow by 'iris' in the 'environment' window, which provides the same information as by typing the following command:
+
+
+
+```{r}
+
+str(iris)
+
+```
+
+
+
+Looking at the output provided informs you that the dataset 'iris' is in R terminology a tibble and a dataframe, and as we've already seen has 150 observations and 5 variables. Variables in a data frame are like columns in a table, and are stored as vectors. Also provided is some information about each variable (or vector) in the dataset (or dataframe) as designated by R; the name, the type (in this case either integer, number or character).  
+
+
+
+The summary command also provides some useful details:
+  
+  
+
+```{r}
+
+summary(iris)
+
+```
+
+
+
+Square brackets can be used to subset data. For instance 'iris[ i , j ]' would return the value in the ith row and jth column of the dataframe 'iris'. Indices in R start from 1. So, if you want the fourth variable for the 10th observation:
+  
+  
+  
+```{r}
+
+iris[10,4]
+
+```
+
+
+
+
+If you want the fourth variable for the 10th and 12th observations you can use the concatenate (c) command:
+  
+  
+  
+```{r}
+
+iris[c(10, 12),4]
+
+```
+
+
+
+If you want the first three variables for the 10th observation:
+  
+  
+  
+```{r}
+
+iris[10,1:3]
+
+```
+
+
+
+The colon operator allows you to create sequences - in this case from 1 to 3, so here you will retrieve from the 1st to the 3rd columns.  
+
+You can exclude a row by negation. So exclude the 10th row using
+
+```{r}
+
+iris[-10,1:3]
+
+```
+
+
+Dataframes/tibbles in R are a collection of vectors where each vector is a column and represents a variable. To view a specific variable, for instance species you can use a dollar sign as follows:
+  
+  
+  
+```{r results="hide"}
+
+iris$Species
+
+```
+
+
+
+The format is dataframe name, $, variable name. Note that a vector is returned. 
+
+
+
+### 2.5 Data classes
+
+
+
+All variables have an associated class. The class will determine what calculations are possible with them and how R should treat them. So far, our dataset offenders has variables of three different classes; integer, number, and character. Other useful types are factor, logical and date. 
+
+
+
+We can check what class a variable is using summary, looking at the information in the Environment pane or by using the command "class" (see example checking the class of the WEIGHT variable below):
+  
+  
+  
+```{r}
+
+class(iris$Sepal.Length) 
+
+```
+
+
+
+It's possible to coerce variables from one class to another. We can change the Sepal.Length variable in the offenders dataset to be an integer variable as follows:
+
+
+
+```{r results="hide"}
+
+iris$Sepal.Length <- as.integer(iris$Sepal.Length)
+
+```
+
+
+
+and back again as follows:
+
+
+
+```{r results="hide"}
+
+iris$Sepal.Length <- as.numeric(iris$Sepal.Length)
+
+```
+
+Warning: Be careful with how you change classes. Changing an integer to a numeric is ok but changing from a numeric to an integer can be dangerous, as we can see above. Here, we have lost everything that was after the decimal point.
+
+Let's reload the dataset to get the original back:
+
+```{r results="hide"}
+
+data(iris)
+
+iris
+
+```
+
+Another common class is factors. 
+
+Factors are for categorical variables involving different levels. So for example, in the dataset 'iris', there are 3 levels of Species: setosa, versicolor, virginica. We can see this now when looking at the environment tab (after clicking the arrow to the left of offenders) and also the order from using the following command:
+
+
+
+```{r}
+
+levels(iris$Species)
+
+```
+
+
+
+The ordering is useful when we do regression analyses as we may want a particular category to be the reference category. By default, the first category is the reference category but this can be changed e.g. from setosa to versicolor using the following command:
+
+
+
+```{r}
+
+iris$Species <- relevel(iris$Species, "versicolor")
+
+```
+
+
+
+We can now change the species variable in the iris dataset to a character variable as follows:
+
+
+```{r results="hide"}
+
+iris$Species <- as.character(iris$Species)  
+
+```
+
+and then change it back to a factor:
+
+```{r results="hide"}
+
+iris$Species <- as.factor(iris$Species)  
+
+```
+
+### 2.6 Some useful numeric and statistical functions include:
+
+
+
+- abs(x): returns the absolute value of x
+
+- sqrt(x): returns the square root of x
+
+- round(x, digits = n): rounds a number to the nth place
+
+- exp(x): returns the exponential of x
+
+- log(x): returns the natural log of x
+
+- sum(x): if x is a vector, returns the sum of its elements
+
+- min(x): if x is a vector, returns the smallest of its elements
+
+- max(x): if x is a vector, returns the biggest of its elements
+
+- rnorm(n, mean = 0, sd = 1): return n random numbers from the standard normal distribution
+
+- rbinom(n, no. of trials = 1, prob = 0.5): return random numbers from n coin tosses
+
+- mean(x): if x is a vector of observations, return the mean of its elements
+
+- sd(x): if x is a vector of observations, return its standard deviation
+
+- cor(x): gives the linear correlation coefficient
+
+- median(x): if x is a vector of observations, return its median
+
+
+
+
+
+### 2.7 Exercises
+
+
+
+1. Find the mean and median of the Sepal.Length variable in the iris dataset.
+
+2. Find the max and min for the Petal.Length variable in the iris dataset.
+
+
+
+
+
+## 3 Data wrangling and 'group by' calculations
+
+### 3.1 Grouping and summarising data
+
+
+
+We can produce breakdowns of statistics using the group_by and summarise commands from the dplyr package.
+
+
+
+```{r results="hide"}
+
+?dplyr::summarise
+
+?group_by
+
+```
+
+
+
+Throughout this course you may have noticed double colons being used following the name of a package as above. This specifies the package you are referring to before calling the function, hence avoiding using the wrong function if two functions have the same name and are from different packages. In general, R will use the function from your most recently loaded package and will warn you when you load a package if there is some overlap. We will not specify packages throughout this code due to the nature of the course, but it is good practice to specify packages in this way if you are sharing code or moving between projects. 
+
+
+
+group_by() identifies which variables we want to produce breakdowns by. 
+
+
+
+summarise() is used to indicate which values we want to calculate. 
+
+
+
+Using these functions together we can produce summary statistics in a similar way to pivot tables in Excel. We can use these functions together using the pipe (%>%) operator which makes code more readable and means you don't have to create a new object each time you run a command. Using the pipe operator reduces the amount of nested functions (functions that are within other functions) and allows us to chain together dplyr data wrangling functions. The pipe operator can be read as "then" and allows us to go from one step to another easily in dplyr so we can, for example:
+
+
+
++ filter our data frame to only focus on a few rows then
+
++ group_by another variable to create groups then
+
++ summarize this grouped data to calculate the mean for each level of the group.
+
+
+
+So if we want the mean sepal length broken down by species:
+
+
+
+```{r results="hide"}
+
+sepal_length_average <- iris %>% 
+  group_by(Species) %>%
+  summarise(ave = mean(Sepal.Length))
+
+```
+
+
+
+In the above code, R is taking the 'iris' dataset, grouping it by Species and then (note that the data is "piped" like water into the group_by command using the pipe symbol '%>%' instead of specifying the 'iris' dataset as the first argument within the group_by command), and then outputting the mean number of previous convictions by species. The new mean number of Sepal.Length variable we've decided to call 'ave'. The results are saved into a new dataset called 'sepal_length_average'. 
+
+
+
+The pipe operator simply passes through the object on the left hand side as the first argument of the following function. If we did not use the pipe operator to obtain the mean sepal length with breakdown by species the R code would look like this:
+
+
+
+```{r results="hide"}
+
+sepal_length_average <- 
+  summarise(group_by(iris,Species),
+            ave=mean(Sepal.Length))
+
+
+
+```
+
+
+
+Using nested functions like this looks more complicated and is harder to follow than if we use the pipe operator. This will become more apparent as extra calculations are added. 
+
+
+There are other functions that could be used here instead of mean e.g. n, n_distinct, min, max, mean, median, var and sd, as well as user functions. 
+
+
+
+If we want to add a new variable called 'count' that provides the counts by Species we can rerun as follows using the pipe operator:
+
+
+
+```{r results="hide"}
+
+sepal_length_average <- iris %>% 
+  group_by(Species) %>%
+  summarise(ave = mean(Sepal.Length), 
+            count=n())
+
+```
+
+
+We can see that there are 50 observations of each species.
+
+Once you have run the group_by() command note that the datset will remain grouped until you tell it to stop. This can cause issues because any further functions you run it on will be applied to the groups rather than the full datset. It is therefore best practice to always ungroup the data once you have run your summary commands. 
+
+
+
+
+```{r results="hide"}
+
+sepal_length_average <- iris %>% 
+  group_by(Species) %>%
+  summarise(ave = mean(Sepal.Length), count=n()) %>%
+  ungroup()
+
+```
+
+
+
+### 3.2 Filter
+
+
+
+If you would like to produce statistics for a subset of rows or observations, a good function to use is filter() from the dplyr package.
+
+
+
+To filter we just specify the data that we want to filter (iris) and the value that we want to filter on. In this case lets filter where Species is "setosa" and "Petal.Length" is less that 1.5 and then recalculate the mean Sepal Length.
+
+
+
+```{r results="hide"}
+
+setosa_sepal_leng_av <- iris %>% 
+  filter(species == "setosa" & Petal.Length < 1.5) %>% 
+  summarise(ave = mean(Sepal.Length))
+
+```
+
+
+
+
+
+### 3.3 Select
+
+
+
+We can also use the select() command from the dplyr package to choose just the variables from the 'iris' dataset that we want. So if we want to create a new dataset without the sepal lengths:
+
+
+
+```{r results="hide"}
+
+iris_no_sepal_length <- iris %>% 
+  select()
+
+```
+
+
+
+Note (as is common with dplyr functions) we first specify the name of the dataset and then the variables that in this case we want to remove.
+
+
+
+Let's say that now we want to restrict this dataset to just include Petal width and Petal_Length and species. 
+
+
+
+```{r results="hide"}
+
+iris_petals <- iris %>% 
+  select()
+
+```
+
+
+
+
+
+### 3.4 Rename
+
+
+
+We can rename variables using the dplyr function rename(). Let's amend our above coding in creating the 'iris_petals' dataset so that Petal.Length is just calles P.Length, and Petal.Width is P.Width.
+
+
+
+```{r results="hide"}
+
+iris_petals <- iris_petals %>% 
+  rename(
+    
+  ) 
+
+```
+
+
+
+
+### 3.5 Mutate
+
+
+
+You can create new variables and perform calculations on variables using the dplyr command mutate().
+
+
+
+```{r eval = FALSE}
+
+?mutate
+
+```
+
+
+
+So if we wanted to amend our coding to include a new derived variable calculating the area of a petal (assuming just for the purpose of this exercise that petals are rectangular!). We will call this P.Area.
+
+
+
+```{r results="hide", warning=FALSE, comment=FALSE}
+
+iris_petals <- iris_petals %>%
+  mutate()
+
+```
+
+
+
+You can download the 'Data Transformation Cheat Sheet' (and other cheatsheets) at: https://www.rstudio.com/resources/cheatsheets/
+
+
+
+### 3.6 If_else
+
+
+
+Another useful function found in the dplyr package is if_else, which works in a similar way to if statements in Excel. This uses a logical statement to determine the output. The below code uses this to identify offenders who have weight under 170lbs, the mutate function is used to add a variable in to the offenders dataset which is 1 if they are under 170lbs and 0 if they are over 170lbs.
+
+
+
+```{r results="hide"}
+
+iris <- iris %>% 
+  mutate(small_p_length = if_else())
+
+```
+
+
+
+### 3.7 Exercises
+
+
+
+1.  Using group_by and summarise, calculate the average and max petal width for each species.
+
+2.  Using select and filter to produce a table of sepal length and widths for irises where the sepal width is greater than 3.
+
+
+
+## 4 Merging data, missing values and exporting
+
+### 4.1 Merging datasets
+
+
+
+There are dplyr functions left_join, right_join, inner_join, full_join, semi_join and anti_join which can merge data sets, provided you have some common fields to match on. This is similar to SQL.
+
+
+
+Let's import two new datasets. One with details of staff salaries and one with the no. sick days taken
+
+
+
+```{r results="hide"}
+
+staff_salaries <- 
+  read_csv("staff_salaries.csv")
+
+staff_sickness <- read_csv("staff_sickness.csv")
+
+```
+
+
+
+
+We merge the staff datasets using the the staff_id field that uniquely identifies each staff member. First we need to rename the staff_id_no column in the sickness data to match the other dataset.
+
+
+
+```{r results="hide"}
+
+staff_sickness <- staff_sickness %>% 
+  rename() 
+
+```
+
+
+
+Now the variables that together form a unique identifier have the same names, we can do the merge. We want to keep only the staff that appear in both datasets. This is called an inner join.
+
+
+
+```{r results="hide"}
+
+staff_merge <- inner_join(staff_salaries, 
+                          staff_sickness, 
+                          by="staff_id")
+
+```
+
+
+If we want to preserve the salary dataset and only add on the sickness data where available then we want to do a left_join. This keeps the left dataset (one specified first) and matches to those records that appear in the other dataset.
+
+```{r results="hide"}
+
+staff_left_join <- left_join(staff_salaries, 
+                             staff_sickness,
+                             by="staff_id")
+
+```
+
+You'll see here that there are NAs in the sick_day column for staff_id 6-10. This is because these staff do not exist in the staff_sickness dataset.
+
+If we keep the datasets in the same order but do a right join then we will create a dataset that keeps all records in staff_sickness and matches to those in staff_salaries.
+
+```{r results="hide"}
+
+staff_right_join <- right_join(staff_salaries,
+                               staff_sickness, 
+                               by="staff_id")
+
+```
+
+A full join keeps all the staff that appear in either dataset.
+
+```{r results="hide"}
+
+staff_full_join <- full_join(staff_salaries,
+                             staff_sickness,
+                             by="staff_id")
+
+```
+
+For more information about the different sorts of joins and other data transformation functions see the 'Data Transformation Cheat Sheet' at: https://www.rstudio.com/resources/cheatsheets/  
+
+
+### 4.2 Exporting data
+
+
+
+A command to export data into csv format is write.csv. For instance, to export our data which contains the complete cases:
+
+
+
+```{r results="hide"}
+
+write.csv(iris_petals, file = "iris_petals.csv")
+
+```
+
+
+
+This assumes by default that you want to export the row headers and that the columns are separated by a comma symbol (sep = ","). The data will be saved as a CSV in your working directory.  
+
+
+
+
+
+### 4.3 Exercises
+
+
+
+
+
+1.	Creating a new dataset called iris_sepals which includes the species, sepal length and sepal width
+
+2.	Export the dataset iris_sepals to a csv file.
+
+
+
+
+
+## 5. Extra Resources
+
+
+
+There are lots of resources that can help you develop your R knowledge, but below are a few that are particularly helpful:
+
+
+
++ DataCamp is a website which hosts multiple online courses that teach coding. Their 'Introduction to R' course is free to complete and provides a broader overview in the basic concepts for coding in R. A link to the course can be found here: https://www.datacamp.com/courses/free-introduction-to-r.
+
++ Another good resource is the 'R for Data Science' online book: [r4ds.had.co.nz/](r4ds.had.co.nz/), written by Hadley Wickham, who is a data scientist at RStudio, who developed the tidyverse package that we introduced earlier. It gives a really good overview of R and how his package works with it.
+
++ RStudio has also developed a list of 'cheatsheets' which give quick overviews of the functions contained in different packages, which can be quickly referred to: https://www.rstudio.com/resources/cheatsheets/ Some can be accessed directly through the top menu help > Cheatsheets e.g. 'Data Transformation with dplyr'.
+
+
+
+For further lists of useful resources please see: https://trello.com/b/D5pSkqnT/online-analytical-training
