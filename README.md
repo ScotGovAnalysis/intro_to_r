@@ -9,3 +9,5 @@ well as a complete solution.
 
 Session 2 contains two versions of the Rmd files. One version uses the
  old dplyr gather() and spread(), the other uses pivot_*().
+
+Test line 1
