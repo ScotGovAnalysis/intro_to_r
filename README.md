@@ -12,6 +12,8 @@ Session 2 contains two versions of the Rmd files. One version uses the
 
 ## Session 1
 
+Testjdfklsfj
+
 ## Session 2
 
 This session covers the importation and examination of data using the console and some basic plots. It then proceeds to tidying data for some more detailed analysis and ploting.
