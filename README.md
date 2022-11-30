@@ -11,7 +11,7 @@ Each session contains datasets as well as Markdown files that are missing some c
 
 ## Session 1
 
-Session 1 beings by presenting an overview of the R programming language. It then presents syntax in Base R, before introducing some elements of the dplyr and lubridate packages
+Session 1 begins by presenting an overview of the R programming language. It then presents syntax in Base R, before introducing some elements of the dplyr and lubridate packages
 
 The first section presents information on R, including the utility/applications of open source computing and the properties of coding in the RStudio IDE. Concepts introduced are:
  - assignment operator `<-`
