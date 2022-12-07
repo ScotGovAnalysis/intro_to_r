@@ -1004,13 +1004,13 @@ A command to export data into csv format is write.csv. For instance, to export o
 
 ```{r results="hide"}
 
-write_csv(iris_petals, path = "iris_petals_uds.csv")
+write_csv(iris_petals, path = "iris_petals_output.csv")
 
 ```
 
 
 
-This assumes by default that the columns are separated by a comma symbol (sep = ","). The data will be saved as a CSV in your working directory.
+This assumes by default that the columns are separated by a comma symbol. The data will be saved as a CSV in your working directory.
 
 
 
