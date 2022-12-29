@@ -998,7 +998,7 @@ For more information about the different sorts of joins and other data transform
 
 
 
-A command to export data into csv format is write.csv. For instance, to export our data which contains the complete cases:
+A command to export data into csv format is write_csv from the readr package (this is a neater version of write.csv() that is available in base R). For instance, to export our data which contains the complete cases:
 
 
 
