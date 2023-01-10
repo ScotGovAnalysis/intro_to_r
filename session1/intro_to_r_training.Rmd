@@ -998,19 +998,19 @@ For more information about the different sorts of joins and other data transform
 
 
 
-A command to export data into csv format is write.csv. For instance, to export our data which contains the complete cases:
+A command to export data into csv format is write_csv from the readr package (this is a neater version of write.csv() that is available in base R). For instance, to export our data which contains the complete cases:
 
 
 
 ```{r results="hide"}
 
-write.csv(iris_petals, file = "iris_petals.csv")
+write_csv(iris_petals, path = "iris_petals.csv")
 
 ```
 
 
 
-This assumes by default that you want to export the row headers and that the columns are separated by a comma symbol (sep = ","). The data will be saved as a CSV in your working directory.  
+This assumes by default that the columns are separated by a comma symbol. The data will be saved as a CSV in your working directory to a file called `iris_petals.csv`.
 
 
 
