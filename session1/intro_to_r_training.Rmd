@@ -84,8 +84,9 @@ Some of the advantages:
 
 * It is **extensible** - there are a vast array of **packages** that can be added to extend the functionality of R, produced by statisticians and programmers around the world. These can range from obscure statistical techniques to tools for making interactive charts.
 
-* It's **free and open source** - a large part of its popularity can be owed to its low cost, particularly relative to proprietary software such as SAS.
+* It's **open source** - the source code is openly available, meaning that there are more eyes looking at the software's code, resulting in fewer bugs and faster updates than typically for proprietary software.
 
+* It's **free/low-cost** - R and RStudio are free to use along with all the packages.
 
 
 ### 1.3 How is it used?
