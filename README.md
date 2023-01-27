@@ -3,7 +3,7 @@
 
 This project contains the material for an introductory course in R.
 
-The material is split into three sesssions. 
+The material is split into three sessions. 
 
 Each session contains the relevant datasets for the session, as well as the R files. The main course material is delivered through **R markdown**. R Markdown allows you to
 easily create dynamic documents, presentations and reports from R. It
@@ -11,9 +11,19 @@ combines markdown (simple formatting syntax) and embedded R code chunks that are
 
 Within each session, the Rmd files which end with `_incomplete` are a version of the session material that is missing some code.  Students should work through this version, and refer to the complete solution for answers. Session 2 contains two versions of the Rmd files. One version uses the old dplyr gather() and spread(), the other uses pivot_().
 
+The housekeeping folder contains material that was used to develop the course and does not form part of the training.
+
 ## <a name="how_to"></a>How to use the session material
 
-A demo video of how to use the training material can be found [here](https://scotsconnect.sharepoint.com/:v:/r/sites/Rtrainers-Org-SG/Shared%20Documents/General/intro_to_markdown.mp4?csf=1&web=1&e=1gijWZ)
+A demo video of how to use the training material can be found [here](https://scotsconnect.sharepoint.com/:v:/r/sites/Rtrainers-Org-SG/Shared%20Documents/General/intro_to_markdown.mp4?csf=1&web=1&e=1gijWZ).
+
+You will be using RStudio to interface with R. When you open RStudio, you will see the window split into four panels.
+
+![Figure 1. The four panels of the RStudio window: 1. Source; 2. Console; 3. Environment/History; 4. Files/Plots/Packages/Help](./housekeeping/rstudio_panels.svg "The four panels of the RStudio window: 1. Source; 2. Console; 3. Environment/History; 4. Files/Plots/Packages/Help")
+
+The source panel is where R files can be viewed and edited. This is the panel in which the course material will appear when you open it. The console window is used to type commands directly into R. The Environment tab in the Environment/History panel shows the objects that exist in your R session. The History tab contains all the commands that you have given to R in the current session. The other tabs in this panel will not be needed for now.  The Files tab in the final panel shows you the files in your working directory. You can open files from this panel as you would from Windows Explorer. Other relevant tabs will be referred to when needed in the course.
+
+
 
 ### R projects
 
