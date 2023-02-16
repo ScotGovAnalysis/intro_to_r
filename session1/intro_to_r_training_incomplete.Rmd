@@ -515,7 +515,7 @@ All variables have an associated class. The class will determine what calculatio
 
 
 
-We can check what class a variable is using summary, looking at the information in the Environment pane or by using the command "class" (see example checking the class of the WEIGHT variable below):
+We can check what class a variable is using summary, looking at the information in the Environment pane or by using the command "class" (see example checking the class of the length variable below):
   
   
   
@@ -710,7 +710,7 @@ sepal_length_average <- iris %>%
 
 
 
-In the above code, R is taking the 'iris' dataset, grouping it by Species and then (note that the data is "piped" like water into the group_by command using the pipe symbol '%>%' instead of specifying the 'iris' dataset as the first argument within the group_by command), and then outputting the mean number of previous convictions by species. The new mean number of Sepal.Length variable we've decided to call 'ave'. The results are saved into a new dataset called 'sepal_length_average'. 
+In the above code, R is taking the 'iris' dataset, grouping it by Species and then (note that the data is "piped" like water into the group_by command using the pipe symbol '%>%' instead of specifying the 'iris' dataset as the first argument within the group_by command), and then outputting the mean length by species. The new mean number of Sepal.Length variable we've decided to call 'ave'. The results are saved into a new dataset called 'sepal_length_average'. 
 
 
 
@@ -886,7 +886,7 @@ You can download the 'Data Transformation Cheat Sheet' (and other cheatsheets) a
 
 
 
-Another useful function found in the dplyr package is if_else, which works in a similar way to if statements in Excel. This uses a logical statement to determine the output. The below code uses this to identify offenders who have weight under 170lbs, the mutate function is used to add a variable in to the offenders dataset which is 1 if they are under 170lbs and 0 if they are over 170lbs.
+Another useful function found in the dplyr package is if_else, which works in a similar way to if statements in Excel. This uses a logical statement to determine the output. The below code uses this to identify petals that are less than 2 cm long, the mutate function is used to add a variable in to the offenders dataset which is 1 if the petal is less than 2 cm and 0 if it is 2 cm or more.
 
 
 
