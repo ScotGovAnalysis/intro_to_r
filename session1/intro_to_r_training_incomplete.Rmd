@@ -1033,7 +1033,7 @@ This assumes by default that the columns are separated by a comma symbol. The da
 
 There are lots of resources that can help you develop your R knowledge, but below are a few that are particularly helpful:
 
-
++ Scottish Government 'Good Coding Practices': https://github.com/DataScienceScotland/good_practices/blob/main/coding.md
 
 + DataCamp is a website which hosts multiple online courses that teach coding. Their 'Introduction to R' course is free to complete and provides a broader overview in the basic concepts for coding in R. A link to the course can be found here: https://www.datacamp.com/courses/free-introduction-to-r.
 
