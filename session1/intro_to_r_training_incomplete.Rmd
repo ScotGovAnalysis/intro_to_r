@@ -873,10 +873,6 @@ iris_petals <- iris_petals %>%
 
 
 
-You can download the 'Data Transformation Cheat Sheet' (and other cheatsheets) at: https://www.rstudio.com/resources/cheatsheets/
-
-
-
 ### 3.6 If_else
 
 
