@@ -111,21 +111,9 @@ There a number of areas in the Government where R is making an impact:
 
 
 
-The window in which commands are entered is called the "console" window. It is used to input and execute code. Results, errors and warnings are shown directly in the same window. 
-
-
+The window in which commands are entered is called the "console" window. It is used to input and execute code. Results, errors and warnings are shown directly in the same window. You can customize the text and background colour in Tools > Global Options > Appearance.
 
 A command which is entered into the console is executed by simply pressing enter. 
-
-
-
-Code appears in blue text.
-
-Results appear in black text. 
-
-Warnings and errors appear as red text. 
-
-
 
 For instance if you type:
   
