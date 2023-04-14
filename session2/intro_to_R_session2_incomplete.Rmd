@@ -40,7 +40,6 @@ benefits <-
 
 
 ```
-Is the data wide or long?
 
 ## Data exploration
 
