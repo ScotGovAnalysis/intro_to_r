@@ -116,7 +116,7 @@ In the long format, we will want a variable called "benefit" specifying the bene
 
 
 benefit_long <- pivot_longer(benefits, 
-                             cols = !date, 
+                             cols = -date, 
                              names_to = "benefit", 
                              values_to = "apps")
 head(benefit_long)

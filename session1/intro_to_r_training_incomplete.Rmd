@@ -828,7 +828,7 @@ iris_petals <- iris %>%
 
 
 
-We can rename variables using the dplyr function rename(). Let's amend our above coding in creating the 'iris_petals' dataset so that Petal.Length is just calles P.Length, and Petal.Width is P.Width.
+We can rename variables using the dplyr function rename(). Let's amend our above coding in creating the 'iris_petals' dataset so that Petal.Length is just called P.Length, and Petal.Width is P.Width.
 
 
 

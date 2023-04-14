@@ -191,7 +191,7 @@ time_series_plot3
 ```
 
 
-Now that we can see the plots, let's fit lines, to the points, and a straigh line for the trend
+Now that we can see the plots, let's fit lines, to the points, and a straight line for the trend
 
 ```{r TimeSeriesPlot4}
 
@@ -219,6 +219,10 @@ time_series_plot5
 ```
 
 Finally, we could perform the wrangling and plotting  in a concise chunk
+
+Exercise:
+
+  See if you can accomplish the same thing as the chunks above to produce the time_series_plot5 object in one chunk
 
 ```{r AllAnalysis}
 #Import
