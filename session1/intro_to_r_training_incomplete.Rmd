@@ -1043,4 +1043,4 @@ There are lots of resources that can help you develop your R knowledge, but belo
 
 
 
-For further lists of useful resources please see: https://trello.com/b/D5pSkqnT/online-analytical-training
+Further resources can be found on Saltire Analytical Professions pages (Analytical Professions > Analytical Tools > Analytical Software)
