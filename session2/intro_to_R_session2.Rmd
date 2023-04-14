@@ -205,7 +205,11 @@ time_series_plot4
 ```
 
 
-Finally, let's change the axes labels, legend title and background (using themes - look at help for options)
+Finally, let's change the axes labels, legend title and background using themes.
+Themes allow us to customize the appearance. ggplot comes with several themes
+such as theme_bw(), or you can create your own themes. For examples see the
+Scottish Government theme [sgplot](https://github.com/DataScienceScotland/sgplot), 
+or the [NRS theme](https://github.com/DataScienceScotland/nrsplot)
 
 ```{r TimeSeriesPlot5}
 
