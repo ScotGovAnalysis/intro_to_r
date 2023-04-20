@@ -15,7 +15,7 @@ The housekeeping folder contains material that was used to develop the course an
 
 ## <a name="how_to"></a>How to use the session material
 
-A demo video of how to use the training material can be found [here](https://scotsconnect.sharepoint.com/:v:/r/sites/Rtrainers-Org-SG/Shared%20Documents/General/intro_to_markdown.mp4?csf=1&web=1&e=1gijWZ).
+A demo video of how to use the training material can be found [here](https://www.youtube.com/watch?v=1sie-g1Ku-c).
 
 You will be using RStudio to interface with R. When you open RStudio, you will see the window split into four panels.
 
