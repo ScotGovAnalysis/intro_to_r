@@ -8,8 +8,8 @@ library(lubridate)
 ##################
 
 #Create vector of dates
-dates <- seq(as_date("2023/01/01"), 
-             as_date("2028/01/01"), 
+dates <- seq(as_date("2020/04/01"), 
+             as_date("2025/03/01"), 
              by = "month")
 
 # Store the length of the date vector
