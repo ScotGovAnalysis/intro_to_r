@@ -144,11 +144,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="351.5393"
-     inkscape:cy="354.15281"
+     inkscape:zoom="1.4"
+     inkscape:cx="726.71732"
+     inkscape:cy="356.3717"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g9661"
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="666"
@@ -624,12 +624,12 @@
          x="610.53302"
          id="tspan8358"
          sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:Symbol;-inkscape-font-specification:'Symbol, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">Processing</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;writing-mode:lr;text-anchor:middle">Processing</tspan><tspan
          id="tspan8360"
          y="914.7276"
          x="610.53302"
          sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:Symbol;-inkscape-font-specification:'Symbol, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">reviews</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;writing-mode:lr;text-anchor:middle">reviews</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:Symbol;-inkscape-font-specification:'Symbol, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -637,12 +637,12 @@
        y="885.68701"
        id="text9338"
        sodipodi:linespacing="125%"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:Symbol;-inkscape-font-specification:'Symbol, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;writing-mode:lr;text-anchor:middle"
          sodipodi:role="line"
          id="tspan9340"
          x="210.29724"
          y="885.68701">Processing</tspan><tspan
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:Symbol;-inkscape-font-specification:'Symbol, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;writing-mode:lr;text-anchor:middle"
          sodipodi:role="line"
          x="210.29724"
          y="910.68701"
@@ -658,50 +658,19 @@
          id="tspan9468"
          x="714.28571"
          y="632.36218" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="757.14288"
+       y="569.50507"
+       id="text9649"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9651"
+         x="757.14288"
+         y="569.50507"> </tspan></text>
     <g
-       id="g9551">
-      <g
-         id="g9542">
-        <rect
-           style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.60000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-           id="rect9480"
-           width="406.98648"
-           height="111.27219"
-           x="595.79248"
-           y="542.44043" />
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="607.42865"
-           y="565.21942"
-           id="text9444"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan9446"
-             x="607.42865"
-             y="565.21942"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">Processing time = Sum(N_apps_j * time_apps_j +</tspan><tspan
-             sodipodi:role="line"
-             x="607.42865"
-             y="583.96942"
-             id="tspan9448"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">                           N_reviews_j * time_review_j)</tspan><tspan
-             sodipodi:role="line"
-             x="607.42865"
-             y="602.71942"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
-             id="tspan9478">      </tspan><tspan
-             sodipodi:role="line"
-             x="607.42865"
-             y="621.46942"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
-             id="tspan9464"> j = benefit1....benefit3</tspan><tspan
-             sodipodi:role="line"
-             x="607.42865"
-             y="640.21942"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
-             id="tspan9470">time measured in min</tspan></text>
-      </g>
+       id="g9661">
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -743,6 +712,59 @@
          width="441.42853"
          id="rect9533"
          style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <rect
+         y="542.44043"
+         x="595.79248"
+         height="111.27219"
+         width="406.98648"
+         id="rect9480"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.60000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text9444"
+         y="565.21942"
+         x="607.42865"
+         style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
+           y="565.21942"
+           x="607.42865"
+           id="tspan9446"
+           sodipodi:role="line">Processing time = <tspan
+   id="tspan9647"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:Symbol;-inkscape-font-specification:'Symbol, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">S </tspan>(N_apps_j * time_apps_j +</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
+           id="tspan9448"
+           y="583.96942"
+           x="607.42865"
+           sodipodi:role="line">                           N_reviews_j * time_review_j)</tspan><tspan
+           id="tspan9478"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
+           y="602.71942"
+           x="607.42865"
+           sodipodi:role="line">      </tspan><tspan
+           id="tspan9464"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
+           y="621.46942"
+           x="607.42865"
+           sodipodi:role="line"> j = benefit1....benefit3</tspan><tspan
+           id="tspan9470"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
+           y="640.21942"
+           x="607.42865"
+           sodipodi:role="line">time measured in min</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text9657"
+         y="571.50507"
+         x="737.28571"
+         style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
+           y="571.50507"
+           x="737.28571"
+           id="tspan9659"
+           sodipodi:role="line">j</tspan></text>
     </g>
   </g>
 </svg>

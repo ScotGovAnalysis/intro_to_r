@@ -69,3 +69,5 @@ knitr::kable(review_time, caption = "Time required to process reviews (min)")
 
 * benefits_1.csv, benefits_2.csv, benefits_3.csv contain the forecasted number of applications of each type for the period of interest
 * working_days.csv contains the number of working days in each month over the period of interest
+
+![Figure 1: Schematic of problem](../housekeeping/session3_fig.svg)
