@@ -7,15 +7,15 @@ Benefits = c("Benefit1", "Benefit2", "Benefit3")
 Types = c('coc', 'nc' )
 
 #First applications come in, are processed and a decisions made (time: 2 months)
-initial_time <- dplyr::tibble(type = Types, 
+app_processing_time <- dplyr::tibble(type = Types, 
                               Benefit1 = c(20, 12), 
                               Benefit2 = c(25, 12), 
                               Benefit3 = c(15, 10)
 )  %>% 
   pivot_longer(names_to = "benefit",
-               values_to = "initial_time", 
+               values_to = "app_processing_time", 
                cols = -type)  %>%
-  #gather(key = benefit, value = review_time, -type)  %>%
+  #gather(key = benefit, value = review_processing_time, -type)  %>%
   rename(application_type = type)
 
 
@@ -33,13 +33,13 @@ review_prop <- dplyr::tibble(type = Types,
   rename(application_type = type)
 
 #This is the amount of time a review takes
-review_time <- dplyr::tibble(type = Types, 
+review_processing_time <- dplyr::tibble(type = Types, 
                               Benefit1 = c(10, 10), 
                               Benefit2 = c(10, 12), 
                               Benefit3 = c(10, 15)
 )  %>% 
   pivot_longer(names_to = "benefit",
-               values_to = "review_time", 
+               values_to = "review_processing_time", 
                cols = -type)  %>%
   #gather(key = benefit, value = appeals_time, -type)  %>%
   rename(application_type = type)
@@ -89,9 +89,9 @@ Benefit3_L <- Benefit3 %>%
 # Combine benefits
 data_all <- bind_rows(Benefit1_L, Benefit2_L, Benefit3_L) %>%
   #join by benefit and application type
-  left_join(initial_time) %>%
+  left_join(app_processing_time) %>%
   left_join(review_prop) %>%
-  left_join(review_time) %>%
+  left_join(review_processing_time) %>%
   left_join(working_days) %>%
   # lag by 2 months grouped by app type and benefit
   group_by(benefit, application_type) %>%
@@ -100,9 +100,9 @@ data_all <- bind_rows(Benefit1_L, Benefit2_L, Benefit3_L) %>%
          # compute the review volumes
          review_volumes = lagged_applications * review_prop,
           #compute times from volumes
-         total_review_time = review_volumes * review_time, 
+         total_review_processing_time = review_volumes * review_processing_time, 
          #compute total FTE for each benefit and application_type
-         fte = (total_review_time + initial_time)/(days * 444 * .75)) %>%
+         fte = (total_review_processing_time + app_processing_time)/(days * 444 * .75)) %>%
   group_by(date, benefit) %>%
   #compute the total fte across the application types
   summarise(total_fte = sum(fte)) %>%
