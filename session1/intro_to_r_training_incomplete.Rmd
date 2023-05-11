@@ -111,21 +111,9 @@ There a number of areas in the Government where R is making an impact:
 
 
 
-The window in which commands are entered is called the "console" window. It is used to input and execute code. Results, errors and warnings are shown directly in the same window. 
-
-
+The window in which commands are entered is called the "console" window. It is used to input and execute code. Results, errors and warnings are shown directly in the same window. You can customize the text and background colour in Tools > Global Options > Appearance.
 
 A command which is entered into the console is executed by simply pressing enter. 
-
-
-
-Code appears in blue text.
-
-Results appear in black text. 
-
-Warnings and errors appear as red text. 
-
-
 
 For instance if you type:
   
@@ -328,7 +316,7 @@ A lot of pre-programmed routines are included in R, and you can add a lot more t
 
 Packages extend R's functionality enormously and are a key factor in making R so popular. 
 
-Packages have to be approved before the can be installed on SCOTS. Instructions can be found here: https://erdm.scotland.gov.uk:8443/documents/A23744528/details
+Packages have to be approved before the can be installed on SCOTS. Instructions can be found here: https://erdm.scotland.gov.uk/documents/A42404229/details
 
 
 Once a package is installed, you should be able to see it in the packages tab. If you want to use it, you can load it by ticking the appropriate box in the packages window. You can also load packages using the library command, which you can inside your script, so they will automatically load when you run it:
@@ -828,7 +816,7 @@ iris_petals <- iris %>%
 
 
 
-We can rename variables using the dplyr function rename(). Let's amend our above coding in creating the 'iris_petals' dataset so that Petal.Length is just calles P.Length, and Petal.Width is P.Width.
+We can rename variables using the dplyr function rename(). Let's amend our above coding in creating the 'iris_petals' dataset so that Petal.Length is just called P.Length, and Petal.Width is P.Width.
 
 
 
@@ -873,15 +861,11 @@ iris_petals <- iris_petals %>%
 
 
 
-You can download the 'Data Transformation Cheat Sheet' (and other cheatsheets) at: https://www.rstudio.com/resources/cheatsheets/
-
-
-
 ### 3.6 If_else
 
 
 
-Another useful function found in the dplyr package is if_else, which works in a similar way to if statements in Excel. This uses a logical statement to determine the output. The below code uses this to identify petals that are less than 2 cm long, the mutate function is used to add a variable in to the offenders dataset which is 1 if the petal is less than 2 cm and 0 if it is 2 cm or more.
+Another useful function found in the dplyr package is if_else, which works in a similar way to if statements in Excel. This uses a logical statement to determine the output. The below code uses this to identify petals that are less than 2 cm long, the mutate function is used to add a variable in to the iris dataset which is 1 if the petal is less than 2 cm and 0 if it is 2 cm or more.
 
 
 
@@ -1043,4 +1027,4 @@ There are lots of resources that can help you develop your R knowledge, but belo
 
 
 
-For further lists of useful resources please see: https://trello.com/b/D5pSkqnT/online-analytical-training
+Further resources can be found on Saltire Analytical Professions pages (Analytical Professions > Analytical Tools > Analytical Software)
