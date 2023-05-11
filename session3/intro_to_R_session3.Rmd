@@ -21,10 +21,9 @@ library(tidyverse)
 -   If unhappy with their decision, they request a review within that month.
 -   SSS requires a forecast of FTE to process the nc and coc for initial applications and reviews
 
-# Client Output requirements
 
--   A plot of the total FTE over time
--   A table with the annual FTE to process reviews and appeal defined as the median
+
+
 
 # Assumptions
 
@@ -71,4 +70,13 @@ knitr::kable(review_processing_time,
 -   benefits_1.csv, benefits_2.csv, benefits_3.csv contain the forecasted number of applications of each type for the period of interest
 -   working_days.csv contains the number of working days in each month over the period of interest
 
+---
+
 ![Figure 1: Schematic of problem](../housekeeping/session3_fig.svg)
+
+---
+
+# Client Output requirements
+
+-   A plot of the total FTE over time
+-   A table with the annual FTE to process reviews and appeal defined as the median
