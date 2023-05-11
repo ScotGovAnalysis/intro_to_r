@@ -944,31 +944,43 @@ If we want to preserve the salary dataset and only add on the sickness data wher
 
 ```{r results="hide"}
 
-staff_left_join <- left_join(staff_salaries, 
-                             staff_sickness,
-                             by="staff_id")
+staff_salary_preserved_with_sickness_joined <-
+  left_join(
+  
+)
 
 ```
 
 You'll see here that there are NAs in the sick_day column for staff_id 6-10. This is because these staff do not exist in the staff_sickness dataset.
 
-If we keep the datasets in the same order but do a right join then we will create a dataset that keeps all records in staff_sickness and matches to those in staff_salaries.
+Which of the join family of commands would you use to create a dataset that keeps all records in staff_sickness and matches to those in staff_salaries while passing the two data arguments in the order staff_salaries, staff_sickness? 
 
 ```{r results="hide"}
 
-staff_right_join <- right_join(staff_salaries,
-                               staff_sickness, 
-                               by="staff_id")
+staff_sickness_preserved_with_sickness_joined <-
+
 
 ```
 
-A full join keeps all the staff that appear in either dataset.
+
+How would you do this if you swapped the order of the dataset arguments?
+
 
 ```{r results="hide"}
 
-staff_full_join <- full_join(staff_salaries,
-                             staff_sickness,
-                             by="staff_id")
+
+
+
+```
+
+
+How would you keep all the entries that exist in both datasets?
+
+```{r results="hide"}
+
+staff_all <- 
+  
+  
 
 ```
 
