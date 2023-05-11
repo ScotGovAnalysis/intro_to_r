@@ -47,10 +47,9 @@ review_processing_time <- dplyr::tibble(type = Types,
 
 # Import data
 benefit1 <- read.csv("./data/benefit_1.csv")
-benefit2 <- read.csv("./data/benefit_1.csv")
-benefit3 <- read.csv("./data/benefit_1.csv")
+benefit2 <- read.csv("./data/benefit_2.csv")
+benefit3 <- read.csv("./data/benefit_3.csv")
 working_days <- read.csv("./data/working_days.csv")
-
 
 
 # Wrangle to long and add benefit type
@@ -60,8 +59,6 @@ benefit1_l <- benefit1 %>%
   pivot_longer(cols = -date, 
                names_to = "application_type", 
                values_to = "applications") %>%
-  # gather(key = application_type, 
-  #        value = applications, -date) %>%
   mutate(benefit = "Benefit1")
 
 benefit2_l <- benefit2 %>%
@@ -70,8 +67,6 @@ benefit2_l <- benefit2 %>%
   pivot_longer(cols = -date, 
                names_to = "application_type", 
                values_to = "applications") %>%
-  # gather(key = application_type, 
-  #        value = applications, -date) %>%
   mutate(benefit = "Benefit2")
 
 benefit3_l <- benefit3 %>%
@@ -80,8 +75,6 @@ benefit3_l <- benefit3 %>%
   pivot_longer(cols = -date, 
                names_to = "application_type", 
                values_to = "applications") %>%
-  # gather(key = application_type, 
-  #        value = applications, -date) %>%
   mutate(benefit = "Benefit3")
 
 
@@ -92,7 +85,7 @@ data_all <- bind_rows(benefit1_l, benefit2_l, benefit3_l) %>%
   left_join(app_processing_time) %>%
   left_join(review_prop) %>%
   left_join(review_processing_time) %>%
-  left_join(working_days) %>%
+  left_join(working_days, by = "date") %>%
   # lag by 2 months grouped by app type and benefit
   group_by(benefit, application_type) %>%
   mutate(

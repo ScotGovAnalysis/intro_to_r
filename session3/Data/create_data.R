@@ -8,8 +8,8 @@ library(lubridate)
 ##################
 
 #Create vector of dates
-dates <- seq(as_date("2020/04/01"), 
-             as_date("2025/03/01"), 
+dates <- seq(as_date("01/04/2020", format = "%d/%m%Y"), 
+             as_date("01/03/2025", format = "%d/%m%Y"), 
              by = "month")
 
 # Store the length of the date vector
@@ -81,7 +81,8 @@ print(length(which(benefit_long$`new cases` < 0))!=0)
 
 # Export the data
 map(benefit_names, ~write_csv(benefit_long %>% 
-                                filter(benefit == .x),
+                                filter(benefit == .x) %>% 
+                                select(-benefit),
                               paste0("./data/benefit_", .x, ".csv"), 
                               
                               
