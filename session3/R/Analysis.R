@@ -46,17 +46,17 @@ review_processing_time <- dplyr::tibble(type = Types,
 
 
 # Import data
-Benefit1 <- read.csv("./Data/Benefit1.csv")
-Benefit2 <- read.csv("./Data/Benefit2.csv")
-Benefit3 <- read.csv("./Data/Benefit3.csv")
-working_days <- read.csv("./Data/working_days.csv")
+benefit1 <- read.csv("./data/benefit_1.csv")
+benefit2 <- read.csv("./data/benefit_1.csv")
+benefit3 <- read.csv("./data/benefit_1.csv")
+working_days <- read.csv("./data/working_days.csv")
 
 
 
 # Wrangle to long and add benefit type
-Benefit1_L <- Benefit1 %>%
-  rename(coc = `Change.of.Circ`, 
-         nc = `New.Cases`) %>%
+benefit1_l <- benefit1 %>%
+  rename(coc = `change.of.circumstances`, 
+         nc = `new.cases`) %>%
   pivot_longer(cols = -date, 
                names_to = "application_type", 
                values_to = "applications") %>%
@@ -64,9 +64,9 @@ Benefit1_L <- Benefit1 %>%
   #        value = applications, -date) %>%
   mutate(benefit = "Benefit1")
 
-Benefit2_L <- Benefit2 %>%
-  rename(coc = `Change.of.Circ`,
-         nc = `New.Cases`) %>%
+benefit2_l <- benefit2 %>%
+  rename(coc = `change.of.circumstances`, 
+         nc = `new.cases`) %>%
   pivot_longer(cols = -date, 
                names_to = "application_type", 
                values_to = "applications") %>%
@@ -74,9 +74,9 @@ Benefit2_L <- Benefit2 %>%
   #        value = applications, -date) %>%
   mutate(benefit = "Benefit2")
 
-Benefit3_L <- Benefit3 %>%
-  rename(coc = `Change.of.Circ`, 
-         nc = `New.Cases`) %>%
+benefit3_l <- benefit3 %>%
+  rename(coc = `change.of.circumstances`, 
+         nc = `new.cases`) %>%
   pivot_longer(cols = -date, 
                names_to = "application_type", 
                values_to = "applications") %>%
@@ -87,7 +87,7 @@ Benefit3_L <- Benefit3 %>%
 
 
 # Combine benefits
-data_all <- bind_rows(Benefit1_L, Benefit2_L, Benefit3_L) %>%
+data_all <- bind_rows(benefit1_l, benefit2_l, benefit3_l) %>%
   #join by benefit and application type
   left_join(app_processing_time) %>%
   left_join(review_prop) %>%

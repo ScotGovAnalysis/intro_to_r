@@ -54,9 +54,9 @@ for (i in seq(1:length(m))){
                          sd = sig[i])
   #put the data in tibble with the date and benefit name
   benefit_temp <- tibble(date = as.character(dates), 
-                         nc = apps_temp,
+                         `new cases` = apps_temp,
                          #sample coc from a vector of integers based on mu and sig. This is arbitrary
-                         coc = sample(seq(mu[i]*20:mu[i] * 20 + sig[i]/2),
+                         `change of circumstances` = sample(seq(mu[i]*20:mu[i] * 20 + sig[i]/2),
                                       lngth, replace = TRUE),
                          benefit = benefit_names[i])
   
@@ -76,13 +76,13 @@ head(benefit_long)
 
 #check that there are no negative numbers in the benefit_long$anc
 print("Checking generation of negative numbers of nc")
-print(length(which(benefit_long$nc < 0))!=0)
+print(length(which(benefit_long$`new cases` < 0))!=0)
 
 
 # Export the data
 map(benefit_names, ~write_csv(benefit_long %>% 
                                 filter(benefit == .x),
-                              paste0("./Data/benefit_", .x, ".csv"), 
+                              paste0("./data/benefit_", .x, ".csv"), 
                               
                               
                               ))
