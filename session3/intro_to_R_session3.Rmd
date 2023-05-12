@@ -12,73 +12,71 @@ library(DT)
 library(tidyverse)
 ```
 
-
 # Background
 
-* Social Security Scotland administers four benefits. The types of cases processed for each of the benefits can be New Cases, Change of Circumstances or Award Reviews.
-* The data available is the forecasted number of cases for each of the types for each of the four benefits
-* Clients receive the decision on their case 2 months after applying
-* Clients who are unhappy with the decision made on their case can apply for a review of the case. They receive a decision after 1 month. If they are still unhappy, they can appeal the decision
-* SSS requires a forecast of FTE to process the reviews and appeals 
+-   Social Security Scotland administers three benefits. Applicants submit an application and 2 months later, receive a decision.
+-   Applications can be of two types: new cases (nc) or change of circumstances (coc)
+-   The data available is the forecasted number of applications for each of the type for each of the thee benefits
+-   Clients receive the decision on their case 2 months after applying.
+-   If unhappy with their decision, they request a review within that month.
+-   SSS requires a forecast of FTE to process the nc and coc for initial applications and reviews
 
-# Client Output requirements
-* A plot of the total FTE over time
-* A table with the annual FTE to process reviews and appeal defined as the median 
+
+
+
 
 # Assumptions
 
+```{r Assumptions_review, echo=FALSE}
 
-
-```{r Assumptions_Redeterminations, echo=FALSE}
-
-Benefits = c("Benefit1", "Benefit2", "Benefit3", "Benefit4") 
-Types = c('Award Reviews', 'Change of Circ', 'New Cases' )
+Benefits = c("Benefit1", "Benefit2", "Benefit3") 
+Types = c('New Cases', 'Change of Circ'  )
 review_prop <- dplyr::tibble(type = Types, 
-                                       Benefit1 = c(0.1, 0, 0.2), 
-                                       Benefit2 = c(0.5, 0.8, 0.1), 
-                                       Benefit3 = c(0, 0, 0), 
-                                       Benefit4 = c(1, 1, 1)
+                                       Benefit1 = c(0.1, 0.2), 
+                                       Benefit2 = c(0.5, 0.65), 
+                                       Benefit3 = c(0.2, 0.3)
                                        ) 
 knitr::kable(review_prop, caption = "Proportion of total cases that require review" )
 ```
 
-
-
-
-```{r Assumptions_appeals, echo = FALSE}
-appeals_prop <- dplyr::tibble(type = Types, 
-                                       Benefit1 = c(0.1, 0.5, 0.6), 
-                                       Benefit2 = c(0.5, 1, 1), 
-                                       Benefit3 = c(0, 0, 0), 
-                                       Benefit4 = c(0, 0, 0)
-)
-knitr::kable(appeals_prop,  caption = "Proportion of reviews that appeal")
+```{r Assumptions_app_times, echo = FALSE}
+app_processing_time <- 
+  dplyr::tibble(type = Types, 
+                Benefit1 = c(20, 12), 
+                Benefit2 = c(25, 12),
+                Benefit3 = c(15, 10)
+                )
+knitr::kable(app_processing_time,
+             caption = 
+               "Time required to process applications (min)")
 ```
 
-```{r Assumptions_redetermination_times, echo = FALSE}
-review_time <- dplyr::tibble(type = Types, 
-                                       Benefit1 = c(10, 10, 15), 
-                                       Benefit2 = c(10, 12, 8), 
-                                       Benefit3 = c(0, 0, 0), 
-                                       Benefit4 = c(10, 15, 5)
+```{r Assumptions_review_times, echo = FALSE}
+review_processing_time <-
+  dplyr::tibble(type = Types, 
+                Benefit1 = c(10, 10),
+                Benefit2 = c(10, 12),
+                Benefit3 = c(10, 15)
 )
-knitr::kable(review_time, caption = "Time required to process reviews (min)")
+knitr::kable(review_processing_time, 
+             caption = 
+               "Time required to process reviews (min)")
 ```
 
-
-```{r Assumptions_appeals_times, echo = FALSE}
-appeals_time <- dplyr::tibble(type = Types, 
-                                       Benefit1 = c(10, 10, 15), 
-                                       Benefit2 = c(10, 12, 8), 
-                                       Benefit3 = c(0, 0, 0), 
-                                       Benefit4 = c(10, 15, 5)
-)
-knitr::kable(appeals_time, caption = "Time required to process appeals (min)")
-```
-
-* The client has estimated that out of a `r 7.4*60` min day, a person is productive for 75% of the time
+-   The client has estimated that out of a `r 7.4*60` min day, a person is productive for 75% of the time
 
 # Data
 
-* Benefits1.csv, Benefits2.csv, Benefits3.csv, Benefits4.csv contain the forecasted number of applications of each type for the period of interest
-* working_days.csv contains the number of working days in each month over the period of interest
+-   benefits_1.csv, benefits_2.csv, benefits_3.csv contain the forecasted number of applications of each type for the period of interest
+-   working_days.csv contains the number of working days in each month over the period of interest
+
+---
+
+![Figure 1: Schematic of problem](../housekeeping/session3_fig.svg)
+
+---
+
+# Client Output requirements
+
+-   A plot of the total FTE over time
+-   A table with the annual FTE to process reviews and appeal defined as the median
