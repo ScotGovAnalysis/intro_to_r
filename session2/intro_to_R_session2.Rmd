@@ -102,14 +102,39 @@ plot(benefits$date, benefits$D)
 
 R has powerful (and pretty plotting) functionality in the library ggplot2, which is part of the tidyverse environment. All of tidyverse uses long data. In long format, each row corresponds to data from one measurement, and repeated measurements are on different rows. 
 
-We need to get the data in the correct structure. Look at the help for pivot_longer().
+We need to get the data in the correct structure. Tidyverse has two functions for reshaping datasets, pivot_wider() and pivot_longer().
+pivot_longer() transforms a dataset so that it is has more rows and fewer columns, e.g. with one measurement per row, whilst pivot_wider() transforms a dataset so that it has more columns and fewer rows e.g. one row per observation.
 
-(Note, pivot_longer and a related function, pivot_wider, became available in recent version of R. Older code may use gather() and spread())
-
+(Note, pivot_longer and a related function, pivot_wider, became available in a relatively recent version of R. Older code may use gather() and spread())
 
 ## Data wrangling
 
-In the long format, we will want a variable called "benefit" specifying the benefit, and one called "apps" for the number of applications. 
+Our dataset is currently in wide format, with the number of applications for each benefit in different columns.
+
+![Wide Data](wide-data.svg)
+
+We want to reshape our data to long format, with a variable called "benefit" specifying the benefit, and one called "apps" for the number of applications.
+
+![Long Data](long-data.svg)
+
+
+As we want to reshape the dataset to have fewer columns and more rows, we will use the pivot_longer() function. See the help section
+for all the options available for pivot_longer()
+
+pivot_longer() and pivot_wider() are powerful functions that can reshape datasets in a variety of ways. 
+For pivoting longer we need to provide the dataset, and the columns we want to pivot to a long format. The
+remaining parameters are all optional and are used to tell R how we want the reshaping to be done.
+
+Typically the two additional parameters used are names_to and values_to which specify the variables containing
+the pivoted variables names and values respectively.
+
+In our case we want to:
+
+* use the benefits dataset
+* pivot the columns A, B, C and D
+* add a column 'benefit' containing the name of the benefit
+* add a column 'apps' containing the values of the number of applications, for each benefit
+
 
 ```{r WideToLong}
 
