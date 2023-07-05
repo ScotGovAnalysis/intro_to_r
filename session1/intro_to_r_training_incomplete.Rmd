@@ -637,9 +637,46 @@ iris$Species <- as.factor(iris$Species)
 
 ## 3 Data wrangling and 'group by' calculations
 
-### 3.1 Grouping and summarising data
 
 
+### 3.1 Filter
+
+To start off with a simple data wrangling function; if you would like to produce statistics for a subset of rows or observations, a good function to use is filter() from the dplyr package.
+
+
+To filter we just specify the data that we want to filter (iris) and the value that we want to filter on. In this case lets filter where Species is "setosa" and "Petal.Length" is less that 1.5.
+
+```{r}
+setosa_sepal_leng <- filter(iris, Species == "setosa" & Petal.Length < 1.5)
+```
+
+We can then use this to recalculate the mean Sepal Length:
+
+```{r}
+setosa_sepal_leng_av <- summarise(setosa_sepal_leng, ave = mean(Sepal.Length))
+
+```
+
+
+Using these functions together we can produce a summary by 'piping' the results from one function into the next. We can use these functions together using the pipe (%>%) operator which makes code more readable and means you don't have to create a new object each time you run a command. Using the pipe operator reduces the amount of nested functions (functions that are within other functions) and allows us to chain together dplyr data wrangling functions. The pipe operator can be read as "then" and allows us to go from one step to another easily in dplyr so we can, for example:
+
+```{r results="hide"}
+
+setosa_sepal_leng_av <- iris %>% 
+  filter(Species == "setosa" & Petal.Length < 1.5) %>% 
+  summarise(ave = mean(Sepal.Length))
+
+```
+Without the pipe function, this same piece of code would look like:
+
+```{r}
+setosa_sepal_leng_av <- summarise(filter(iris, Species == "setosa" & Petal.Length < 1.5), ave = mean(Sepal.Length))
+```
+
+This is not very readable and appears more complicated, whereas the pipe operator allows us to reorder the code in a step-by-step fashion, like a recipe. Next we will look at using pipes with the group_by and summarise functions. 
+
+
+### 3.2 Grouping and summarising data
 
 We can produce breakdowns of statistics using the group_by and summarise commands from the dplyr package.
 
@@ -666,12 +703,7 @@ group_by() identifies which variables we want to produce breakdowns by.
 summarise() is used to indicate which values we want to calculate. 
 
 
-
-Using these functions together we can produce summary statistics in a similar way to pivot tables in Excel. We can use these functions together using the pipe (%>%) operator which makes code more readable and means you don't have to create a new object each time you run a command. Using the pipe operator reduces the amount of nested functions (functions that are within other functions) and allows us to chain together dplyr data wrangling functions. The pipe operator can be read as "then" and allows us to go from one step to another easily in dplyr so we can, for example:
-
-
-
-+ filter our data frame to only focus on a few rows then
+We can use these functions together with the pipe operator we just saw to perform calculations on grouped output similar to a pivot table:
 
 + group_by another variable to create groups then
 
@@ -697,8 +729,7 @@ In the above code, R is taking the 'iris' dataset, grouping it by Species and th
 
 
 
-The pipe operator simply passes through the object on the left hand side as the first argument of the following function. If we did not use the pipe operator to obtain the mean sepal length with breakdown by species the R code would look like this:
-
+The pipe operator simply passes through the object on the left hand side as the first argument of the following function. Again, to demonstrate what the code would look like if we did not use the pipe operator to obtain the mean sepal length with breakdown by species:
 
 
 ```{r results="hide"}
@@ -749,31 +780,6 @@ sepal_length_average <- iris %>%
   ungroup()
 
 ```
-
-
-
-### 3.2 Filter
-
-
-
-If you would like to produce statistics for a subset of rows or observations, a good function to use is filter() from the dplyr package.
-
-
-
-To filter we just specify the data that we want to filter (iris) and the value that we want to filter on. In this case lets filter where Species is "setosa" and "Petal.Length" is less that 1.5 and then recalculate the mean Sepal Length.
-
-
-
-```{r results="hide"}
-
-setosa_sepal_leng_av <- iris %>% 
-  filter(species == "setosa" & Petal.Length < 1.5) %>% 
-  summarise(ave = mean(Sepal.Length))
-
-```
-
-
-
 
 
 ### 3.3 Select
