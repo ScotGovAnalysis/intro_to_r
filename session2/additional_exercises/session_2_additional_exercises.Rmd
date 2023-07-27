@@ -1,0 +1,51 @@
+---
+title: "Session 2 - Additional exercises"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE)
+```
+
+R comes with several built in datasets (https://www.rdocumentation.org/packages/datasets/versions/3.6.2).
+
+To load the data into the global environment, type `data(<datasetname>)` where your replace datasetname with the dataset you want to use
+
+
+## Data wrangling
+
+
+### Analysing quarterly UKgas
+
+Read in "UKgas.csv" from the `additional_exercises/data` folder
+```{r}
+
+
+```
+
+You want to compute the mean quarterly gas consumption by quarter.
+
+1. Convert the data to long format with a column to specify the quarter.
+
+```{r}
+
+
+
+```
+
+2. Compute the mean quarterly UKgas consumption across years (Your tibble will have four rows)
+
+```{r}
+
+
+
+```
+
+
+3. Compute the mean gas consumption for each year (Your tibble will have 27 rows)
+
+```{r}
+
+
+
+```
