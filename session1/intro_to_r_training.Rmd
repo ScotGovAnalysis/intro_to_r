@@ -494,7 +494,7 @@ The format is dataframe name, $, variable name. Note that a vector is returned.
 
 
 
-All variables have an associated class. The class will determine what calculations are possible with them and how R should treat them. So far, our dataset offenders has variables of three different classes; integer, number, and character. Other useful types are factor, logical and date. 
+All variables have an associated class. The class will determine what calculations are possible with them and how R should treat them. So far, our dataset iris has variables of three different classes; integer, number, and character. Other useful types are factor, logical and date. 
 
 
 
@@ -510,7 +510,7 @@ class(iris$Sepal.Length)
 
 
 
-It's possible to coerce variables from one class to another. We can change the Sepal.Length variable in the offenders dataset to be an integer variable as follows:
+It's possible to coerce variables from one class to another. We can change the Sepal.Length variable in the iris dataset to be an integer variable as follows:
 
 
 
@@ -546,7 +546,7 @@ iris
 
 Another common class is factors. 
 
-Factors are for categorical variables involving different levels. So for example, in the dataset 'iris', there are 3 levels of Species: setosa, versicolor, virginica. We can see this now when looking at the environment tab (after clicking the arrow to the left of offenders) and also the order from using the following command:
+Factors are for categorical variables involving different levels. So for example, in the dataset 'iris', there are 3 levels of Species: setosa, versicolor, virginica. We can see this now when looking at the environment tab (after clicking the arrow to the left of iris) and also the order from using the following command:
 
 
 
