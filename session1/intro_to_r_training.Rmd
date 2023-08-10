@@ -638,6 +638,7 @@ iris$Species <- as.factor(iris$Species)
 ## 3 Data wrangling and 'group by' calculations
 
 
+
 ### 3.1 Filter
 
 To start off with a simple data wrangling function; if you would like to produce statistics for a subset of rows or observations, a good function to use is filter() from the dplyr package.
@@ -780,6 +781,7 @@ sepal_length_average <- iris %>%
 
 ```
 
+
 ### 3.3 Select
 
 
@@ -820,7 +822,7 @@ iris_petals <- iris %>%
 
 
 
-We can rename variables using the dplyr function rename(). Let's amend our above coding in creating the 'iris_petals' dataset so that Petal.Length is just calles P.Length, and Petal.Width is P.Width.
+We can rename variables using the dplyr function rename(). Let's amend our above coding in creating the 'iris_petals' dataset so that Petal.Length is just called P.Length, and Petal.Width is P.Width.
 
 
 
@@ -868,7 +870,7 @@ iris_petals <- iris_petals %>%
 
 
 
-Another useful function found in the dplyr package is if_else, which works in a similar way to if statements in Excel. This uses a logical statement to determine the output. The below code uses this to identify petals that are less than 2 cm long, the mutate function is used to add a variable in to the offenders dataset which is 1 if the petal is less than 2 cm and 0 if it is 2 cm or more.
+Another useful function found in the dplyr package is if_else, which works in a similar way to if statements in Excel. This uses a logical statement to determine the output. The below code uses this to identify petals that are less than 2 cm long, the mutate function is used to add a variable in to the iris dataset which is 1 if the petal is less than 2 cm and 0 if it is 2 cm or more.
 
 
 
@@ -1011,7 +1013,7 @@ write_csv(iris_petals, path = "iris_petals.csv")
 
 
 
-This assumes by default that the columns are separated by a comma symbol. The data will be saved as a CSV in your working directory to a file called `iris_petals.csv`.
+This assumes by default that the columns are separated by a comma symbol. The data will be saved as a CSV in your working directory to a file called `iris_petals.csv`.  
 
 
 
@@ -1036,8 +1038,6 @@ This assumes by default that the columns are separated by a comma symbol. The da
 
 
 There are lots of resources that can help you develop your R knowledge, but below are a few that are particularly helpful:
-
-
 
 + Scottish Government 'Good Coding Practices': https://github.com/DataScienceScotland/good_practices/blob/main/coding.md
 
