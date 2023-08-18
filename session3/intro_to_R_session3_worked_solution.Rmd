@@ -9,10 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
-
-
-
-
 ```{r source}
 library(tidyverse)
 source("./R/Analysis.R")
@@ -20,8 +16,6 @@ source("./R/Analysis.R")
 ```
 
 ## Plot of total FTE over time
-
-
 
 ```{r plot}
 
@@ -40,12 +34,13 @@ plt
 ```
 
 ## Table of median annual FTE
+
 ```{r table, results = "asis"}
 data_all_median <- data_all %>%
   #you can call functions to create variables in the group_by argument
   group_by(Year = year(date), benefit) %>%
-  summarise(total_fte = round(median(total_fte), 1)) %>%
-  spread(key = benefit, value = total_fte) %>%
+  summarise(median_fte = round(median(total_fte), 1)) %>%
+  pivot_wider(names_from = "benefit", values_from = "median_fte") %>%
   #you can draw on functions from libraries that you don't want to load using :: . 
   #knitr::kable is a pretty html table formatting library
   #see https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf for other table formatting suggestions. Note, you need results = "asis" for the kable html output, also DT::datatable
@@ -53,6 +48,4 @@ data_all_median <- data_all %>%
 data_all_median
 
 
-
 ```
-

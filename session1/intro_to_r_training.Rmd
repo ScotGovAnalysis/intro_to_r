@@ -84,8 +84,9 @@ Some of the advantages:
 
 * It is **extensible** - there are a vast array of **packages** that can be added to extend the functionality of R, produced by statisticians and programmers around the world. These can range from obscure statistical techniques to tools for making interactive charts.
 
-* It's **free and open source** - a large part of its popularity can be owed to its low cost, particularly relative to proprietary software such as SAS.
+* It's **open source** - the source code is openly available, meaning that there are more eyes looking at the software's code, resulting in fewer bugs and faster updates than typically for proprietary software.
 
+* It's **free/low-cost** - R and RStudio are free to use along with all the packages.
 
 
 ### 1.3 How is it used?
@@ -110,21 +111,9 @@ There a number of areas in the Government where R is making an impact:
 
 
 
-The window in which commands are entered is called the "console" window. It is used to input and execute code. Results, errors and warnings are shown directly in the same window. 
-
-
+The window in which commands are entered is called the "console" window. It is used to input and execute code. Results, errors and warnings are shown directly in the same window. You can customize the text and background colour in Tools > Global Options > Appearance.
 
 A command which is entered into the console is executed by simply pressing enter. 
-
-
-
-Code appears in blue text.
-
-Results appear in black text. 
-
-Warnings and errors appear as red text. 
-
-
 
 For instance if you type:
   
@@ -260,13 +249,26 @@ Of course, you can also use Google, Stack Overflow, R-Yammer or the R-user group
   
 ##   2. Processing data
   
-### 2.1 Setting up a working directory
+### 2.1 Creating a Project / Setting up a working directory
   
+Projects are a means of organising work for reproducible analysis. A project file (.RProj) allows RStudio to refer to files relative to the project directory. You can create a new project using RStudio and upload files from a folder in your laptop into this new project. Opening a project sets you up in the appropriate working directory automatically. Steps to create a new project are detailed below:  
   
-  
-  The default behaviour of RStudio for the handling of files e.g. datasets, code scripts etc. is to use a working directory which is a folder where RStudio reads and saves files. Therefore, before we start writing any code we should set up a working directory so that everything we are going to import into RStudio or export from RStudio will be saved by default into this folder. 
+1. Click on the File Menu and select New Project.
+
+2. Select New Directory
+
+3. Select New Project
+
+4. Write an appropriate name for your project in the Directory Name text box and select Create Project. The project name will now appear in the top right corner of RStudio to indicate that you are in the new project.
+
+5. Upload files to your new project by clicking Upload in the Files window menu (bottom right window) and select Browse to upload any files saved in a folder e.g. data csv files saved in a folder in your OneDrive.
+
+To switch between R projects, you can select a .Rproj file, use the menu "File" and open project, or use the drop down in the top right corner of RStudio. 
 
 
+The default behaviour of RStudio for the handling of files e.g. datasets, code scripts etc. is to use a working directory which is a folder where RStudio reads and saves files. When setting up a project, RStudio will use the project directory as the working directory. 
+
+Alternatively, before we start writing any code we should set up a working directory so that everything we are going to import into RStudio or export from RStudio will be saved by default into this folder. 
 
 You can check what the working directory currently is by using the getwd() command (which stands for get working directory):
   
@@ -304,24 +306,6 @@ You can set your working directory manually following the steps below:
 3. Choose the directory (folder) you've just created in step 1.
 
 
-
-Projects are a means of organising work for reproducible analysis. A project file (.RProj) allows RStudio to refer to files relative to the project directory. You can create a new project using RStudio and upload files from a folder in your laptop into this new project. Opening a project sets you up in the appropriate working directory automatically. Steps to create a new project are detailed below:  
-  
-  
-  
-1. Click on the File Menu and select New Project.
-
-2. Select New Directory
-
-3. Select New Project
-
-4. Write an appropriate name for your project in the Directory Name text box and select Create Project. The project name will now appear in the top right corner of RStudio to indicate that you are in the new project.
-
-5. Upload files to your new project by clicking Upload in the Files window menu (bottom right window) and select Browse to upload any files saved in a folder e.g. data csv files saved in a folder in your OneDrive.
-
-To switch between R projects, you can select a .Rproj file, use the menu "File" and open project, or use the drop down in the top right corner of RStudio. 
-
-
 ### 2.2 Packages
 
 
@@ -332,7 +316,7 @@ A lot of pre-programmed routines are included in R, and you can add a lot more t
 
 Packages extend R's functionality enormously and are a key factor in making R so popular. 
 
-Packages have to be approved before the can be installed on SCOTS. Instructions can be found here: https://erdm.scotland.gov.uk:8443/documents/A23744528/details
+Packages have to be approved before the can be installed on SCOTS. Instructions can be found here: https://erdm.scotland.gov.uk/documents/A42404229/details
 
 
 Once a package is installed, you should be able to see it in the packages tab. If you want to use it, you can load it by ticking the appropriate box in the packages window. You can also load packages using the library command, which you can inside your script, so they will automatically load when you run it:
@@ -514,7 +498,7 @@ All variables have an associated class. The class will determine what calculatio
 
 
 
-We can check what class a variable is using summary, looking at the information in the Environment pane or by using the command "class" (see example checking the class of the WEIGHT variable below):
+We can check what class a variable is using summary, looking at the information in the Environment pane or by using the command "class" (see example checking the class of the length variable below):
   
   
   
@@ -653,9 +637,45 @@ iris$Species <- as.factor(iris$Species)
 
 ## 3 Data wrangling and 'group by' calculations
 
-### 3.1 Grouping and summarising data
+
+### 3.1 Filter
+
+To start off with a simple data wrangling function; if you would like to produce statistics for a subset of rows or observations, a good function to use is filter() from the dplyr package.
 
 
+To filter we just specify the data that we want to filter (iris) and the value that we want to filter on. In this case lets filter where Species is "setosa" and "Petal.Length" is less that 1.5.
+
+```{r}
+setosa_sepal_leng <- filter(iris, Species == "setosa" & Petal.Length < 1.5)
+```
+
+We can then use this to recalculate the mean Sepal Length:
+
+```{r}
+setosa_sepal_leng_av <- summarise(setosa_sepal_leng, ave = mean(Sepal.Length))
+
+```
+
+
+Using these functions together we can produce a summary by 'piping' the results from one function into the next. We can use these functions together using the pipe (%>%) operator which makes code more readable and means you don't have to create a new object each time you run a command. Using the pipe operator reduces the amount of nested functions (functions that are within other functions) and allows us to chain together dplyr data wrangling functions. The pipe operator can be read as "then" and allows us to go from one step to another easily in dplyr so we can, for example:
+
+```{r results="hide"}
+
+setosa_sepal_leng_av <- iris %>% 
+  filter(Species == "setosa" & Petal.Length < 1.5) %>% 
+  summarise(ave = mean(Sepal.Length))
+
+```
+Without the pipe function, this same piece of code would look like:
+
+```{r}
+setosa_sepal_leng_av <- summarise(filter(iris, Species == "setosa" & Petal.Length < 1.5), ave = mean(Sepal.Length))
+```
+
+This is not very readable and appears more complicated, whereas the pipe operator allows us to reorder the code in a step-by-step fashion, like a recipe. Next we will look at using pipes with the group_by and summarise functions. 
+
+
+### 3.2 Grouping and summarising data
 
 We can produce breakdowns of statistics using the group_by and summarise commands from the dplyr package.
 
@@ -682,12 +702,7 @@ group_by() identifies which variables we want to produce breakdowns by.
 summarise() is used to indicate which values we want to calculate. 
 
 
-
-Using these functions together we can produce summary statistics in a similar way to pivot tables in Excel. We can use these functions together using the pipe (%>%) operator which makes code more readable and means you don't have to create a new object each time you run a command. Using the pipe operator reduces the amount of nested functions (functions that are within other functions) and allows us to chain together dplyr data wrangling functions. The pipe operator can be read as "then" and allows us to go from one step to another easily in dplyr so we can, for example:
-
-
-
-+ filter our data frame to only focus on a few rows then
+We can use these functions together with the pipe operator we just saw to perform calculations on grouped output similar to a pivot table:
 
 + group_by another variable to create groups then
 
@@ -709,12 +724,11 @@ sepal_length_average <- iris %>%
 
 
 
-In the above code, R is taking the 'iris' dataset, grouping it by Species and then (note that the data is "piped" like water into the group_by command using the pipe symbol '%>%' instead of specifying the 'iris' dataset as the first argument within the group_by command), and then outputting the mean number of previous convictions by species. The new mean number of Sepal.Length variable we've decided to call 'ave'. The results are saved into a new dataset called 'sepal_length_average'. 
+In the above code, R is taking the 'iris' dataset, grouping it by Species and then (note that the data is "piped" like water into the group_by command using the pipe symbol '%>%' instead of specifying the 'iris' dataset as the first argument within the group_by command), and then outputting the mean length by species. The new mean number of Sepal.Length variable we've decided to call 'ave'. The results are saved into a new dataset called 'sepal_length_average'. 
 
 
 
-The pipe operator simply passes through the object on the left hand side as the first argument of the following function. If we did not use the pipe operator to obtain the mean sepal length with breakdown by species the R code would look like this:
-
+The pipe operator simply passes through the object on the left hand side as the first argument of the following function. Again, to demonstrate what the code would look like if we did not use the pipe operator to obtain the mean sepal length with breakdown by species:
 
 
 ```{r results="hide"}
@@ -765,32 +779,6 @@ sepal_length_average <- iris %>%
   ungroup()
 
 ```
-
-
-
-### 3.2 Filter
-
-
-
-If you would like to produce statistics for a subset of rows or observations, a good function to use is filter() from the dplyr package.
-
-
-
-To filter we just specify the data that we want to filter (iris) and the value that we want to filter on. In this case lets filter where Species is "setosa" and "Petal.Length" is less that 1.5 and then recalculate the mean Sepal Length.
-
-
-
-```{r results="hide"}
-
-setosa_sepal_leng_av <- iris %>% 
-  filter(species == "setosa" & Petal.Length < 1.5) %>% 
-  summarise(ave = mean(Sepal.Length))
-
-```
-
-
-
-
 
 ### 3.3 Select
 
@@ -876,15 +864,11 @@ iris_petals <- iris_petals %>%
 
 
 
-You can download the 'Data Transformation Cheat Sheet' (and other cheatsheets) at: https://www.rstudio.com/resources/cheatsheets/
-
-
-
 ### 3.6 If_else
 
 
 
-Another useful function found in the dplyr package is if_else, which works in a similar way to if statements in Excel. This uses a logical statement to determine the output. The below code uses this to identify offenders who have weight under 170lbs, the mutate function is used to add a variable in to the offenders dataset which is 1 if they are under 170lbs and 0 if they are over 170lbs.
+Another useful function found in the dplyr package is if_else, which works in a similar way to if statements in Excel. This uses a logical statement to determine the output. The below code uses this to identify petals that are less than 2 cm long, the mutate function is used to add a variable in to the offenders dataset which is 1 if the petal is less than 2 cm and 0 if it is 2 cm or more.
 
 
 
@@ -963,29 +947,46 @@ If we want to preserve the salary dataset and only add on the sickness data wher
 
 ```{r results="hide"}
 
-staff_left_join <- left_join(staff_salaries, 
-                             staff_sickness,
-                             by="staff_id")
+staff_salary_preserved_with_sickness_joined <-
+  left_join(staff_salaries,
+            staff_sickness,
+            by="staff_id")
 
 ```
 
 You'll see here that there are NAs in the sick_day column for staff_id 6-10. This is because these staff do not exist in the staff_sickness dataset.
 
-If we keep the datasets in the same order but do a right join then we will create a dataset that keeps all records in staff_sickness and matches to those in staff_salaries.
+
+Which of the join family of commands would you use to create a dataset that keeps all records in staff_sickness and matches to those in staff_salaries while passing the two data arguments in the order staff_salaries, staff_sickness? 
 
 ```{r results="hide"}
 
-staff_right_join <- right_join(staff_salaries,
-                               staff_sickness, 
-                               by="staff_id")
+staff_sickness_preserved_with_sickness_joined <- 
+  right_join(staff_salaries,
+             staff_sickness,
+             by="staff_id")
 
 ```
 
-A full join keeps all the staff that appear in either dataset.
+
+How would you do this if you swapped the order of the dataset arguments?
+
 
 ```{r results="hide"}
 
-staff_full_join <- full_join(staff_salaries,
+staff_sickness_preserved_with_salaries_joined <- 
+  left_join(staff_sickness,
+             staff_salaries,
+             by="staff_id")
+
+
+```
+
+How would you keep all the entries that exist in both datasets?
+
+```{r results="hide"}
+
+staff_all <- full_join(staff_salaries,
                              staff_sickness,
                              by="staff_id")
 
@@ -998,19 +999,19 @@ For more information about the different sorts of joins and other data transform
 
 
 
-A command to export data into csv format is write.csv. For instance, to export our data which contains the complete cases:
+A command to export data into csv format is write_csv from the readr package (this is a neater version of write.csv() that is available in base R). For instance, to export our data which contains the complete cases:
 
 
 
 ```{r results="hide"}
 
-write.csv(iris_petals, file = "iris_petals.csv")
+write_csv(iris_petals, path = "iris_petals.csv")
 
 ```
 
 
 
-This assumes by default that you want to export the row headers and that the columns are separated by a comma symbol (sep = ","). The data will be saved as a CSV in your working directory.  
+This assumes by default that the columns are separated by a comma symbol. The data will be saved as a CSV in your working directory to a file called `iris_petals.csv`.
 
 
 
@@ -1038,6 +1039,8 @@ There are lots of resources that can help you develop your R knowledge, but belo
 
 
 
++ Scottish Government 'Good Coding Practices': https://github.com/DataScienceScotland/good_practices/blob/main/coding.md
+
 + DataCamp is a website which hosts multiple online courses that teach coding. Their 'Introduction to R' course is free to complete and provides a broader overview in the basic concepts for coding in R. A link to the course can be found here: https://www.datacamp.com/courses/free-introduction-to-r.
 
 + Another good resource is the 'R for Data Science' online book: [r4ds.had.co.nz/](r4ds.had.co.nz/), written by Hadley Wickham, who is a data scientist at RStudio, who developed the tidyverse package that we introduced earlier. It gives a really good overview of R and how his package works with it.
@@ -1046,4 +1049,4 @@ There are lots of resources that can help you develop your R knowledge, but belo
 
 
 
-For further lists of useful resources please see: https://trello.com/b/D5pSkqnT/online-analytical-training
+Further resources can be found on Saltire Analytical Professions pages (Analytical Professions > Analytical Tools > Analytical Software)
