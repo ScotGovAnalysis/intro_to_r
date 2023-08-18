@@ -79,7 +79,7 @@ g <- ggplot(UKgas_l, aes(x = year,
                          group = quarter,
                          colour = quarter)) + 
   geom_line() +
-  xlab("Year") +                           ## Consider doing this via labels(title = "", x="", y="") to reduce number of calls
+  xlab("Year") +                           ## Consider doing this via labels(title = "", x="", y="") to reduce number of calls 
   ylab("Gas consumption (mTherms)")
 
 g
