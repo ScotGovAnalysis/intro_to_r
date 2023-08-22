@@ -111,6 +111,18 @@ Additional statistical functions
 * `sd()`
 
 Some detail of ggplot coverage:
+ - `aes(x,y,group, colour)`
+ - `geom_point()`, `geom_line()`, `geom_smooth()`, `geom_col()`, `geom_errorbar()`
+ - `facet_grid()`
+ - `theme_bw()`
+ - `xlab()`, `ylab()`
+ - `position_dodge()`
+
+## Session 3
+
+This session provides an opportunity to put everything learned during previous sessions into practice. It outlines a hypothetical scenario, with a specific ask to create a plot and a table. 
+
+To be honest this section looks pretty underdeveloped. A more fleshed-out example which comprises the data importing, tidying, *and* visualsation functions covered in sessions 1 and 2 would likely be a more effective means of embedding the materials.
 
 * `aes(x,y,group, colour)`
 * `geom_point()`, `geom_line()`, `geom_smooth()`, `geom_col()`, `geom_errorbar()`
@@ -122,12 +134,3 @@ Some detail of ggplot coverage:
 ### Session 3
 
 This session provides an opportunity to put everything learned during previous sessions into practice. It outlines a hypothetical scenario, with a specific ask to create a plot and a table. 
-
-
-
-
-
-
-
-
-
