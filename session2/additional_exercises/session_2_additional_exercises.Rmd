@@ -19,6 +19,7 @@ library(tidyverse)
 1. Read in "UKgas.csv" from the `./data` folder and inspect the data. (The data has been created from one of R datasets https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas)
 
 ```{r}
+
 UKgas <-  
 
 
@@ -37,7 +38,6 @@ UKgas_l <-
 
 ```{r}
 UKgas_by_quarter <- 
-  
 
 ```
 
