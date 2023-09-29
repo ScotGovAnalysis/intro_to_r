@@ -1,7 +1,7 @@
 ---
 title: "Intro to R session2"
 author: ""
-date: "2020"
+date: "2023"
 output: html_document
 ---
 
@@ -20,10 +20,8 @@ You need to:
   3. Plot a bar graph with error bars to compare the mean number of applications for the four benefits
 
 ```{r LoadandSource}
-
+#Read in libraries
 library(tidyverse)
-# Call an external file. This file creates the data. We will look at it at the end of the session
-source("./R/create_data.R") 
 
 ```
 
@@ -37,6 +35,8 @@ benefits <-
 
 # view the first few lines of the tibble
 
+  
+# view the entire tibble in a new tab
 
 
 ```
@@ -149,6 +149,9 @@ benefit_long <- pivot_longer(
   
   
                             )
+
+# If your dataset contains many variables, you can also specify columns to pivot
+
 head(benefit_long)
 
 ```
@@ -162,8 +165,9 @@ Once we summarise, we can add this to our benefit_long dataframe. We need to spe
 
 benefit_total <- benefit_long %>%
   group_by() %>%
-  summarise(apps = , 
-            benefit = ) %>%
+  summarise(benefit = 
+            apps = , 
+           ) %>%
   ungroup()
 
 head(benefit_total)
