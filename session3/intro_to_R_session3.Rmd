@@ -78,5 +78,5 @@ knitr::kable(review_processing_time,
 
 # Client Output requirements
 
--   A plot of the total FTE over time
--   A table with the annual FTE to process reviews and appeal defined as the median
+-   A plot of the total FTE over time grouped by benefit type
+-   A table with the median annual FTE to process all applications for each benefit type
