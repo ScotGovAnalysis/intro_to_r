@@ -20,11 +20,7 @@ knitr::opts_chunk$set(
 
 
 
-This document was created by the Ministry of Justice Analytical Services R training group and has been adapted for use by Scottish Government. The original document can be found at https://moj-analytical-services.github.io/platform_user_guidance/getting-started.html. 
-
-
-
-This guide is hosted on Github: https://github.com/moj-analytical-services/IntroRTraining
+This document was created by the Ministry of Justice Analytical Services R training group and has been adapted for use by Scottish Government (the original guide is hosted on Github: https://github.com/moj-analytical-services/IntroRTraining)
 
 
 
@@ -70,7 +66,7 @@ R is an open-source programming language and software environment, designed prim
 
 
 
-R has grown rapidly in popularity particularly in the last five years, due to the increased interest in the data science field. It is now a key tool in the MoJ's Analytical Platform.
+R has grown rapidly in popularity particularly in the last five years, due to the increased interest in the data science field. It is now a key tool in the Scottish Government's analytical platform, and will remain so as SG phases out the use of proprietary software (e.g. SAS) over the next few years.
 
 
 
