@@ -256,7 +256,7 @@ time_series_plot5
 
 ```
 
-Finally, we could perform the wrangling and plotting  in a concise chunk
+Finally, we could perform the wrangling and plotting in a concise chunk
 
 Exercise:
 

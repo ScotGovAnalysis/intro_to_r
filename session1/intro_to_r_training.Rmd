@@ -490,7 +490,7 @@ The format is dataframe name, $, variable name. Note that a vector is returned.
 
 
 
-All variables have an associated class. The class will determine what calculations are possible with them and how R should treat them. So far, our dataset offenders has variables of three different classes; integer, number, and character. Other useful types are factor, logical and date. 
+All variables have an associated class. The class will determine what calculations are possible with them and how R should treat them. So far, our dataset iris has variables of three different classes; integer, number, and character. Other useful types are factor, logical and date. 
 
 
 
@@ -506,7 +506,7 @@ class(iris$Sepal.Length)
 
 
 
-It's possible to coerce variables from one class to another. We can change the Sepal.Length variable in the offenders dataset to be an integer variable as follows:
+It's possible to coerce variables from one class to another. We can change the Sepal.Length variable in the iris dataset to be an integer variable as follows:
 
 
 
@@ -542,7 +542,7 @@ iris
 
 Another common class is factors. 
 
-Factors are for categorical variables involving different levels. So for example, in the dataset 'iris', there are 3 levels of Species: setosa, versicolor, virginica. We can see this now when looking at the environment tab (after clicking the arrow to the left of offenders) and also the order from using the following command:
+Factors are for categorical variables involving different levels. So for example, in the dataset 'iris', there are 3 levels of Species: setosa, versicolor, virginica. We can see this now when looking at the environment tab (after clicking the arrow to the left of iris) and also the order from using the following command:
 
 
 
@@ -632,6 +632,7 @@ iris$Species <- as.factor(iris$Species)
 
 
 ## 3 Data wrangling and 'group by' calculations
+
 
 
 ### 3.1 Filter
@@ -776,6 +777,7 @@ sepal_length_average <- iris %>%
 
 ```
 
+
 ### 3.3 Select
 
 
@@ -816,7 +818,7 @@ iris_petals <- iris %>%
 
 
 
-We can rename variables using the dplyr function rename(). Let's amend our above coding in creating the 'iris_petals' dataset so that Petal.Length is just calles P.Length, and Petal.Width is P.Width.
+We can rename variables using the dplyr function rename(). Let's amend our above coding in creating the 'iris_petals' dataset so that Petal.Length is just called P.Length, and Petal.Width is P.Width.
 
 
 
@@ -864,7 +866,7 @@ iris_petals <- iris_petals %>%
 
 
 
-Another useful function found in the dplyr package is if_else, which works in a similar way to if statements in Excel. This uses a logical statement to determine the output. The below code uses this to identify petals that are less than 2 cm long, the mutate function is used to add a variable in to the offenders dataset which is 1 if the petal is less than 2 cm and 0 if it is 2 cm or more.
+Another useful function found in the dplyr package is if_else, which works in a similar way to if statements in Excel. This uses a logical statement to determine the output. The below code uses this to identify petals that are less than 2 cm long, the mutate function is used to add a variable in to the iris dataset which is 1 if the petal is less than 2 cm and 0 if it is 2 cm or more.
 
 
 
@@ -1007,7 +1009,7 @@ write_csv(iris_petals, path = "iris_petals.csv")
 
 
 
-This assumes by default that the columns are separated by a comma symbol. The data will be saved as a CSV in your working directory to a file called `iris_petals.csv`.
+This assumes by default that the columns are separated by a comma symbol. The data will be saved as a CSV in your working directory to a file called `iris_petals.csv`.  
 
 
 
@@ -1032,8 +1034,6 @@ This assumes by default that the columns are separated by a comma symbol. The da
 
 
 There are lots of resources that can help you develop your R knowledge, but below are a few that are particularly helpful:
-
-
 
 + Scottish Government 'Good Coding Practices': https://github.com/DataScienceScotland/good_practices/blob/main/coding.md
 
