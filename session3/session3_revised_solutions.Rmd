@@ -48,7 +48,8 @@ library(tidyverse)
 library(lubridate)
 
 all_visits_sas_date <- all_visits_sas %>% 
-  mutate(date = as.Date(period, origin="2011-01-01"))
+  mutate(date = paste0(period, "01"), #to convert it to a date, we need to include a day as well as the month and year
+         date = as_date(date)) #as_date should infer that it is a date in YYYYMMDD format, otherwise we can explicitly specify this using the format argument: date = as_date(period, format = ""%Y%m%d)
 
 ```
 
