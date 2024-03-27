@@ -21,7 +21,7 @@ The data are in the folder "intro_to_r/session3/Data"
 
 ```{r import_csv}
 library(tidyverse)
-setwd("C:/Users/u415537/R/R Training/intro_to_r/session3")
+
 visits_csv <- read_csv("Data/visits2011.csv")
 
 ```
@@ -33,7 +33,7 @@ Hint: use the readxl package. Use the command ?readxl to view the help page
 ```{r import_excel}
 #import library 
 library(readxl)
-setwd("C:/Users/u415537/R/R Training/intro_to_r/session3")
+
 visits_xl <- read_excel("Data/visits201213.xlsx")
 
 ```
@@ -102,7 +102,7 @@ all_visits_seasons = all_visits_months %>%
 ```
 
 
-### 2.4: Create a date variable using the "period" column
+### 2.4: Stretch: Create a date variable using the "period" column
 
 ```{r dates}
 library(tidyverse)

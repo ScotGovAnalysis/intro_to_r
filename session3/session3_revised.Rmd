@@ -11,14 +11,14 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ## Overview
 
-This session will aim to give you a chance to work through a problem that may be similar to one you would face your daily role. It will use functions we have covered in session 1 and 2, as well as some helpful new functions. 
+This session will aim to give you a chance to work through a problem that may be similar to one you would face your daily role. It will use functions we have covered in session 1 and 2, as well as some helpful new functions.
 
-## Section 1: Importing dataset 
+## Section 1: Importing dataset
 
 1.  Read in the CSV file "visits2011.csv"
 2.  Read in the Excel file "visits201213.xlsx"
 3.  Examine the two datasets - what differs about the outputs of each method?
-4.  Stretch: Read in the SAS dataset TRNG.ALL_VISITS to R
+4.  **Stretch**: Read in the SAS dataset TRNG.ALL_VISITS to R
 
 Some hints in the sections below....
 
@@ -28,7 +28,7 @@ The data are in the folder "intro_to_r/session3/Data"
 
 ### 1.2: Read in visits201213.xlsx
 
-Hint: use the readxl package. Use the command ?readxl to view the help page
+Hint: use the `readxl` package. Use the command `??readxl` to view the help page for the package
 
 ```{r import_excel}
 #import library 
@@ -42,26 +42,26 @@ visits_xl <-
 
 Use base R functions to look at the structure, values and types of variables in each dataset.
 
-### 1.4: Read in TRNG.ALL_VISITS dataset from SAS. 
+### 1.4: Read in TRNG.ALL_VISITS dataset from SAS.
 
-Hint: use the function read_sas in the haven package to read in SAS datafiles.
+Hint: use the function `haven::read_sas` to read in SAS datafiles.
 
 The SAS libraries are located on the shared drive "//s0177a/sasdata1/<path>/<filename>.sas7bdat". Note that the folder names may be different to that seen in the SAS server.
 
 You can use proc contents in SAS to find the exact file path.
 
 ```{r import_SAS}
+library(haven)
 
-all_visits_sas <- haven::read_sas("//s0177a/sasdata1/
+all_visits_sas <- 
 ```
-
 
 ## Section 2: Manipulating data
 
-1.  Combine the datasets from 1.1 and 1.2 as appropriate. Use the resulting data or the dataset from 1.4 for the following tasks.
+1.  Combine the datasets from 1.1 and 1.2 as appropriate. Use the resulting data (or the dataset from 1.4) for the following tasks:
 2.  Convert the dataset to a "long" (i.e. "tidy") format
-3.  Create a lookup table to add the season to each month. Use it to create a "season" variable in the dataset
-4.  Stretch: Create a date format variable using information in the "period" column
+3.  Create a "season" variable in the dataset by building a lookup table to match a season value to each value of month
+4.  **Stretch**: Create a date format variable using information in the "period" column
 
 Some hints in the sections below....
 
@@ -77,18 +77,19 @@ Use functions from earlier in the course to combine the datasets
 all_visits_sas_long <-
 ```
 
-### 2.3: Create new dataset using tibble so use as a lookup table to add the season corresponding to each month. 
+### 2.3: Create new dataset using tibble so use as a lookup table to add the season corresponding to each month.
 
 Create a table that corresponds specific months to season, e.g. Winter: Dec, Jan, Feb/ Spring: March, April, May/ Summer: June, July, August/ Autumn: Sep, Oct, nov
 
-Match this information in by extracting the month information from the "period" variable - consider the functions "substr" and "as.numeric"
-
+Match this information in by extracting the month information from the "period" variable: consider the functions `substr` and `as.numeric`
 
 ```{r lookup}
 seasons <- 
 ```
 
-### 2.4: Create a date variable using the "period" column 
+### 2.4: Stretch: Create a date variable using the "period" column
+
+Consider the function `as_date()` in the `lubridate` package
 
 ```{r dates}
 library(tidyverse)
@@ -97,6 +98,3 @@ library(lubridate)
 
 
 ```
-
-
-
