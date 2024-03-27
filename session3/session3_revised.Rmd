@@ -1,5 +1,5 @@
 ---
-title: "session3_resvised_solutions"
+title: "session3_revised"
 author: ""
 date: "2024-03-21"
 output: html_document
@@ -15,33 +15,80 @@ This session will aim to give you a chance to work through a problem that may be
 
 ## Section 1: Importing dataset 
 
-### 1.1: Read in TRNG.ALL_VISITS dataset from SAS. 
+1.  Read in the CSV file "visits2011.csv"
+2.  Read in the Excel file "visits201213.xlsx"
+3.  Examine the two datasets - what differs about the outputs of each method?
+4.  Stretch: Read in the SAS dataset TRNG.ALL_VISITS to R
 
-Hint: use the following code.... haven::read_sas("//s0177a/sasdata1/folder_names/dataset_name.sas7bdat"). Note that the folder names may be different to that seen in the SAS server. Use proc contents in SAS to find the exact file path. 
+Some hints in the sections below....
+
+### 1.1: Read in visits2011.csv
+
+The data are in the folder "intro_to_r/session3/Data"
+
+### 1.2: Read in visits201213.xlsx
+
+Hint: use the readxl package. Use the command ?readxl to view the help page
+
+```{r import_excel}
+#import library 
+library(readxl)
+
+visits_xl <- 
+
+```
+
+### 1.3: Whats the difference between these two datasets?
+
+Use base R functions to look at the structure, values and types of variables in each dataset.
+
+### 1.4: Read in TRNG.ALL_VISITS dataset from SAS. 
+
+Hint: use the function read_sas in the haven package to read in SAS datafiles.
+
+The SAS libraries are located on the shared drive "//s0177a/sasdata1/<path>/<filename>.sas7bdat". Note that the folder names may be different to that seen in the SAS server.
+
+You can use proc contents in SAS to find the exact file path.
 
 ```{r import_SAS}
 
 all_visits_sas <- haven::read_sas("//s0177a/sasdata1/
 ```
 
-### 1.2: Read in TRNG.ALL_VISITS dataset as xlsx. 
 
-Hint: use ?readxl help page
+## Section 2: Manipulating data
 
-```{r import_excel}
-#import library 
-library(readxl)
+1.  Combine the datasets from 1.1 and 1.2 as appropriate. Use the resulting data or the dataset from 1.4 for the following tasks.
+2.  Convert the dataset to a "long" (i.e. "tidy") format
+3.  Create a lookup table to add the season to each month. Use it to create a "season" variable in the dataset
+4.  Stretch: Create a date format variable using information in the "period" column
 
-all_visits_xl <- 
+Some hints in the sections below....
 
+### 2.1: Combine datasets
+
+Use functions from earlier in the course to combine the datasets
+
+### 2.2: Pivot data into tidy format
+
+"tidy" format is a long data format with one measurement per row.
+
+```{r pivot}
+all_visits_sas_long <-
 ```
 
-### 1.3: Whats the difference between these two datasets?
+### 2.3: Create new dataset using tibble so use as a lookup table to add the season corresponding to each month. 
+
+Create a table that corresponds specific months to season, e.g. Winter: Dec, Jan, Feb/ Spring: March, April, May/ Summer: June, July, August/ Autumn: Sep, Oct, nov
+
+Match this information in by extracting the month information from the "period" variable - consider the functions "substr" and "as.numeric"
 
 
-## Section 2: Working with dates
+```{r lookup}
+seasons <- 
+```
 
-### 2.1: Using the all_visits dataset imported from SAS. Change the period column into a date 
+### 2.4: Create a date variable using the "period" column 
 
 ```{r dates}
 library(tidyverse)
@@ -51,20 +98,5 @@ library(lubridate)
 
 ```
 
-
-### 2.2: Pivot data into tidyverse format
-
-```{r pivot}
-all_visits_sas_long <-
-```
-
-### 2.3: Create new dataset using tibble so use as a lookup table to add the season correspinding to each month. 
-
-e.g. Winter: Dec, Jan, Feb/ Spring: March, April, May/ Summer: June, July, August/ Autumn: Sep, Oct, nov
-
-
-```{r lookup}
-seasons <- 
-```
 
 
