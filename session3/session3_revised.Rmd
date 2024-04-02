@@ -89,7 +89,7 @@ seasons <-
 
 ### 2.4: Stretch: Create a date variable using the "period" column
 
-Consider the function `as_date()` in the `lubridate` package
+Consider the function `as_date()` in the `lubridate` package. First you will need to modify the period variable into a form that `lubridate` can interpret as a date
 
 ```{r dates}
 library(tidyverse)
@@ -98,3 +98,21 @@ library(lubridate)
 
 
 ```
+
+## Section 3: Analysing data
+
+### 3.1: Calculate the total number of trips made during each season
+
+Create a new dataset summarising the average number of trips for each of the 4 seasons.
+
+### 3.2: For each visit type, find the total number of trips made during each season
+
+Create a new dataset containing the average number of trips made during the 4 seasons, for each of the visit types (business, holiday, etc.). You can group by more than one variable within tidyverse
+
+### 3.3: For each each season, find the percentage of trips made for each of the visit types
+
+Consider joining the two datasets created in 3.1 and 3.2, 
+
+### 3.4: Stretch: Calculate the monthly change in number of trips, by visit type
+
+Create a dataset containing the difference in number of trips compared to the previous month, for each visit type. The `lag()` function in the `dplyr` tidyverse package can be used to reference values in previous rows

@@ -90,11 +90,11 @@ seasons <- tibble(month =seq(1,12),
                   season = c(rep("winter", 2), rep("spring", 3),rep("summer", 3), rep("autumn", 3),"winter"))
 
 # Create the match variable
-all_visits_months = all_visits_long %>% 
+all_visits_months <- all_visits_long %>% 
   mutate(month = substr(period,5,6) %>% as.numeric()) %>% glimpse()
 
 # Combine the datasets
-all_visits_seasons = all_visits_months %>% 
+all_visits_seasons <- all_visits_months %>% 
   left_join(seasons, by = "month") %>% 
   # Optionally, remove the match variable as it isn't required
   select(-month) %>% glimpse()
@@ -114,3 +114,58 @@ all_visits_date <- all_visits_seasons %>%
 
 ```
 
+## Section 3: Analysing data
+
+### 3.1: Calculate the total number of trips made during each season
+
+```{r avg_visits_all}
+all_visits_seasons_total <- all_visits_seasons %>%
+  group_by(season) %>%
+  summarise(total_trips_all = sum(no_of_trips)) %>%
+  glimpse()
+```
+
+### 3.2: For each visit type, find the total number of trips made during each season
+
+```{r avg_visits}
+visits_types_seasons_total <- all_visits_seasons %>%
+  group_by(holiday_type, season) %>%
+  summarise(total_trips = sum(no_of_trips)) %>%
+  glimpse()
+```
+
+
+### 3.3: For each each season, find the percentage of trips made for each of the visit types
+
+```{r pct_visits}
+visits_types_seasons_pct <- visits_types_seasons_total %>%
+  full_join(all_visits_seasons_total,
+            by = "season") %>%
+  mutate(pct = total_trips / total_trips_all) %>%
+  glimpse
+
+
+```
+alternatively using group_by-mutate
+```{r pct_visits2}
+visits_types_seasons_pct2 <- all_visits_seasons %>%
+  group_by(holiday_type, season) %>%
+  summarise(no_of_trips = sum(no_of_trips)) %>%
+  group_by(season) %>%
+  mutate(pct = no_of_trips / sum(no_of_trips)) %>%
+  glimpse
+
+
+```
+
+### 3.4: Stretch: Calculate the monthly change in number of trips, by visit type
+
+```{r diff_visits}
+
+all_visits_diff <- all_visits_date %>%
+  group_by(holiday_type) %>%
+  arrange(date) %>%
+  mutate(diff = no_of_trips - lag(no_of_trips, default = NA_real_)) %>%
+  glimpse()
+
+```
