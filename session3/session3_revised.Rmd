@@ -15,8 +15,8 @@ This session will aim to give you a chance to work through a problem that may be
 
 ## Section 1: Importing dataset
 
-1.  Read in the CSV file "visits2011.csv"
-2.  Read in the Excel file "visits201213.xlsx"
+1.  Read in the CSV file `"visits2011.csv"`
+2.  Read in the Excel file `"visits201213.xlsx"`
 3.  Examine the two datasets - what differs about the outputs of each method?
 4.  **Stretch**: Read in the SAS dataset TRNG.ALL_VISITS to R
 
@@ -24,7 +24,11 @@ Some hints in the sections below....
 
 ### 1.1: Read in visits2011.csv
 
-The data are in the folder "intro_to_r/session3/Data"
+The data are in the folder `"intro_to_r/session3/Data"`
+
+### 1.1: Read in visits2011.csv
+
+The data are in the folder `"intro_to_r/session3/Data"`
 
 ### 1.2: Read in visits201213.xlsx
 
@@ -46,7 +50,7 @@ Use base R functions to look at the structure, values and types of variables in 
 
 Hint: use the function `haven::read_sas` to read in SAS datafiles.
 
-The SAS libraries are located on the shared drive "//s0177a/sasdata1/<path>/<filename>.sas7bdat". Note that the folder names may be different to that seen in the SAS server.
+The SAS libraries are located on the shared drive `"//s0177a/sasdata1/<path>/<filename>.sas7bdat"`. Note that the folder names may be different to that seen in the SAS server.
 
 You can use proc contents in SAS to find the exact file path.
 
@@ -101,6 +105,11 @@ library(lubridate)
 
 ## Section 3: Analysing data
 
+1.  Calculate the total number of trips made during each season
+2.  For each visit type, find the total number of trips made during each season
+3.  For each each season, find the percentage of trips made for each of the visit types
+4.  **Stretch**: Calculate the monthly change in number of trips, by visit type
+
 ### 3.1: Calculate the total number of trips made during each season
 
 Create a new dataset summarising the average number of trips for each of the 4 seasons.
@@ -111,7 +120,7 @@ Create a new dataset containing the average number of trips made during the 4 se
 
 ### 3.3: For each each season, find the percentage of trips made for each of the visit types
 
-Consider joining the two datasets created in 3.1 and 3.2, 
+Consider joining the two datasets created in 3.1 and 3.2,
 
 ### 3.4: Stretch: Calculate the monthly change in number of trips, by visit type
 

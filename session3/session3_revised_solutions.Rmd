@@ -11,9 +11,9 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ## Overview
 
-This session will aim to give you a chance to work through a problem that may be similar to one you would face your daily role. It will use functions we have covered in session 1 and 2, as well as some helpful new functions. 
+This session will aim to give you a chance to work through a problem that may be similar to one you would face your daily role. It will use functions we have covered in session 1 and 2, as well as some helpful new functions.
 
-## Section 1: Importing dataset 
+## Section 1: Importing dataset
 
 ### 1.1: Read in visits2011.csv
 
@@ -42,7 +42,7 @@ visits_xl <- read_excel("Data/visits201213.xlsx")
 
 Depends on the functions used to read the datasets in. If all else is the same, the difference is the period covered.
 
-### 1.4: Stretch: Read in TRNG.ALL_VISITS dataset from SAS. 
+### 1.4: Stretch: Read in TRNG.ALL_VISITS dataset from SAS.
 
 Hint: use the function read_sas in the haven package to read in SAS datafiles.
 
@@ -54,7 +54,6 @@ You can use proc contents in SAS to find the exact file path.
 
 all_visits_sas <- haven::read_sas("//s0177a/sasdata1/training/all_visits.sas7bdat") 
 ```
-
 
 ## Section 2: Manipulating data
 
@@ -79,10 +78,9 @@ all_visits_long <- all_visits %>%
                values_to = "no_of_trips") %>% glimpse()
 ```
 
-### 2.3: Create new dataset using tibble so use as a lookup table to add the season corresponding to each month. 
+### 2.3: Create new dataset using tibble so use as a lookup table to add the season corresponding to each month.
 
 e.g. Winter: Dec, Jan, Feb/ Spring: March, April, May/ Summer: June, July, August/ Autumn: Sep, Oct, nov
-
 
 ```{r lookup}
 # Create the lookup
@@ -101,7 +99,6 @@ all_visits_seasons <- all_visits_months %>%
 
 ```
 
-
 ### 2.4: Stretch: Create a date variable using the "period" column
 
 ```{r dates}
@@ -119,10 +116,13 @@ all_visits_date <- all_visits_seasons %>%
 ### 3.1: Calculate the total number of trips made during each season
 
 ```{r avg_visits_all}
+library(knitr)
+
 all_visits_seasons_total <- all_visits_seasons %>%
   group_by(season) %>%
-  summarise(total_trips_all = sum(no_of_trips)) %>%
-  glimpse()
+  summarise(total_trips_all = sum(no_of_trips)) #%>% glimpse()
+
+kable(all_visits_seasons_total)
 ```
 
 ### 3.2: For each visit type, find the total number of trips made during each season
@@ -130,10 +130,10 @@ all_visits_seasons_total <- all_visits_seasons %>%
 ```{r avg_visits}
 visits_types_seasons_total <- all_visits_seasons %>%
   group_by(holiday_type, season) %>%
-  summarise(total_trips = sum(no_of_trips)) %>%
-  glimpse()
-```
+  summarise(total_trips = sum(no_of_trips)) #%>% glimpse()
 
+kable(visits_types_seasons_total)
+```
 
 ### 3.3: For each each season, find the percentage of trips made for each of the visit types
 
@@ -141,21 +141,21 @@ visits_types_seasons_total <- all_visits_seasons %>%
 visits_types_seasons_pct <- visits_types_seasons_total %>%
   full_join(all_visits_seasons_total,
             by = "season") %>%
-  mutate(pct = total_trips / total_trips_all) %>%
-  glimpse
+  mutate(pct = total_trips / total_trips_all) #%>% glimpse
 
-
+kable(visits_types_seasons_pct)
 ```
+
 alternatively using group_by-mutate
+
 ```{r pct_visits2}
 visits_types_seasons_pct2 <- all_visits_seasons %>%
   group_by(holiday_type, season) %>%
   summarise(no_of_trips = sum(no_of_trips)) %>%
   group_by(season) %>%
-  mutate(pct = no_of_trips / sum(no_of_trips)) %>%
-  glimpse
+  mutate(pct = no_of_trips / sum(no_of_trips)) %>% glimpse
 
-
+kable(visits_types_seasons_pct2)
 ```
 
 ### 3.4: Stretch: Calculate the monthly change in number of trips, by visit type
@@ -165,7 +165,8 @@ visits_types_seasons_pct2 <- all_visits_seasons %>%
 all_visits_diff <- all_visits_date %>%
   group_by(holiday_type) %>%
   arrange(date) %>%
-  mutate(diff = no_of_trips - lag(no_of_trips, default = NA_real_)) %>%
-  glimpse()
+  mutate(diff = no_of_trips - lag(no_of_trips, default = NA_real_)) #%>% glimpse()
+
+kable(all_visits_diff)
 
 ```
