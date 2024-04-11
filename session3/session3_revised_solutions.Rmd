@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 This session will aim to give you a chance to work through a problem that may be similar to one you would face your daily role. It will use functions we have covered in session 1 and 2, as well as some helpful new functions.
 
-## Section 1: Importing dataset
+## Section 1: Importing datasets
 
 ### 1.1: Read in visits2011.csv
 
@@ -175,7 +175,7 @@ kable(all_visits_diff)
 
 ### 4.1: Create an output table showing the median number of trips by calendar year.
 
-Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4), or extract the year as a substring of `source3`. 
+Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4), or extract the year as a substring of `source3`.
 
 Tidy the column headings using `rename()`
 
@@ -303,7 +303,7 @@ kable(all_visits_output_pct_rounded)
 
 ### 5.1. Create a bar chart showing the number of trips by calendar year
 
-Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4), or extract the year as a substring of `source3`. 
+Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4), or extract the year as a substring of `source3`.
 
 Consider carefully the x and y variables in `aes()`.
 
