@@ -125,3 +125,39 @@ Consider joining the two datasets created in 3.1 and 3.2,
 ### 3.4: Stretch: Calculate the monthly change in number of trips, by visit type
 
 Create a dataset containing the difference in number of trips compared to the previous month, for each visit type. The `lag()` function in the `dplyr` tidyverse package can be used to reference values in previous rows
+
+## Section 4: Creating output tables
+
+1. Create an output table showing the median number of trips by calendar year
+2. Create an output table showing the number of trips as a percentage of all trips taken by calendar year
+3 . **Stretch**: Modify the table created above to show the percentages rounded to the nearest whole number
+
+### 4.1: Create an output table showing the median and total number of trips by calendar year. 
+
+Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4). Tidy the column headings using `rename()`
+
+### 4.2: Create an output table showing the number of trips as a percentage of all trips taken by calendar year
+
+Consider using `ungroup()` in the `tidyverse` package after calculating the number of trips per year. Use `select()` to choose the columns needed for the output table.
+
+### 4.3: Stretch: Modify the table created above to show the percentages rounded to the nearest whole number
+
+Think of ways to adjust the code used to create the table in 4.2. The `round()` function can be used to calculate rounded figures.
+
+## Section 5: Creating charts using ggplot
+
+1. Create a bar chart showing the number of trips by calendar year
+2. Create a facet bar plot for each season showing the number of trips by calendar year
+3. **Stretch**: Create a stacked bar chart showing the number of trips by calendar year and season
+
+### 5.1: Create a bar chart showing the number of trips by calendar year
+
+Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4). Consider carefully the x and y variables in `aes()`.
+
+### 5.2: Create a facet bar plot for each season showing the number of trips by calendar year
+
+Consider carefully the variables in `aes()`, you should be including more that just x and y variables here. Use `facet_grid()` to create the facet bar plot.
+
+### 5.3: Stretch: Create a stacked bar chart showing the number of trips by calendar year and season
+
+Think about what should be included in `geom_col()` to specify that the bars should be stacked. 
