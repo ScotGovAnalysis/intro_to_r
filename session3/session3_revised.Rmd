@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 This session will aim to give you a chance to work through a problem that may be similar to one you would face your daily role. It will use functions we have covered in session 1 and 2, as well as some helpful new functions.
 
-## Section 1: Importing dataset
+## Section 1: Importing datasets
 
 1.  Read in the CSV file `"visits2011.csv"`
 2.  Read in the Excel file `"visits201213.xlsx"`
@@ -62,7 +62,7 @@ all_visits_sas <-
 
 ## Section 2: Manipulating data
 
-1.  Combine the datasets from 1.1 and 1.2 as appropriate. Use the resulting data (or the dataset from 1.4) for the following tasks:
+1.  Combine the datasets from 1.1 and 1.2 as appropriate. Use the resulting data (or the dataset from 1.4) for the following tasks.
 2.  Convert the dataset to a "long" (i.e. "tidy") format
 3.  Create a "season" variable in the dataset by building a lookup table to match a season value to each value of month
 4.  **Stretch**: Create a date format variable using information in the "period" column
@@ -81,7 +81,7 @@ Use functions from earlier in the course to combine the datasets
 all_visits_sas_long <-
 ```
 
-### 2.3: Create new dataset using tibble so use as a lookup table to add the season corresponding to each month.
+### 2.3: Create a new dataset using tibble to use as a lookup table to add the season corresponding to each month.
 
 Create a table that corresponds specific months to season, e.g. Winter: Dec, Jan, Feb/ Spring: March, April, May/ Summer: June, July, August/ Autumn: Sep, Oct, nov
 
@@ -128,13 +128,14 @@ Create a dataset containing the difference in number of trips compared to the pr
 
 ## Section 4: Creating output tables
 
-1. Create an output table showing the median number of trips by calendar year
-2. Create an output table showing the number of trips as a percentage of all trips taken by calendar year
-3 . **Stretch**: Modify the table created above to show the percentages rounded to the nearest whole number
+1.  Create an output table showing the median number of trips by calendar year
+2.  Create an output table showing the number of trips as a percentage of all trips taken by calendar year 3 . **Stretch**: Modify the table created above to show the percentages rounded to the nearest whole number
 
-### 4.1: Create an output table showing the median and total number of trips by calendar year. 
+### 4.1: Create an output table showing the median and total number of trips by calendar year.
 
-Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4). Tidy the column headings using `rename()`
+Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4), or extract the year as a substring of \`source3\`.
+
+Tidy the column headings using `rename()`
 
 ### 4.2: Create an output table showing the number of trips as a percentage of all trips taken by calendar year
 
@@ -146,13 +147,15 @@ Think of ways to adjust the code used to create the table in 4.2. The `round()` 
 
 ## Section 5: Creating charts using ggplot
 
-1. Create a bar chart showing the number of trips by calendar year
-2. Create a facet bar plot for each season showing the number of trips by calendar year
-3. **Stretch**: Create a stacked bar chart showing the number of trips by calendar year and season
+1.  Create a bar chart showing the number of trips by calendar year
+2.  Create a facet bar plot for each season showing the number of trips by calendar year
+3.  **Stretch**: Create a stacked bar chart showing the number of trips by calendar year and season
 
 ### 5.1: Create a bar chart showing the number of trips by calendar year
 
-Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4). Consider carefully the x and y variables in `aes()`.
+Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4), or extract the year as a substring of \`source3\`.
+
+Consider carefully the x and y variables in `aes()`.
 
 ### 5.2: Create a facet bar plot for each season showing the number of trips by calendar year
 
@@ -160,4 +163,4 @@ Consider carefully the variables in `aes()`, you should be including more that j
 
 ### 5.3: Stretch: Create a stacked bar chart showing the number of trips by calendar year and season
 
-Think about what should be included in `geom_col()` to specify that the bars should be stacked. 
+Think about what should be included in `geom_col()` to specify that the bars should be stacked.

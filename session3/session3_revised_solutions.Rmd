@@ -74,7 +74,7 @@ all_visits = bind_rows(visits_csv,visits_xl) %>% glimpse()
 ```{r pivot}
 all_visits_long <- all_visits %>% 
   pivot_longer(-c("period", "source3"),
-               names_to= "holiday_type", 
+               names_to= "visit_type", 
                values_to = "no_of_trips") %>% glimpse()
 ```
 
@@ -129,7 +129,7 @@ kable(all_visits_seasons_total)
 
 ```{r avg_visits}
 visits_types_seasons_total <- all_visits_seasons %>%
-  group_by(holiday_type, season) %>%
+  group_by(visit_type, season) %>%
   summarise(total_trips = sum(no_of_trips)) #%>% glimpse()
 
 kable(visits_types_seasons_total)
@@ -150,7 +150,7 @@ alternatively using group_by-mutate
 
 ```{r pct_visits2}
 visits_types_seasons_pct2 <- all_visits_seasons %>%
-  group_by(holiday_type, season) %>%
+  group_by(visit_type, season) %>%
   summarise(no_of_trips = sum(no_of_trips)) %>%
   group_by(season) %>%
   mutate(pct = no_of_trips / sum(no_of_trips)) %>% glimpse
@@ -163,7 +163,7 @@ kable(visits_types_seasons_pct2)
 ```{r diff_visits}
 
 all_visits_diff <- all_visits_date %>%
-  group_by(holiday_type) %>%
+  group_by(visit_type) %>%
   arrange(date) %>%
   mutate(diff = no_of_trips - lag(no_of_trips, default = NA_real_)) #%>% glimpse()
 
@@ -175,9 +175,11 @@ kable(all_visits_diff)
 
 ### 4.1: Create an output table showing the median number of trips by calendar year.
 
-Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4). Tidy the column headings using `rename()`
+Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4), or extract the year as a substring of `source3`. 
 
-```{r output_table_1}
+Tidy the column headings using `rename()`
+
+```{r output_table_1a}
 
 all_visits_output <- all_visits_date %>% 
   
@@ -198,6 +200,28 @@ kable(all_visits_output)
 
 ```
 
+Alternatively use `all_visits_seasons` (without the date extension) and extract the year number from `source3` or `period` as a substring
+
+```{r output_table_1b}
+
+all_visits_output <- all_visits_date %>% 
+  
+  # Creating the calendar year column and grouping by this new variable
+  mutate(calendar_year = substr(source3,4,7)) %>% 
+  group_by(calendar_year) %>% 
+  
+  # Calculating the median and total number of trips
+  summarise(median_trips = median(no_of_trips),
+            total_trips = sum(no_of_trips)) %>%
+  
+  # Renaming columns in the output table to remove R syntax
+  rename("Calendar Year" = calendar_year, 
+         "Median number of trips per year" = median_trips,
+         "Total number of trips per year" = total_trips)
+
+kable(all_visits_output)
+
+```
 
 ### 4.2: Create an output table showing the number of trips as a percentage of all trips taken by calendar year
 
@@ -235,7 +259,6 @@ all_visits_output_pct <- all_visits_date %>%
 kable(all_visits_output_pct)
 
 ```
-
 
 ### 4.3: Stretch: Modify the table created above to show the percentages rounded to the nearest whole number
 
@@ -276,12 +299,13 @@ kable(all_visits_output_pct_rounded)
 
 ```
 
-
 ## Section 5: Creating charts using ggplot
 
 ### 5.1. Create a bar chart showing the number of trips by calendar year
 
-Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4). Consider carefully the x and y variables in `aes()`.
+Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4), or extract the year as a substring of `source3`. 
+
+Consider carefully the x and y variables in `aes()`.
 
 ```{r output_chart_1}
 
@@ -346,7 +370,7 @@ bar_graph_trips_facet
 
 ### 5.3. Stretch: Create a stacked bar chart showing the number of trips by calendar year and season
 
-Think about what should be included in `geom_col()` to specify that the bars should be stacked. 
+Think about what should be included in `geom_col()` to specify that the bars should be stacked.
 
 ```{r output_chart_3}
 
