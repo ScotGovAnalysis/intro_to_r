@@ -1,0 +1,399 @@
+---
+title: "session3_resvised_solutions"
+author: ""
+date: "2024-03-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+## Section 1: Importing datasets
+
+### 1.1: Read in visits2011.csv
+
+The data are in the folder "intro_to_r/session3/Data"
+
+```{r import_csv}
+library(tidyverse)
+
+visits_csv <- read_csv("Data/visits2011.csv")
+
+```
+
+### 1.2: Read in visits201213.xlsx
+
+Hint: use the readxl package. Use the command ?readxl to view the help page
+
+```{r import_excel}
+#import library 
+library(readxl)
+
+visits_xl <- read_excel("Data/visits201213.xlsx")
+
+```
+
+### 1.3: Whats the difference between these two datasets?
+
+Depends on the functions used to read the datasets in. If all else is the same, the difference is the period covered.
+
+### 1.4: Stretch: Read in TRNG.ALL_VISITS dataset from SAS.
+
+Hint: use the function read_sas in the haven package to read in SAS datafiles.
+
+The SAS libraries are located on the shared drive "//s0177a/sasdata1/<path>/<filename>.sas7bdat". Note that the folder names may be different to that seen in the SAS server.
+
+You can use proc contents in SAS to find the exact file path.
+
+```{r import_SAS}
+
+all_visits_sas <- haven::read_sas("//s0177a/sasdata1/training/all_visits.sas7bdat") 
+```
+
+## Section 2: Manipulating data
+
+### 2.1: Combine datasets
+
+Use functions from earlier in the course to combine the datasets
+
+```{r combine}
+
+all_visits = bind_rows(visits_csv,visits_xl) %>% glimpse()
+
+```
+
+### 2.2: Pivot data into tidy format
+
+"tidy" format is a long data format with one measurement per row.
+
+```{r pivot}
+all_visits_long <- all_visits %>% 
+  pivot_longer(-c("period", "source3"),
+               names_to= "visit_type", 
+               values_to = "no_of_trips") %>% glimpse()
+```
+
+### 2.3: Create new dataset using tibble so use as a lookup table to add the season corresponding to each month.
+
+e.g. Winter: Dec, Jan, Feb/ Spring: March, April, May/ Summer: June, July, August/ Autumn: Sep, Oct, nov
+
+```{r lookup}
+# Create the lookup
+seasons <- tibble(month =seq(1,12), 
+                  season = c(rep("winter", 2), rep("spring", 3),rep("summer", 3), rep("autumn", 3),"winter"))
+
+# Create the match variable
+all_visits_months <- all_visits_long %>% 
+  mutate(month = substr(period,5,6) %>% as.numeric()) %>% glimpse()
+
+# Combine the datasets
+all_visits_seasons <- all_visits_months %>% 
+  left_join(seasons, by = "month") %>% 
+  # Optionally, remove the match variable as it isn't required
+  select(-month) %>% glimpse()
+
+```
+
+### 2.4: Stretch: Create a date variable using the "period" column
+
+```{r dates}
+library(tidyverse)
+library(lubridate)
+
+all_visits_date <- all_visits_seasons %>% 
+  mutate(date = paste0(period,"01") %>% 
+           as_date()) %>% glimpse()
+
+```
+
+## Section 3: Analysing data
+
+### 3.1: Calculate the total number of trips made during each season
+
+```{r avg_visits_all}
+library(knitr)
+
+all_visits_seasons_total <- all_visits_seasons %>%
+  group_by(season) %>%
+  summarise(total_trips_all = sum(no_of_trips)) #%>% glimpse()
+
+kable(all_visits_seasons_total)
+```
+
+### 3.2: For each visit type, find the total number of trips made during each season
+
+```{r avg_visits}
+visits_types_seasons_total <- all_visits_seasons %>%
+  group_by(visit_type, season) %>%
+  summarise(total_trips = sum(no_of_trips)) #%>% glimpse()
+
+kable(visits_types_seasons_total)
+```
+
+### 3.3: For each each season, find the percentage of trips made for each of the visit types
+
+```{r pct_visits}
+visits_types_seasons_pct <- visits_types_seasons_total %>%
+  full_join(all_visits_seasons_total,
+            by = "season") %>%
+  mutate(pct = total_trips / total_trips_all) #%>% glimpse
+
+kable(visits_types_seasons_pct)
+```
+
+alternatively using group_by-mutate
+
+```{r pct_visits2}
+visits_types_seasons_pct2 <- all_visits_seasons %>%
+  group_by(visit_type, season) %>%
+  summarise(no_of_trips = sum(no_of_trips)) %>%
+  group_by(season) %>%
+  mutate(pct = no_of_trips / sum(no_of_trips)) %>% glimpse
+
+kable(visits_types_seasons_pct2)
+```
+
+### 3.4: Stretch: Calculate the monthly change in number of trips, by visit type
+
+```{r diff_visits}
+
+all_visits_diff <- all_visits_date %>%
+  group_by(visit_type) %>%
+  arrange(date) %>%
+  mutate(diff = no_of_trips - lag(no_of_trips, default = NA_real_)) #%>% glimpse()
+
+kable(all_visits_diff)
+
+```
+
+## Section 4: Creating output tables
+
+### 4.1: Create an output table showing the median number of trips by calendar year.
+
+Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4), or extract the year as a substring of `source3`.
+
+Tidy the column headings using `rename()`
+
+```{r output_table_1a}
+
+all_visits_output <- all_visits_date %>% 
+  
+  # Creating the calendar year column and grouping by this new variable
+  mutate(calendar_year = lubridate::year(date)) %>% 
+  group_by(calendar_year) %>% 
+  
+  # Calculating the median and total number of trips
+  summarise(median_trips = median(no_of_trips),
+            total_trips = sum(no_of_trips)) %>%
+  
+  # Renaming columns in the output table to remove R syntax
+  rename("Calendar Year" = calendar_year, 
+         "Median number of trips per year" = median_trips,
+         "Total number of trips per year" = total_trips)
+
+kable(all_visits_output)
+
+```
+
+Alternatively use `all_visits_seasons` (without the date extension) and extract the year number from `source3` or `period` as a substring
+
+```{r output_table_1b}
+
+all_visits_output <- all_visits_date %>% 
+  
+  # Creating the calendar year column and grouping by this new variable
+  mutate(calendar_year = substr(source3,4,7)) %>% 
+  group_by(calendar_year) %>% 
+  
+  # Calculating the median and total number of trips
+  summarise(median_trips = median(no_of_trips),
+            total_trips = sum(no_of_trips)) %>%
+  
+  # Renaming columns in the output table to remove R syntax
+  rename("Calendar Year" = calendar_year, 
+         "Median number of trips per year" = median_trips,
+         "Total number of trips per year" = total_trips)
+
+kable(all_visits_output)
+
+```
+
+### 4.2: Create an output table showing the number of trips as a percentage of all trips taken by calendar year
+
+Consider using `ungroup()` in the `tidyverse` package after calculating the number of trips per year. Use `select()` to choose the columns needed for the output table.
+
+```{r output_table_2}
+
+all_visits_output_pct <- all_visits_date %>%
+  
+  # Creating the calendar year column and grouping by this new variable
+  mutate(calendar_year = year(date)) %>%
+  group_by(calendar_year) %>%
+  
+  # Calculating the total number of trips in each calendar year and then un-grouping the data
+  summarise(total_trips = sum(no_of_trips)) %>%
+  ungroup() %>%
+  
+  # Calculate the grand total of trips across all years
+  mutate(grand_total_trips = sum(total_trips)) %>%
+  
+  # Calculate the percentage of total trips per year by the grand total
+  
+  mutate(percentage_of_total_trips = (total_trips / grand_total_trips) * 100) %>%
+  
+  # Select the columns as needed for the final output table
+  select(calendar_year, 
+         total_trips, 
+         percentage_of_total_trips) %>%
+  
+  # Renaming columns in the output table to remove R syntax
+  rename("Calendar Year" = calendar_year, 
+         "Total number of trips per year" = total_trips,
+         "Percentage of total trips taken (%)" = percentage_of_total_trips)
+
+kable(all_visits_output_pct)
+
+```
+
+### 4.3: Stretch: Modify the table created above to show the percentages rounded to the nearest whole number
+
+Think of ways to adjust the code used to create the table in 4.2. The `round()` function can be used to calculate rounded figures.
+
+```{r output_table_3}
+
+all_visits_output_pct_rounded <- all_visits_date %>%
+  
+  # Creating the calendar year column and grouping by this new variable
+  mutate(calendar_year = year(date)) %>%
+  group_by(calendar_year) %>%
+  
+  # Calculating the total number of trips in each calendar year and then un-grouping the data
+  summarise(total_trips = sum(no_of_trips)) %>%
+  ungroup() %>%
+  
+  # Calculate the grand total of trips across all years
+  mutate(grand_total_trips = sum(total_trips)) %>%
+  
+  # Calculate the percentage of total trips per year by the grand total and rounding this figure
+  mutate(percentage_of_total_trips = (total_trips / grand_total_trips) * 100,
+         rounded_percentage_trips = round(percentage_of_total_trips)) %>%
+  
+  # Select the columns as needed for the final output table
+  select(calendar_year, 
+         total_trips, 
+         percentage_of_total_trips, 
+         rounded_percentage_trips) %>%
+  
+  # Renaming columns in the output table to remove R syntax
+  rename("Calendar Year" = calendar_year, 
+         "Total number of trips per year" = total_trips,
+         "Percentage of total trips taken (%)" = percentage_of_total_trips,
+         "Rounded Percentage of total trips taken (%)" = rounded_percentage_trips)
+
+kable(all_visits_output_pct_rounded)
+
+```
+
+## Section 5: Creating charts using ggplot
+
+### 5.1. Create a bar chart showing the number of trips by calendar year
+
+Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4), or extract the year as a substring of `source3`.
+
+Consider carefully the x and y variables in `aes()`.
+
+```{r output_chart_1}
+
+# Creating a new dataset with the calendar year column added
+all_visits_year <- all_visits_date %>% 
+  mutate(calendar_year = lubridate::year(date))
+
+# Creating a basic bar chart using ggplot
+# Choosing the x and y variables
+bar_graph_trips <- ggplot(data = all_visits_year,
+                          aes(x = calendar_year,
+                              y = no_of_trips)) +
+  # Choosing a bar chart
+  geom_col() +
+  
+  # Labelling the x axis
+  xlab("Calendar Year") +
+  
+  # Labelling the y axis
+  ylab("Number of trips per year") 
+
+bar_graph_trips
+
+```
+
+### 5.2. Create a facet bar plot for each season showing the number of trips by calendar year
+
+Consider carefully the variables in `aes()`, you should be including more that just x and y variables here. Use `facet_grid()` to create the facet bar plot.
+
+```{r output_chart_2}
+
+# Creating a new dataset with the calendar year column added
+all_visits_year <- all_visits_date %>% 
+  mutate(calendar_year = lubridate::year(date))
+
+# Creating a facet bar plot 
+# Choosing the x and y variables and grouping by season
+bar_graph_trips_facet <- ggplot(data = all_visits_year,
+                                aes(x = calendar_year,
+                                    y = no_of_trips,
+                                    group = season,
+                                    colour = season)) +
+  
+  # Creating a bar chart and using colour to demonstrate the different seasons
+  geom_col(aes(fill = season)) +
+  
+  # Making the bar chart into a facet plot for each season
+  facet_grid(rows = vars(season)) +
+  
+  # Labelling the x axis
+  xlab("Calendar Year") +
+  
+  # Labelling the y axis
+  ylab("Number of trips per year") +
+  
+  # Setting the theme to show a white background with gridlines
+  theme_bw()
+ 
+bar_graph_trips_facet
+
+```
+
+### 5.3. Stretch: Create a stacked bar chart showing the number of trips by calendar year and season
+
+Think about what should be included in `geom_col()` to specify that the bars should be stacked.
+
+```{r output_chart_3}
+
+# Creating a new dataset with the calendar year column added
+all_visits_year <- all_visits_date %>% 
+  mutate(calendar_year = lubridate::year(date))
+
+# Creating a stacked bar chart 
+# # Choosing the x and y variables
+bar_graph_trips_stacked <- ggplot(data = all_visits_year, 
+                                            aes(x = calendar_year, 
+                                                y = no_of_trips)) +
+  
+  # Creating a bar chart and using colour to demonstrate the different seasons
+  geom_col(aes(fill = season), 
+           position = "stack") + # Stacking the bars by season
+  
+  # Labelling the x axis
+  xlab("Calendar Year") +
+  
+  # Labelling the y axis
+  ylab("Number of trips per year") +
+  
+  # Labelling the legend for season
+  labs(fill = "Season") + 
+  theme_bw()
+ 
+bar_graph_trips_stacked
+
+```
