@@ -13,6 +13,10 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 This session will aim to give you a chance to work through a problem that may be similar to one you would face your daily role. It will use functions we have covered in session 1 and 2, as well as some helpful new functions.
 
+For the following coding challenges you'll use some aggregated data from the International Passenger Survey from 2011-2013. These data provide counts of visits to Wales each month by visit "type", e.g. business, holiday, etc. They were provided by ONS for our introductory SAS course.
+
+Each section has an (optional) "**Stretch**" challenge that may require functions not covered in the course so far. This is an opportunity to begin coding independently: searching for appropriate functions online, or using the help pages to understand ***hinted*** functions and how to use them.
+
 ## Section 1: Importing datasets
 
 1.  Read in the CSV file `"visits2011.csv"`
@@ -48,11 +52,11 @@ Use base R functions to look at the structure, values and types of variables in 
 
 ### 1.4: Read in TRNG.ALL_VISITS dataset from SAS.
 
-Hint: use the function `haven::read_sas` to read in SAS datafiles.
-
 The SAS libraries are located on the shared drive `"//s0177a/sasdata1/<path>/<filename>.sas7bdat"`. Note that the folder names may be different to that seen in the SAS server.
 
 You can use proc contents in SAS to find the exact file path.
+
+***Hint***: use the function `haven::read_sas` to read in SAS datafiles.
 
 ```{r import_SAS}
 library(haven)
@@ -93,7 +97,7 @@ seasons <-
 
 ### 2.4: Stretch: Create a date variable using the "period" column
 
-Consider the function `as_date()` in the `lubridate` package. First you will need to modify the period variable into a form that `lubridate` can interpret as a date
+***Hint:*** Consider the function `as_date()` in the `lubridate` package. First you will need to modify the `period` variable into a form that `lubridate` can interpret as a date.
 
 ```{r dates}
 library(tidyverse)
@@ -124,7 +128,9 @@ Consider joining the two datasets created in 3.1 and 3.2,
 
 ### 3.4: Stretch: Calculate the monthly change in number of trips, by visit type
 
-Create a dataset containing the difference in number of trips compared to the previous month, for each visit type. The `lag()` function in the `dplyr` tidyverse package can be used to reference values in previous rows
+Create a dataset containing the difference in number of trips compared to the previous month, for each visit type.
+
+***Hint:*** The `lag()` function in the `dplyr` tidyverse package can be used to reference values in previous rows
 
 ## Section 4: Creating output tables
 
@@ -143,7 +149,9 @@ Consider using `ungroup()` in the `tidyverse` package after calculating the numb
 
 ### 4.3: Stretch: Modify the table created above to show the percentages rounded to the nearest whole number
 
-Think of ways to adjust the code used to create the table in 4.2. The `round()` function can be used to calculate rounded figures.
+Think of ways to adjust the code used to create the table in 4.2.
+
+***Hint:*** The `round()` function can be used to calculate rounded figures.
 
 ## Section 5: Creating charts using ggplot
 

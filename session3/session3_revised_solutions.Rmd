@@ -9,10 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
-## Overview
-
-This session will aim to give you a chance to work through a problem that may be similar to one you would face your daily role. It will use functions we have covered in session 1 and 2, as well as some helpful new functions.
-
 ## Section 1: Importing datasets
 
 ### 1.1: Read in visits2011.csv
