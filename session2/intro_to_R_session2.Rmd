@@ -16,8 +16,9 @@ Social Security Scotland administers four benefits: Benefit A - Benefit D. You h
 You need to:
   
   1. Import and explore the data
-  2. Plot the data over time for each of the benefits as well as the total
-  3. Plot a bar graph with error bars to compare the mean number of applications for the four benefits
+  2. Manipulate the data to prepare it for plotting
+  3. Plot the data over time for each of the benefits as well as the total
+  4. Plot a bar graph with error bars to compare the mean number of applications for the four benefits
 
 ```{r LoadandSource}
 
@@ -28,7 +29,7 @@ library(tidyverse)
 
 # Import and explore the data
 
-We import the data to create a tibble called benefits. We view the first few lines to see what the data is that is included
+The data is saved in the session 2 folder, in a file "benefits.csv". We import the data to create a tibble called benefits. We view the first few lines to see what the data is that is included
 
 ```{r ImportAndExplore}
 
@@ -307,12 +308,12 @@ time_series_plot
 
 # Plotting the mean applications per year as a bar graph
 
-To take the average  by year, we need to create a factor variable for the year which we can use for grouping. The lubridate package has a convenient function year(). We will need to mutate benefit_long to append this factor variable
+To take the average  by year, we need to create a factor variable for the year which we can use for grouping. The lubridate package which comes with tidyverse has a convenient function year(). We will need to mutate benefit_long to append this factor variable
 
 ## Wrangling
 
 ```{r CreateYearIndicator}
-library(lubridate)
+
 
 benefit_long <- benefit_long %>%
   mutate(year = year(date)) %>%
