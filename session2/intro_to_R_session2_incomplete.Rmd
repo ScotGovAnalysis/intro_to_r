@@ -300,12 +300,11 @@ time_series_plot
 
 # Plotting the mean applications per year as a bar graph
 
-To take the average  by year, we need to create a factor variable for the year which we can use for grouping. The lubridate package has a convenient function year(). We will need to mutate benefit_long to append this factor variable
+To take the average  by year, we need to create a factor variable for the year which we can use for grouping. The lubridate package which comes with tidyverse has a convenient function year(). We will need to mutate benefit_long to append this factor variable
 
 ## Wrangling
 
 ```{r CreateYearIndicator}
-library(lubridate)
 
 benefit_long <- benefit_long %>%
   mutate() %>%
