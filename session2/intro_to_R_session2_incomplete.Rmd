@@ -28,7 +28,7 @@ library(tidyverse)
 
 # Import and explore the data
 
-We import the data to create a tibble called benefits. We view the first few lines to see what the data is that is included
+The data is saved in the session 2 folder, in a file "benefits.csv". We import the data to create a tibble called benefits. We view the first few lines to see what the data is that is included
 
 ```{r ImportAndExplore}
 
