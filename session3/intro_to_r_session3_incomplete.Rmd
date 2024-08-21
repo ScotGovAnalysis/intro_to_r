@@ -1,8 +1,11 @@
 ---
-title: "session3_revised"
+title: "Session 3"
 author: ""
-date: "2024-03-21"
+date: "08-10-2024"
 output: html_document
+editor_options: 
+  markdown: 
+    wrap: 80
 ---
 
 ```{r setup, include=FALSE}
@@ -11,164 +14,140 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ## Overview
 
-This session will aim to give you a chance to work through a problem that may be similar to one you would face your daily role. It will use functions we have covered in session 1 and 2, as well as some helpful new functions.
+This session will aim to give you a chance to work through a problem
+that may be similar to one you would face your daily role. It will use
+functions we have covered in session 1 and 2, as well as some helpful
+new functions.
 
-For the following coding challenges you'll use some aggregated data from the International Passenger Survey from 2011-2013. These data provide counts of visits to Wales each month by visit "type", e.g. business, holiday, etc. They were provided by ONS for our introductory SAS course.
+For the following coding challenges you'll use some aggregated data from
+the International Passenger Survey from 2011-2013. These data provide
+counts of visits to Wales each month by visit "type", e.g. business,
+holiday, etc. They were provided by ONS for our introductory SAS course.
 
-Each section has an (optional) "**Stretch**" challenge that may require functions not covered in the course so far. This is an opportunity to begin coding independently: searching for appropriate functions online, or using the help pages to understand ***hinted*** functions and how to use them.
+Each section has an (optional) **stretch** challenge that may require
+functions not covered in the course so far. This is an opportunity to
+begin coding independently: searching for appropriate functions online,
+or using the help pages to understand ***hinted*** functions and how to
+use them.
 
 ## Section 1: Importing datasets
 
-1.  Read in the CSV file `"visits2011.csv"`
-2.  Read in the Excel file `"visits201213.xlsx"`
-3.  Examine the two datasets - what differs about the outputs of each method?
-4.  **Stretch**: Read in the SAS dataset TRNG.ALL_VISITS to R
+The data are in the folder `intro_to_r/session3/Data`
 
-Some hints in the sections below....
+### 1.1: Read in the CSV file `visits2011.csv`.
 
-### 1.1: Read in visits2011.csv
 
-The data are in the folder `"intro_to_r/session3/Data"`
+### 1.2: Read in the Excel file `visits201213.xlsx`.
 
-### 1.1: Read in visits2011.csv
+***Hint:*** use the `read_excel` function from the `readxl` package. Use
+the command `?read_excel` to view the help page.
 
-The data are in the folder `"intro_to_r/session3/Data"`
 
-### 1.2: Read in visits201213.xlsx
+### 1.3: Examine the two datasets. What's the difference between these two datasets?
 
-Hint: use the `readxl` package. Use the command `??readxl` to view the help page for the package
+Use base R functions to look at the structure, values and types of
+variables in each dataset.
 
-```{r import_excel}
-#import library 
-library(readxl)
+### 1.4: **Stretch**: Read in `TRNG.visits` dataset from SAS.
 
-visits_xl <- 
+If you have SAS installed on your computer, open SAS and use
+`proc contents` to find the file path of `TRNG.ALL_VISITS`. Note that
+the folder names may be different to that seen in the SAS server. The
+SAS libraries are located on the shared drive
+`//s0177a/sasdata1/<path>/<filename>.sas7bdat`.
 
-```
+***Hint***: use
+`read_sas("//s0177a/sasdata1/<path>/<filename>.sas7bdat")` to read in
+the SAS datafile.
 
-### 1.3: Whats the difference between these two datasets?
-
-Use base R functions to look at the structure, values and types of variables in each dataset.
-
-### 1.4: Read in TRNG.ALL_VISITS dataset from SAS.
-
-The SAS libraries are located on the shared drive `"//s0177a/sasdata1/<path>/<filename>.sas7bdat"`. Note that the folder names may be different to that seen in the SAS server.
-
-You can use proc contents in SAS to find the exact file path.
-
-***Hint***: use the function `haven::read_sas` to read in SAS datafiles.
-
-```{r import_SAS}
-library(haven)
-
-all_visits_sas <- 
-```
 
 ## Section 2: Manipulating data
 
-1.  Combine the datasets from 1.1 and 1.2 as appropriate. Use the resulting data (or the dataset from 1.4) for the following tasks.
-2.  Convert the dataset to a "long" (i.e. "tidy") format
-3.  Create a "season" variable in the dataset by building a lookup table to match a season value to each value of month
-4.  **Stretch**: Create a date format variable using information in the "period" column
+### 2.1: Combine the datasets from 1.1 and 1.2.
 
-Some hints in the sections below....
+Use functions from earlier in the course to combine the datasets.
 
-### 2.1: Combine datasets
 
-Use functions from earlier in the course to combine the datasets
-
-### 2.2: Pivot data into tidy format
+### 2.2: Convert the dataset to a "long" (i.e. "tidy") format.
 
 "tidy" format is a long data format with one measurement per row.
 
-```{r pivot}
-all_visits_sas_long <-
-```
 
-### 2.3: Create a new dataset using tibble to use as a lookup table to add the season corresponding to each month.
+### 2.3: Create a new dataset using `tibble` to use as a lookup table to add the season corresponding to each month.
 
-Create a table that corresponds specific months to season, e.g. Winter: Dec, Jan, Feb/ Spring: March, April, May/ Summer: June, July, August/ Autumn: Sep, Oct, nov
+Create a table that corresponds specific months to season, e.g. Winter:
+Dec, Jan, Feb/ Spring: Mar, Apr, May/ Summer: Jun, Jul, Aug/ Autumn:
+Sep, Oct, Nov
 
-Match this information in by extracting the month information from the "period" variable: consider the functions `substr` and `as.numeric`
-
-```{r lookup}
-seasons <- 
-```
-
-### 2.4: Stretch: Create a date variable using the "period" column
-
-***Hint:*** Consider the function `as_date()` in the `lubridate` package. First you will need to modify the `period` variable into a form that `lubridate` can interpret as a date.
-
-```{r dates}
-library(tidyverse)
-library(lubridate)
+Match this information in by extracting the month information from the
+`period` variable: consider the functions `substr` and `as.numeric`
 
 
+### 2.4: **Stretch**
 
-```
+#### A: Create a date variable using the "period" column.
+
+***Hint:*** Consider the function `as_date()` in the `lubridate`
+package. First you will need to modify the `period` variable into a form
+that `lubridate` can interpret as a date.
+
+#### B: Use this date variable to create a year variable calld `calendar_year`.
+
+***Hint:*** Use the `year()` function to create your `calendar_year`
+variable.
+
 
 ## Section 3: Analysing data
 
-1.  Calculate the total number of trips made during each season
-2.  For each visit type, find the total number of trips made during each season
-3.  For each each season, find the percentage of trips made for each of the visit types
-4.  **Stretch**: Calculate the monthly change in number of trips, by visit type
+### 3.1: Calculate the total number of trips made during each season.
 
-### 3.1: Calculate the total number of trips made during each season
+Create a new dataset containing the total number of trips for each of
+the 4 seasons.
 
-Create a new dataset summarising the average number of trips for each of the 4 seasons.
 
-### 3.2: For each visit type, find the total number of trips made during each season
+### 3.2: For each visit type, find the total number of trips made during each season.
 
-Create a new dataset containing the average number of trips made during the 4 seasons, for each of the visit types (business, holiday, etc.). You can group by more than one variable within tidyverse
+Create a new dataset containing the total number of trips made during
+the 4 seasons, for each of the visit types (business, holiday, etc.).
+***Hint:*** You can group by more than one variable within
+tidyverse.
 
-### 3.3: For each each season, find the percentage of trips made for each of the visit types
 
-Consider joining the two datasets created in 3.1 and 3.2,
+### 3.3: For each each season, find the percentage of trips made for each of the visit types. Round this percentage to two decimal places.
 
-### 3.4: Stretch: Calculate the monthly change in number of trips, by visit type
+***Hint:*** Consider joining the two datasets created in 3.1 and 3.2.
 
-Create a dataset containing the difference in number of trips compared to the previous month, for each visit type.
 
-***Hint:*** The `lag()` function in the `dplyr` tidyverse package can be used to reference values in previous rows
+### 3.4: Stretch: Calculate the monthly change in number of trips, by visit type.
 
-## Section 4: Creating output tables
+Using `visits_date`, create a dataset containing the difference in
+number of trips compared to the previous month, for each visit type.
 
-1.  Create an output table showing the median number of trips by calendar year
-2.  Create an output table showing the number of trips as a percentage of all trips taken by calendar year 3 . **Stretch**: Modify the table created above to show the percentages rounded to the nearest whole number
+***Hint:*** The `lag()` function from the `dplyr` tidyverse package can
+be used to reference values in previous rows.
 
-### 4.1: Create an output table showing the median and total number of trips by calendar year.
 
-Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4), or extract the year as a substring of \`source3\`.
+## Section 4: Creating outputs
 
-Tidy the column headings using `rename()`
+### 4.1. Create a bar chart showing the number of trips by calendar year and season.
 
-### 4.2: Create an output table showing the number of trips as a percentage of all trips taken by calendar year
+***Hint:*** Use the `visits_year` data you created in 2.4. Consider
+carefully the x and y variables in `aes()`.
 
-Consider using `ungroup()` in the `tidyverse` package after calculating the number of trips per year. Use `select()` to choose the columns needed for the output table.
 
-### 4.3: Stretch: Modify the table created above to show the percentages rounded to the nearest whole number
+### 4.2 Export `visits_year` to an Excel workbook named "Ex 4.2.xlsx" and save your bar chart as a jpg.
 
-Think of ways to adjust the code used to create the table in 4.2.
+***Hint:*** Use the function `write_xlsx()` from the package `writexl`.
+Use the function `ggsave()` to save your bar chart.
 
-***Hint:*** The `round()` function can be used to calculate rounded figures.
 
-## Section 5: Creating charts using ggplot
+### 4.3. **Stretch:** Amend `bar_graph_trips` to create a publication standard chart.
 
-1.  Create a bar chart showing the number of trips by calendar year
-2.  Create a facet bar plot for each season showing the number of trips by calendar year
-3.  **Stretch**: Create a stacked bar chart showing the number of trips by calendar year and season
+Some suggested improvements:
 
-### 5.1: Create a bar chart showing the number of trips by calendar year
-
-Consider using `year()` in the `lubridate` package, once the date variable has been created (see 2.4), or extract the year as a substring of \`source3\`.
-
-Consider carefully the x and y variables in `aes()`.
-
-### 5.2: Create a facet bar plot for each season showing the number of trips by calendar year
-
-Consider carefully the variables in `aes()`, you should be including more that just x and y variables here. Use `facet_grid()` to create the facet bar plot.
-
-### 5.3: Stretch: Create a stacked bar chart showing the number of trips by calendar year and season
-
-Think about what should be included in `geom_col()` to specify that the bars should be stacked.
+* Order the seasons (***hint:*** do this before you start plotting using the `levels` argument in the `factor()` function)
+* Re-label the x and y axis (***hint:*** "Labels and Legends" section of the ggplot cheat sheet)
+* Set the theme to show a white background with horizontal gridlines (***hint:*** "Themes" section of the ggplot cheat sheet)
+* Change the colour of the bars
+* Format the y-axis label with thousands comma (***hint:*** use the `scales` package)
+* Define the y-axis limits and breaks
