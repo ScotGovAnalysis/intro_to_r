@@ -53,7 +53,7 @@ If you have SAS installed on your computer, open SAS and use `proc contents` to 
 
 ```{r import_SAS}
 
-#visits_sas <- haven::read_sas("//s0177a/sasdata1/training/visits.sas7bdat") 
+visits_sas <- haven::read_sas("//s0177a/sasdata1/Training/all_visits.sas7bdat") 
 ```
 
 ## Section 2: Manipulating data
