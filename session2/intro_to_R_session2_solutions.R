@@ -2,6 +2,7 @@
 
 #Read in libraries
 library(tidyverse)
+library(lubridate)
 
 ## Section 2: Exploring the Data ------------------------------------------
 
@@ -205,9 +206,9 @@ bar_graph_plot
 
 ## Additional Exercises ---------------------------------------------------
 
-#1. Read in "UKgas.csv" from the `./data` folder and inspect the data. 
+#1. Read in "UKgas.csv" from the `./additional_exercises/data` folder and inspect the data. 
 #   (The data has been created from one of R datasets https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas)
-UKgas <- read_csv("./data/UKgas.csv")
+UKgas <- read_csv("./additional_exercises/data/UKgas.csv")
 head(UKgas)
 
 #2. Create a new tibble of the data in long format with a column to specify the quarter.
@@ -285,7 +286,7 @@ g3 <- ggplot(UKgas_l_with_mean, aes(x = year,
                                     colour = quarter)) + 
   geom_line(aes(linewidth = linewidth)) +
   #specify the range that the linewidths should span, and disable the linewidth legend
-  scale_linewidth(range=c(0.1, 2), guide=FALSE) +
+  scale_linewidth(range = c(0.1, 2), guide = "none") +
   xlab("Year") + 
   ylab("Gas consumption (mTherms)")
 

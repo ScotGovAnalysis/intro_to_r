@@ -2,6 +2,7 @@
 
 #Read in libraries
 library(tidyverse)
+library(lubridate)
 
 ## Section 2: Exploring the Data ------------------------------------------
 
@@ -190,7 +191,7 @@ bar_graph_plot
 
 ## Additional Exercises ---------------------------------------------------
 
-#1. Read in "UKgas.csv" from the `./data` folder and inspect the data. 
+#1. Read in "UKgas.csv" from the `./additional_exercises/data` folder and inspect the data. 
 #   (The data has been created from one of R datasets https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas)
 UKgas <-  
   
