@@ -729,8 +729,8 @@ The pipe operator simply passes through the object on the left hand side as the 
 ```{r results="hide"}
 
 sepal_length_average <- 
-  summarise(group_by(iris,Species),
-            ave=mean(Sepal.Length))
+  summarise(group_by(iris, Species),
+            ave = mean(Sepal.Length))
 
 
 

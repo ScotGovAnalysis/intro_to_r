@@ -5,6 +5,22 @@
 ## Section 1: Introduction ------------------------------------------------
 
 
+# 1.4 Examples ------------------------------------------------------------
+
+#1.4.1
+x <- 3
+
+#1.4.2
+x
+
+#1.4.3
+x <- c(3, 2, 4)
+
+# 1.6 Examples ------------------------------------------------------------
+
+#1.6.1
+?mean
+
 ### 1.7 Exercises ---------------------------------------------------------
 
 
@@ -31,6 +47,86 @@
 
 ## Section 2: Data Processing ---------------------------------------------
 
+### 2.1 Examples ----------------------------------------------------------
+
+#2.1.1
+getwd()
+
+#2.1.2
+setwd("C:/Users/u446122/Documents/OFFLINE/Training/intro_to_r/intro_to_r")
+
+
+### 2.2 Examples ----------------------------------------------------------
+
+#2.2.1
+library("tidyverse")
+
+#2.2.2
+help(package=dplyr)
+
+### 2.3 Examples ----------------------------------------------------------
+
+#2.3.1
+chick_weights <- read_csv("chickweights.csv")
+
+#2.3.2
+data(iris)
+iris
+
+### 2.4 Examples ----------------------------------------------------------
+
+#2.4.1
+View(iris)
+
+#2.4.2
+str(iris)
+
+#2.4.3
+summary(iris)
+
+#2.4.4
+iris[10,4]
+
+#2.4.5
+iris[c(10, 12),4]
+
+#2.4.6
+iris[10,1:3]
+
+#2.4.7
+iris[-10,1:3]
+
+#2.4.8
+iris$Species
+
+### 2.5 Examples ----------------------------------------------------------
+
+#2.5.1
+class(iris$Sepal.Length) 
+
+#2.5.2
+iris$Sepal.Length <- as.integer(iris$Sepal.Length)
+
+#2.5.3
+iris$Sepal.Length <- as.numeric(iris$Sepal.Length)
+
+#2.5.4
+data(iris)
+iris
+
+#2.5.5
+levels(iris$Species)
+
+#2.5.6
+iris$Species <- relevel(iris$Species, "versicolor")
+
+#2.5.7
+iris$Species <- as.character(iris$Species)  
+
+#2.5.8
+iris$Species <- as.factor(iris$Species)  
+
+
 ### 2.7 Exercises ---------------------------------------------------------
 
 # reload the iris dataset
@@ -53,6 +149,88 @@ data(iris)
 
 ## Section 3: Data wrangling and 'group by' calculations ------------------
 
+### 3.1 Examples ----------------------------------------------------------
+
+#3.1.1
+setosa_sepal_leng <- filter(iris, Species == "setosa" & Petal.Length < 1.5)
+
+#3.1.2
+setosa_sepal_leng_av <- summarise(setosa_sepal_leng, ave = mean(Sepal.Length))
+
+#3.1.3
+setosa_sepal_leng_av <- iris %>% 
+  filter(Species == "setosa" & Petal.Length < 1.5) %>% 
+  summarise(ave = mean(Sepal.Length))
+
+#3.1.4
+setosa_sepal_leng_av <- summarise(filter(iris, Species == "setosa" & Petal.Length < 1.5), ave = mean(Sepal.Length))
+
+
+### 3.2 Examples ----------------------------------------------------------
+
+#3.2.1
+?dplyr::summarise
+?group_by
+
+#3.2.2
+sepal_length_average <- iris %>% 
+  group_by(Species) %>%
+  summarise(ave = mean(Sepal.Length))
+
+#3.2.3
+sepal_length_average <- 
+  summarise(group_by(iris, Species),
+            ave = mean(Sepal.Length))
+
+#3.2.4
+sepal_length_average <- iris %>% 
+  group_by(Species) %>%
+  summarise(ave = mean(Sepal.Length), 
+            count=n())
+
+#3.2.5
+sepal_length_average <- iris %>% 
+  group_by(Species) %>%
+  summarise(ave = mean(Sepal.Length), count=n()) %>%
+  ungroup()
+
+
+### 3.3 Examples (incomplete) ----------------------------------------------
+
+#3.3.1
+iris_no_sepal_length <- iris %>% 
+  select()
+
+#3.3.2
+iris_petals <- iris %>% 
+  select()
+
+
+### 3.4 Examples (incomplete) ----------------------------------------------
+
+#3.4.1
+iris_petals <- iris_petals %>% 
+  rename(
+    
+  ) 
+
+### 3.5 Examples (incomplete) ----------------------------------------------
+
+#3.5.1
+?mutate
+
+#3.5.2
+iris_petals <- iris_petals %>%
+  mutate()
+
+
+### 3.6 Examples (incomplete) ----------------------------------------------
+
+#3.6.1
+iris <- iris %>% 
+  mutate(small_p_length = if_else())
+
+
 ### 3.7 Exercises ---------------------------------------------------------
 
 # reload the iris dataset
@@ -74,6 +252,43 @@ iris_filtered <-
 
 
 ## Section 4: Merging data, missing values and exporting ------------------
+
+### 4.1 Examples (incomplete) ----------------------------------------------
+
+#4.1.1
+staff_salaries <- read_csv("staff_salaries.csv")
+staff_sickness <- read_csv("staff_sickness.csv")
+
+#4.1.2
+staff_sickness <- staff_sickness %>% 
+  rename() 
+
+#4.1.3
+staff_merge <- inner_join(staff_salaries, 
+                          staff_sickness, 
+                          by="staff_id")
+
+#4.1.4
+staff_salary_preserved_with_sickness_joined <-
+  left_join(
+    
+  )
+
+#4.1.5
+staff_sickness_preserved_with_sickness_joined <-
+
+#4.1.6
+staff_sickness_preserved_with_salaries_joined <- 
+
+
+#4.1.7
+staff_all <- 
+  
+### 4.2 Examples ----------------------------------------------------------
+
+#4.2.1
+write_csv(iris_petals, path = "iris_petals.csv")
+
 
 ### 4.3 Exercises ---------------------------------------------------------
 
