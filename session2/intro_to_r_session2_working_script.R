@@ -92,7 +92,7 @@ time_series_plot
 
 #4.1.2 separate series with different colours
 time_series_plot2 <-  ggplot(data = benefit_long,
-                             aes(x=date,
+                             aes(x = date,
                                  y = apps,  
                                  group = benefit, 
                                  colour = benefit)) +
@@ -187,4 +187,40 @@ bar_graph_plot <- bar_graph_plot +
   ylab()
 
 bar_graph_plot
+
+## Additional Exercises ---------------------------------------------------
+
+#1. Read in "UKgas.csv" from the `./data` folder and inspect the data. 
+#   (The data has been created from one of R datasets https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas)
+UKgas <-  
+  
+#2. Create a new tibble of the data in long format with a column to specify the quarter.
+UKgas_l <-
+  
+#3. Compute the mean quarterly UKgas consumption across years (Your new tibble will have four rows and 2 columns)
+
+UKgas_by_quarter <-
+  
+#4. Compute the mean gas consumption for each year (Your tibble will have 27 rows and 2 columns)
+UKgas_by_year <- 
+  
+#5. **Bonus:** Convert your long tibble back to wide. This should be the same as the UKgas data. 
+#   Compute the mean gas consumption by year. 
+#   Hint: Have a look at https://stackoverflow.com/questions/50352735/calculate-the-mean-of-some-columns-using-dplyrmutate 
+#   (Your tibble will have 27 rows and 6 columns). As you can see, working with long data is simpler in R.
+UKgas <- 
+  
+#6. Plot the UKgas consumption by year as a line graph, with quarters shown in different colours. 
+#   Change the axes labels to something of your choice and add a title.
+
+  
+#7. Plot the same as above, but include a line for the mean gas consumption across quarters. 
+#   You will first need to append the UKgas_by_year to your data
+  
+  
+#8. Create the same plot as above (including the mean), but use thin lines for quarter, and a thick line for the mean. 
+#   You will need to add a new numeric variable to the data used in the previous exercise that specifies a value for line thickness. 
+#   See the examples in `?geom_line` for details around specifying aesthetics for the line graph and how to do this by group. 
+#   You will also need to look at `?scale_linewidth`
+
 
