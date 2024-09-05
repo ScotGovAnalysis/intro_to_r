@@ -195,8 +195,8 @@ Here, we will plot the data with a point geometry
   
 ```{r TimeSeriesPlot1}
 time_series_plot <- ggplot(data = benefit_long,
-                           aes(x=date, y = apps)) +
-            #Add the geometry
+                           aes(x = date, y = apps)) +
+                             #Add the geometry
                              geom_point()
                             
 #call the object to show the plot
@@ -264,7 +264,7 @@ time_series_plot5
 
 Finally, we could perform the wrangling and plotting  in a concise chunk
 
-Exercise:
+### 4.2 Exercise
 
   See if you can accomplish the same thing as the chunks above to produce the time_series_plot5 object in one chunk
 
@@ -303,7 +303,7 @@ time_series_plot
 ```
 
 
-### 4.2 Plotting the mean applications per year as a bar graph
+### 4.3 Plotting the mean applications per year as a bar graph
 
 #### Wrangling
 

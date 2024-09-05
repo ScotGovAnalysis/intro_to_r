@@ -262,6 +262,8 @@ time_series_plot5
 
 ```
 
+###4.2 Exercise
+
 Finally, we could perform the wrangling and plotting  in a concise chunk
 
 ```{r AllAnalysis}
@@ -311,7 +313,7 @@ time_series_plot
 ```
 
 
-### 4.2 Plotting the mean applications per year as a bar graph
+### 4.3 Plotting the mean applications per year as a bar graph
 
 To take the average  by year, we need to create a factor variable for the year which we can use for grouping. The lubridate package which comes with tidyverse has a convenient function year(). We will need to mutate benefit_long to append this factor variable
 
