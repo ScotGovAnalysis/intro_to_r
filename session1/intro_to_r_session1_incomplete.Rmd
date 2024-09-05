@@ -229,15 +229,13 @@ Of course, you can also use Google, Stack Overflow, R-Yammer or the R-user group
 
 ### 1.7 Exercises
 
+Open the script intro_to_r_session1_working_script.R and complete the following:
 
+1.  Create a new value called y which is equal to 17.
 
-1.	Create a new R script file in which you can store all commands you make during this exercise. Save it as 'Intro_R_Exercises.R'.
-
-2.  Create a new value called y which is equal to 17.
-
-3.  Now multiply y by 78. What answer do you get?
+2.  Now multiply y by 78. What answer do you get?
   
-  4.	What does the command "head" do?
+3.	What does the command "head" do?
   
   
   
