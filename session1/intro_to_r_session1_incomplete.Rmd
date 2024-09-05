@@ -997,7 +997,7 @@ A command to export data into csv format is write_csv from the readr package (th
 
 ```{r results="hide"}
 
-write_csv(iris_petals, path = "iris_petals.csv")
+write_csv(iris_petals, file = "iris_petals.csv")
 
 ```
 
