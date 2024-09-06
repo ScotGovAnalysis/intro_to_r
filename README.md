@@ -9,7 +9,9 @@ Each session contains the relevant datasets for the session, as well as the R fi
 easily create dynamic documents, presentations and reports from R. It
 combines markdown (simple formatting syntax) and embedded R code chunks that are run and can perform calculations. The R Markdown files are identified with a .Rmd suffix. See [How to use the session material](#how_to) for details on how to use R Markdown.
 
-Within each session, the Rmd files which end with `_incomplete` are a version of the session material that is missing some code.  Students should work through this version, and refer to the complete solution for answers. Session 2 contains two versions of the Rmd files. One version uses the old dplyr gather() and spread(), the other uses pivot_().
+Within each session, the Rmd files which end with `_incomplete` are a version of the session material that is missing some code.  Students should work through this version, and refer to the complete solution for answers. Code examples and exercises are provided in an R script file (ending with `_working_script.R`) in each session folder along with an R script containing solutions.
+
+Session 2 contains two versions of the Rmd files. One version uses the old dplyr gather() and spread(), the other uses pivot_().
 
 The housekeeping folder contains material that was used to develop the course and does not form part of the training.
 
