@@ -719,7 +719,7 @@ sepal_length_average <- iris %>%
 
 
 
-In the above code, R is taking the 'iris' dataset, grouping it by Species and then (note that the data is "piped" like water into the group_by command using the pipe symbol '%>%' instead of specifying the 'iris' dataset as the first argument within the group_by command), and then outputting the mean length by species. The new mean number of Sepal.Length variable we've decided to call 'ave'. The results are saved into a new dataset called 'sepal_length_average'. 
+In the above code, R is taking the 'iris' dataset, grouping it by Species (note that the data is "piped" like water into the group_by command using the pipe symbol '%>%' instead of specifying the 'iris' dataset as the first argument within the group_by command), and then outputting the mean length by species. The new mean number of Sepal.Length variable we've decided to call 'ave'. The results are saved into a new dataset called 'sepal_length_average'. 
 
 
 
@@ -984,7 +984,7 @@ staff_all <-
 
 ```
 
-For more information about the different sorts of joins and other data transformation functions see the 'Data Transformation Cheat Sheet' at: https://www.rstudio.com/resources/cheatsheets/  
+For more information about the different sorts of joins and other data transformation functions see the 'Data Transformation Cheat Sheet' at: https://rstudio.github.io/cheatsheets/html/data-transformation.html  
 
 
 ### 4.2 Exporting data
@@ -1033,10 +1033,9 @@ There are lots of resources that can help you develop your R knowledge, but belo
 
 + DataCamp is a website which hosts multiple online courses that teach coding. Their 'Introduction to R' course is free to complete and provides a broader overview in the basic concepts for coding in R. A link to the course can be found here: https://www.datacamp.com/courses/free-introduction-to-r.
 
-+ Another good resource is the 'R for Data Science' online book: [r4ds.had.co.nz/](r4ds.had.co.nz/), written by Hadley Wickham, who is a data scientist at RStudio, who developed the tidyverse package that we introduced earlier. It gives a really good overview of R and how his package works with it.
++ Another good resource is the 'R for Data Science' online book: [https://r4ds.hadley.nz/](https://r4ds.hadley.nz/), written by Hadley Wickham, who is a data scientist at RStudio, who developed the tidyverse package that we introduced earlier. It gives a really good overview of R and how his package works with it.
 
-+ RStudio has also developed a list of 'cheatsheets' which give quick overviews of the functions contained in different packages, which can be quickly referred to: https://www.rstudio.com/resources/cheatsheets/ Some can be accessed directly through the top menu help > Cheatsheets e.g. 'Data Transformation with dplyr'.
++ RStudio has also developed a list of 'cheatsheets' which give quick overviews of the functions contained in different packages, which can be quickly referred to: https://posit.co/resources/cheatsheets/ Some can be accessed directly through the top menu help > Cheatsheets e.g. 'Data Transformation with dplyr'.
 
 
-
-Further resources can be found on Saltire Analytical Professions pages (Analytical Professions > Analytical Tools > Analytical Software)
+Further resources can be found on Stats group sharepoint site:  https://scotsconnect.sharepoint.com/sites/StatisticsGroup-Org-SG/SitePages/R-Resources.aspx
