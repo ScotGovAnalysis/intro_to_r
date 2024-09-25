@@ -287,7 +287,7 @@ staff_all <-
 ### 4.2 Examples ----------------------------------------------------------
 
 #4.2.1
-write_csv(iris_petals, path = "iris_petals.csv")
+write_csv(iris_petals, file = "iris_petals.csv")
 
 
 ### 4.3 Exercises ---------------------------------------------------------
