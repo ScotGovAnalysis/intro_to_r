@@ -262,7 +262,7 @@ time_series_plot5
 
 ```
 
-###4.2 Exercise
+### 4.2 Exercise
 
 Finally, we could perform the wrangling and plotting  in a concise chunk
 
