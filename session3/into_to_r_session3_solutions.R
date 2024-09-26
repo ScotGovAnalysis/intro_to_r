@@ -31,7 +31,7 @@ visits_sas <- haven::read_sas("//s0177a/sasdata1/Training/all_visits.sas7bdat")
 
 # 2.1: Combine the datasets from 1.1 and 1.2.
 
-visits_sas <- haven::read_sas("//s0177a/sasdata1/Training/all_visits.sas7bdat") 
+visits <- bind_rows(visits_csv, visits_xl)
 
 
 # 2.2: Convert the dataset to a "long" (i.e. "tidy") format.
