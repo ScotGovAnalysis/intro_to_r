@@ -229,15 +229,13 @@ Of course, you can also use Google, Stack Overflow, R-Yammer or the R-user group
 
 ### 1.7 Exercises
 
+Open the script intro_to_r_session1_working_script.R and complete the following:
 
+1.  Create a new value called y which is equal to 17.
 
-1.	Create a new R script file in which you can store all commands you make during this exercise. Save it as 'Intro_R_Exercises.R'.
-
-2.  Create a new value called y which is equal to 17.
-
-3.  Now multiply y by 78. What answer do you get?
+2.  Now multiply y by 78. What answer do you get?
   
-  4.	What does the command "head" do?
+3.	What does the command "head" do?
   
   
   
@@ -721,7 +719,7 @@ sepal_length_average <- iris %>%
 
 
 
-In the above code, R is taking the 'iris' dataset, grouping it by Species and then (note that the data is "piped" like water into the group_by command using the pipe symbol '%>%' instead of specifying the 'iris' dataset as the first argument within the group_by command), and then outputting the mean length by species. The new mean number of Sepal.Length variable we've decided to call 'ave'. The results are saved into a new dataset called 'sepal_length_average'. 
+In the above code, R is taking the 'iris' dataset, grouping it by Species (note that the data is "piped" like water into the group_by command using the pipe symbol '%>%' instead of specifying the 'iris' dataset as the first argument within the group_by command), and then outputting the mean length by species. The new mean number of Sepal.Length variable we've decided to call 'ave'. The results are saved into a new dataset called 'sepal_length_average'. 
 
 
 
@@ -731,8 +729,8 @@ The pipe operator simply passes through the object on the left hand side as the 
 ```{r results="hide"}
 
 sepal_length_average <- 
-  summarise(group_by(iris,Species),
-            ave=mean(Sepal.Length))
+  summarise(group_by(iris, Species),
+            ave = mean(Sepal.Length))
 
 
 
@@ -986,7 +984,7 @@ staff_all <-
 
 ```
 
-For more information about the different sorts of joins and other data transformation functions see the 'Data Transformation Cheat Sheet' at: https://www.rstudio.com/resources/cheatsheets/  
+For more information about the different sorts of joins and other data transformation functions see the 'Data Transformation Cheat Sheet' at: https://rstudio.github.io/cheatsheets/html/data-transformation.html  
 
 
 ### 4.2 Exporting data
@@ -999,7 +997,7 @@ A command to export data into csv format is write_csv from the readr package (th
 
 ```{r results="hide"}
 
-write_csv(iris_petals, path = "iris_petals.csv")
+write_csv(iris_petals, file = "iris_petals.csv")
 
 ```
 
@@ -1035,10 +1033,9 @@ There are lots of resources that can help you develop your R knowledge, but belo
 
 + DataCamp is a website which hosts multiple online courses that teach coding. Their 'Introduction to R' course is free to complete and provides a broader overview in the basic concepts for coding in R. A link to the course can be found here: https://www.datacamp.com/courses/free-introduction-to-r.
 
-+ Another good resource is the 'R for Data Science' online book: [r4ds.had.co.nz/](r4ds.had.co.nz/), written by Hadley Wickham, who is a data scientist at RStudio, who developed the tidyverse package that we introduced earlier. It gives a really good overview of R and how his package works with it.
++ Another good resource is the 'R for Data Science' online book: [https://r4ds.hadley.nz/](https://r4ds.hadley.nz/), written by Hadley Wickham, who is a data scientist at RStudio, who developed the tidyverse package that we introduced earlier. It gives a really good overview of R and how his package works with it.
 
-+ RStudio has also developed a list of 'cheatsheets' which give quick overviews of the functions contained in different packages, which can be quickly referred to: https://www.rstudio.com/resources/cheatsheets/ Some can be accessed directly through the top menu help > Cheatsheets e.g. 'Data Transformation with dplyr'.
++ RStudio has also developed a list of 'cheatsheets' which give quick overviews of the functions contained in different packages, which can be quickly referred to: https://posit.co/resources/cheatsheets/ Some can be accessed directly through the top menu help > Cheatsheets e.g. 'Data Transformation with dplyr'.
 
 
-
-Further resources can be found on Saltire Analytical Professions pages (Analytical Professions > Analytical Tools > Analytical Software)
+Further resources can be found on Stats group sharepoint site:  https://scotsconnect.sharepoint.com/sites/StatisticsGroup-Org-SG/SitePages/R-Resources.aspx

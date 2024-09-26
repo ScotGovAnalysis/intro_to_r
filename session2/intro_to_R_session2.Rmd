@@ -9,6 +9,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE)
 ```
 
+## 1. Introduction
+
 In this session, we will analyse a mock dataset. 
 
 Social Security Scotland administers four benefits: Benefit A - Benefit D. You have collected data summarising the monthly applications for each of these benefits between January 2020 and January 2025.
@@ -24,10 +26,13 @@ You need to:
 
 #Read in libraries
 library(tidyverse)
+library(lubridate)
 
 ```
 
-# Import and explore the data
+## 2. Exploring the data
+
+### 2.1 Import the data
 
 The data is saved in the session 2 folder, in a file "benefits.csv". We import the data to create a tibble called benefits. We view the first few lines to see what the data is that is included
 
@@ -43,7 +48,7 @@ View(benefits)
 
 ```
 
-## Data exploration
+### 2.2 Data exploration
 
 First, we look at the structure of benefits. Recall the function str()
 
@@ -83,7 +88,7 @@ sum(is.na(benefits))
 If you want to return the index of datapoints with missing data, you can use the function which()
 
 
-## Exploratory plots
+### 2.3 Exploratory plots
 
 Now we can create quick exploratory plots of the data. Look at the help function for plot()
 
@@ -98,9 +103,7 @@ plot(benefits$date, benefits$D)
 ```
 
 
-# Wrangling and plotting the applications numbers over time
-
-
+## 3. Data Wrangling
 
 R has powerful (and pretty plotting) functionality in the library ggplot2, which is part of the tidyverse environment. All of tidyverse uses long data. In long format, each row corresponds to data from one measurement, and repeated measurements are on different rows. 
 
@@ -109,7 +112,7 @@ pivot_longer() transforms a dataset so that it is has more rows and fewer column
 
 (Note, pivot_longer and a related function, pivot_wider, became available in a relatively recent version of R. Older code may use gather() and spread())
 
-## Data wrangling
+### 3.1 Tidying the Data
 
 Our dataset is currently in wide format, with the number of applications for each benefit in different columns.
 
@@ -179,7 +182,10 @@ benefit_long <- bind_rows(benefit_long, benefit_total)
 ```
 
 
-## Plotting
+## 4. Plotting with ggplot
+
+### 4.1 ggplot syntax
+
 The syntax for ggplot has the following elements:
 
   1. create a ggplot object which is defined by the dataset, and the aesthetic (including the variables). 
@@ -257,6 +263,8 @@ time_series_plot5
 
 ```
 
+### 4.2 Exercise
+
 Finally, we could perform the wrangling and plotting  in a concise chunk
 
 ```{r AllAnalysis}
@@ -306,11 +314,11 @@ time_series_plot
 ```
 
 
-# Plotting the mean applications per year as a bar graph
+### 4.3 Plotting the mean applications per year as a bar graph
 
 To take the average  by year, we need to create a factor variable for the year which we can use for grouping. The lubridate package which comes with tidyverse has a convenient function year(). We will need to mutate benefit_long to append this factor variable
 
-## Wrangling
+#### Wrangling
 
 ```{r CreateYearIndicator}
 
@@ -340,7 +348,7 @@ head(benefit_by_year)
 ```
 
 
-## Plotting bar graph
+#### Plotting bar graph
 
 Now we create a ggplot object. The x-axis will show the year, and will use colour for the benefit.
 
@@ -374,7 +382,7 @@ bar_graph_plot
 
 ```
 
-# Further training
+## 5. Further training
 
 We have only touched on the capabilities of ggplot2. A good set of tutorials on ggplot can be found at 
 http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html
