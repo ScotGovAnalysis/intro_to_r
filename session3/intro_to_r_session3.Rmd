@@ -1,7 +1,6 @@
 ---
 title: "Session 3 Solutions"
 author: ""
-date: "08-10-2024"
 output: html_document
 ---
 
@@ -18,7 +17,7 @@ Each section has an (optional) **stretch** challenge that may require functions 
 
 ## Section 1: Importing datasets
 
-The data are in the "Data" folder.
+The data are in the folder `intro_to_r/session3/Data`
 
 ### 1.1: Read in the CSV file `visits2011.csv`.
 
@@ -58,9 +57,9 @@ visits_sas <- haven::read_sas("//s0177a/sasdata1/Training/all_visits.sas7bdat")
 
 ## Section 2: Manipulating data
 
-### 2.1: Combine the datasets from 1.1 and 1.2.
+### 2.1: Append `visits_xl` to `visits_csv`.
 
-Use functions from earlier in the course to combine the datasets.
+***Hint***: we appended data in session 2.
 
 ```{r combine}
 visits <- bind_rows(visits_csv,visits_xl)
@@ -68,7 +67,7 @@ visits <- bind_rows(visits_csv,visits_xl)
 
 ### 2.2: Convert the dataset to a "long" (i.e. "tidy") format.
 
-"tidy" format is a long data format with one measurement per row.
+"Tidy" format is a long data format with one measurement per row.
 
 ```{r pivot}
 visits_long <- visits %>% 
@@ -99,12 +98,17 @@ visits_seasons <- visits_months %>%
   select(-month)
 ```
 
+
 ### 2.4: Stretch
+
 #### A: Create a `date` variable using the `period` variable. 
-***Hint:*** Consider the function `as_date()` in the `lubridate` package. First you will need to modify the `period` variable into a form that `lubridate` can interpret as a date. 
+
+***Hint:*** consider the function `as_date()` in the `lubridate` package. First you will need to modify the `period` variable into a form that `lubridate` can interpret as a date. 
+
 
 #### B: Use the `date` variable to create a year variable called `calendar_year`.
-***Hint:*** Use the `year()` function to create your `calendar_year` variable.
+
+***Hint:*** use the `year()` function to create your `calendar_year` variable.
 
 ```{r dates}
 library(lubridate)
@@ -123,7 +127,7 @@ visits_year <- visits_date %>%
 
 ### 3.1: Calculate the total number of trips made during each season.
 
-Create a new dataset containing the total number of trips for each of the 4 seasons.
+Create a new dataset containing the total number of trips for each of the 4 seasons. ***Hint***: you will need to use the `group_by()` function first.
 
 ```{r avg_visits_all}
 visits_seasons_total <- visits_seasons %>%
@@ -133,7 +137,7 @@ visits_seasons_total <- visits_seasons %>%
 
 ### 3.2: For each visit type, find the total number of trips made during each season.
 
-Create a new dataset containing the total number of trips made during the 4 seasons, for each of the visit types (business, holiday, etc.). ***Hint:*** You can group by more than one variable within tidyverse.
+Create a new dataset containing the total number of trips made during the 4 seasons, for each of the visit types (business, holiday, etc.). ***Hint:*** you can group by more than one variable within tidyverse.
 
 ```{r avg_visits}
 visits_types_seasons_total <- visits_seasons %>%
@@ -143,6 +147,8 @@ visits_types_seasons_total <- visits_seasons %>%
 ```
 
 ### 3.3: For each each season, find the percentage of trips made for each of the visit types. Round this percentage to two decimal places.
+
+***Hints:*** consider joining the two datasets created in 3.1 and 3.2. We covered useful numeric functions in session 1.
 
 ```{r pct_visits}
 visits_types_seasons_pct <- visits_types_seasons_total %>%
@@ -165,9 +171,7 @@ visits_types_seasons_pct2 <- visits_seasons %>%
 
 ### 3.4: Stretch: Calculate the monthly change in number of trips, by visit type.
 
-Using `visits_date`, create a dataset containing the difference in number of trips compared to the previous month, for each visit type.
-
-***Hint:*** The `lag()` function in the `dplyr` tidyverse package can be used to reference values in previous rows.
+Using `visits_date`, create a dataset containing the difference in number of trips compared to the previous month, for each visit type. ***Hint:*** the `lag()` function in the `dplyr` tidyverse package can be used to reference values in previous rows.
 
 ```{r diff_visits}
 visits_diff <- visits_date %>%
@@ -181,7 +185,7 @@ visits_diff <- visits_date %>%
 
 ### 4.1. Create a bar chart showing the number of trips by calendar year and season.
 
-***Hint:*** Use the `visits_year` data you created in 2.4. Consider carefully the x and y variables in `aes()`.
+***Hints:*** use the `visits_year` data you created in 2.4. Consider carefully the x and y variables in `aes()`. We created a bar chart in session 2.
 
 ```{r output_chart_1}
 # Creating a basic bar chart using ggplot
@@ -198,7 +202,7 @@ bar_graph_trips
 
 ### 4.2 Export `visits_date` to an Excel workbook named "Ex 4.2" and save your bar chart as a jpg.
 
-***Hint:*** Use the function `write_xlsx()` from the package `writexl`. Use the function `ggsave()` to save your bar chart.
+***Hints:*** we covered exporting data in session 1. Consider using the `write_xlsx()` function from the  `writexl` package. Use the function `ggsave()` to save your bar chart.
 
 ``` {r export}
 library(writexl)
@@ -216,7 +220,7 @@ Some suggested improvements:
 
 * Order the seasons (***hint:*** do this before you start plotting using the `levels` argument in the `factor()` function)
 * Re-label the x and y axis (***hint:*** "Labels and Legends" section of the ggplot cheat sheet)
-* Set the theme to show a white background with horizontal gridlines (***hint:*** "Themes" section of the ggplot cheat sheet)
+* Set the theme to show a white background with horizontal gridlines (***hint:*** use `sgplot`, an R package for creating accessible plots in the Scottish Government)
 * Change the colour of the bars
 * Format the y-axis label with thousands comma (***hint:*** use the `scales` package)
 * Define the y-axis limits and breaks

@@ -29,7 +29,7 @@ visits_sas <-
 
 ## Section 2: Manipulating data ----
 
-# 2.1: Combine the datasets from 1.1 and 1.2.
+# 2.1: Append `visits_xl` to `visits_csv`
 
 visits <- 
 
