@@ -249,7 +249,7 @@ time_series_plot3
 ```
 
 
-Now that we can see the plots, let's fit lines, to the points, and a straigh line for the trend
+Now that we can see the plots, let's fit lines, to the points, and a straight line for the trend
 
 ```{r TimeSeriesPlot4}
 
@@ -368,7 +368,7 @@ head(benefit_by_year)
 
 Now we create a ggplot object. The x-axis will show the year, and will use colour for the benefit.
 
-We will apply the geom_col and geom_errorbar geometries. Note that geom_col by default plots a stacked bar graph. To unstack the graph you will need to use the function dodge <- position_dodge(...) and then the argument "position = dodge" needs to be passed to the geometries.
+We will apply the geom_col and geom_errorbar geometries. Note that geom_col by default plots a stacked bar graph. To unstack the graph you will need to use the function dodge `<- position_dodge(...)` and then the argument `"position = dodge"` needs to be passed to the geometries.
 
 We will remove the label from the x-axis and change the labels for the y-axis to "Average yearly applications"
 
