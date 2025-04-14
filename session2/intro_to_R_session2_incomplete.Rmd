@@ -3,9 +3,6 @@ title: "Intro to R session2"
 author: ""
 date: "2023"
 output: html_document
-editor_options: 
-  markdown: 
-    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
@@ -16,18 +13,14 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE, message = FALS
 
 In this session, we will analyse a mock dataset.
 
-Social Security Scotland administers four benefits: Benefit A - Benefit
-D. You have collected data summarising the monthly applications for each
-of these benefits between January 2020 and January 2025.
+Social Security Scotland administers four benefits: Benefit A - Benefit D. You have collected data summarising the monthly applications for each of these benefits between January 2020 and January 2025.
 
 You need to:
 
 1.  Import and explore the data
 2.  Manipulate the data to prepare it for plotting
-3.  Plot the data over time for each of the benefits as well as the
-    total
-4.  Plot a bar graph with error bars to compare the mean number of
-    applications for the four benefits
+3.  Plot the data over time for each of the benefits as well as the total
+4.  Plot a bar graph with error bars to compare the mean number of applications for the four benefits
 
 ```{r LoadandSource}
 #Read in libraries
@@ -39,9 +32,7 @@ library(tidyverse)
 
 ### 2.1 Import the data
 
-The data is saved in the session 2 folder, in a file "benefits.csv". We
-import the data to create a tibble called benefits. We view the first
-few lines to see what the data is that is included
+The data is saved in the session 2 folder, in a file "benefits.csv". We import the data to create a tibble called benefits. We view the first few lines to see what the data is that is included
 
 ```{r ImportAndExplore}
 
@@ -76,8 +67,7 @@ Next, get the summary statistics
 
 Are there any points that are indicative of errors in data capture?
 
-It is good practice to look if there are any missing values in the data.
-The function is.na() will tell you if there are any missing data.
+It is good practice to look if there are any missing values in the data. The function is.na() will tell you if there are any missing data.
 
 ```{r Explore3}
 
@@ -93,13 +83,11 @@ How can we get the total number of missing values in the dataset?
 
 ```
 
-If you want to return the index of datapoints with missing data, you can
-use the function which()
+If you want to return the index of datapoints with missing data, you can use the function which()
 
 ### 2.3 Exploratory plots
 
-Now we can create quick exploratory plots of the data. Look at the help
-function for plot()
+Now we can create quick exploratory plots of the data. Look at the help function for plot()
 
 ```{r QuickPlot}
 
@@ -113,61 +101,39 @@ plot()
 
 ## 3. Data Wrangling
 
-R has powerful (and pretty plotting) functionality in the library
-ggplot2, which is part of the tidyverse environment. All of tidyverse
-uses long data. In long format, each row corresponds to data from one
-measurement, and repeated measurements are on different rows.
+R has powerful (and pretty plotting) functionality in the library ggplot2, which is part of the tidyverse environment. All of tidyverse uses long data. In long format, each row corresponds to data from one measurement, and repeated measurements are on different rows.
 
-We need to get the data in the correct structure. Tidyverse has two
-functions for reshaping datasets, pivot_wider() and pivot_longer().
-pivot_longer() transforms a dataset so that it is has more rows and
-fewer columns, e.g. with one measurement per row, whilst pivot_wider()
-transforms a dataset so that it has more columns and fewer rows e.g. one
-row per observation.
+We need to get the data in the correct structure. Tidyverse has two functions for reshaping datasets, pivot_wider() and pivot_longer(). pivot_longer() transforms a dataset so that it is has more rows and fewer columns, e.g. with one measurement per row, whilst pivot_wider() transforms a dataset so that it has more columns and fewer rows e.g. one row per observation.
 
-(Note, pivot_longer and a related function, pivot_wider, became
-available in a relatively recent version of R. Older code may use
-gather() and spread())
+(Note, pivot_longer and a related function, pivot_wider, became available in a relatively recent version of R. Older code may use gather() and spread())
 
 ### 3.1 Tidying the Data
 
-Our dataset is currently in wide format, with the number of applications
-for each benefit in different columns.
+Our dataset is currently in wide format, with the number of applications for each benefit in different columns.
 
 ![Wide Data](wide-data.svg)
 
-We want to reshape our data to long format, with a variable called
-"benefit" specifying the benefit, and one called "apps" for the number
-of applications.
+We want to reshape our data to long format, with a variable called "benefit" specifying the benefit, and one called "apps" for the number of applications.
 
 ![Long Data](long-data.svg)
 
-As we want to reshape the dataset to have fewer columns and more rows,
-we will use the pivot_longer() function. See the help section for all
-the options available for pivot_longer()
+As we want to reshape the dataset to have fewer columns and more rows, we will use the pivot_longer() function. See the help section for all the options available for pivot_longer()
 
 ```{r pivotLongerHelp}
 ?pivot_longer
 
 ```
 
-pivot_longer() and pivot_wider() are powerful functions that can reshape
-datasets in a variety of ways. For pivoting longer we need to provide
-the dataset, and the columns we want to pivot to a long format. The
-remaining parameters are all optional and are used to tell R how we want
-the reshaping to be done.
+pivot_longer() and pivot_wider() are powerful functions that can reshape datasets in a variety of ways. For pivoting longer we need to provide the dataset, and the columns we want to pivot to a long format. The remaining parameters are all optional and are used to tell R how we want the reshaping to be done.
 
-Typically the two additional parameters used are names_to and values_to
-which specify the variables containing the pivoted variables names and
-values respectively.
+Typically the two additional parameters used are names_to and values_to which specify the variables containing the pivoted variables names and values respectively.
 
 In our case we want to:
 
 -   use the benefits dataset
 -   pivot the columns A, B, C and D
 -   add a column 'benefit' containing the name of the benefit
--   add a column 'apps' containing the values of the number of
-    applications, for each benefit
+-   add a column 'apps' containing the values of the number of applications, for each benefit
 
 ```{r WideToLong}
 
@@ -184,12 +150,9 @@ head(benefit_long)
 
 ```
 
-To get the total applications for each month, we need to use group_by()
-and summarise() from the package dplyr which is part of the tidyverse
-suite.
+To get the total applications for each month, we need to use group_by() and summarise() from the package dplyr which is part of the tidyverse suite.
 
-Once we summarise, we can add this to our benefit_long dataframe. We
-need to specify the benefit, and here we use the label "Total"
+Once we summarise, we can add this to our benefit_long dataframe. We need to specify the benefit, and here we use the label "Total"
 
 ```{r AddTotal}
 
@@ -210,33 +173,25 @@ benefit_long <-
 
 ### 3.2 Exercises
 
-1. Read in "UKgas.csv" and inspect the data. 
-(The data has been created from one of R datasets https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas)
+1.  Read in "UKgas.csv" and inspect the data. (The data has been created from one of R datasets <https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas>)
 
-2. Create a new tibble of the data in long format with a column to specify the quarter.
+2.  Create a new tibble of the data in long format with a column to specify the quarter.
 
-3. Compute the mean quarterly UKgas consumption across years (Your new tibble will have four rows and 2 columns)
+3.  Compute the mean quarterly UKgas consumption across years (Your new tibble will have four rows and 2 columns)
 
-4. Compute the mean gas consumption for each year (Your tibble will have 27 rows and 2 columns)
+4.  Compute the mean gas consumption for each year (Your tibble will have 27 rows and 2 columns)
 
-5. **Bonus:** Convert your long tibble back to wide. This should be the same as the UKgas data. 
-Compute the mean gas consumption by year. 
-Hint: Have a look at https://stackoverflow.com/questions/50352735/calculate-the-mean-of-some-columns-using-dplyrmutate 
-(Your tibble will have 27 rows and 6 columns). As you can see, working with long data is simpler in R.
-
+5.  **Bonus:** Convert your long tibble back to wide. This should be the same as the UKgas data. Compute the mean gas consumption by year. Hint: Have a look at <https://stackoverflow.com/questions/50352735/calculate-the-mean-of-some-columns-using-dplyrmutate> (Your tibble will have 27 rows and 6 columns). As you can see, working with long data is simpler in R.
 
 ## 4. Plotting with ggplot
 
 ### 4.1 ggplot syntax
 
-The syntax for ggplot has the following elements: 1. create a ggplot
-object which is defined by the dataset, and the aesthetic (including the
-variables). 2. Specify geometries (i.e. plot types). Geometries such as
-plotting points, lines and bars are available. The specification of
-geometries enables one to plot various plot types on the same set of
-axes. See help(package = ggplot2) under the letter g for the various
-geometries available. 3. Customise the appearance. Colours, background,
-labels etc. (optional)
+The syntax for ggplot has the following elements:
+
+1.  create a ggplot object which is defined by the dataset, and the aesthetic (including the variables).
+2.  Specify geometries (i.e. plot types). Geometries such as plotting points, lines and bars are available. The specification of geometries enables one to plot various plot types on the same set of axes. See help(package = ggplot2) under the letter g for the various geometries available.
+3.  Customise the appearance. Colours, background, labels etc. (optional)
 
 Here, we will plot the data with a point geometry
 
@@ -252,8 +207,7 @@ time_series_plot
 
 ```
 
-This has combined the data for all the benefits. We can separate these
-by colour by using the aesthetic to specify the grouping variable
+This has combined the data for all the benefits. We can separate these by colour by using the aesthetic to specify the grouping variable
 
 ```{r}
 time_series_plot2 <-  ggplot(data = benefit_long,
@@ -277,8 +231,7 @@ time_series_plot3
 
 ```
 
-Now that we can see the plots, let's fit lines, to the points, and a
-straight line for the trend
+Now that we can see the plots, let's fit lines, to the points, and a straight line for the trend
 
 ```{r TimeSeriesPlot4}
 
@@ -290,12 +243,7 @@ time_series_plot4
 
 ```
 
-Finally, let's change the axes labels, legend title and background using
-themes. Themes allow us to customize the appearance. ggplot comes with
-several themes such as theme_bw(), or you can create your own themes.
-For examples see the Scottish Government theme
-[sgplot](https://github.com/DataScienceScotland/sgplot), or the [NRS
-theme](https://github.com/DataScienceScotland/nrsplot)
+Finally, let's change the axes labels, legend title and background using themes. Themes allow us to customize the appearance. ggplot comes with several themes such as theme_bw(), or you can create your own themes. For examples see the Scottish Government theme [sgplot](https://github.com/DataScienceScotland/sgplot), or the [NRS theme](https://github.com/DataScienceScotland/nrsplot)
 
 ```{r TimeSeriesPlot5}
 
@@ -352,16 +300,11 @@ time_series_plot
   
 ```
 
-
-
 ### 4.2 Plotting the mean applications per year as a bar graph
 
 #### Wrangling
 
-To take the average by year, we need to create a factor variable for the
-year which we can use for grouping. The lubridate package which comes
-with tidyverse has a convenient function year(). We will need to mutate
-benefit_long to append this factor variable
+To take the average by year, we need to create a factor variable for the year which we can use for grouping. The lubridate package which comes with tidyverse has a convenient function year(). We will need to mutate benefit_long to append this factor variable
 
 ```{r CreateYearIndicator}
 
@@ -372,9 +315,7 @@ benefit_long <- benefit_long %>%
 
 ```
 
-Now we group the data and summarise. The summary statistics that we will
-evaluate are the +- sd which will be used as error bars. We only want
-the yearly averages by benefit, so we will (un)select "Total"
+Now we group the data and summarise. The summary statistics that we will evaluate are the +- sd which will be used as error bars. We only want the yearly averages by benefit, so we will (un)select "Total"
 
 ```{r SummariseByYear}
 
@@ -393,16 +334,11 @@ head(benefit_by_year)
 
 #### Plotting bar graph
 
-Now we create a ggplot object. The x-axis will show the year, and will
-use colour for the benefit.
+Now we create a ggplot object. The x-axis will show the year, and will use colour for the benefit.
 
-We will apply the geom_col and geom_errorbar geometries. Note that
-geom_col by default plots a stacked bar graph. To unstack the graph you
-will need to use the function dodge \<- position_dodge(...) and then the
-argument "position = dodge" needs to be passed to the geometries.
+We will apply the geom_col and geom_errorbar geometries. Note that geom_col by default plots a stacked bar graph. To unstack the graph you will need to use the function dodge `<- position_dodge(...)` and then the argument `"position = dodge"` needs to be passed to the geometries.
 
-We will remove the label from the x-axis and change the labels for the
-y-axis to "Average yearly applications"
+We will remove the label from the x-axis and change the labels for the y-axis to "Average yearly applications"
 
 ```{r BarGraph}
 
@@ -430,15 +366,12 @@ bar_graph_plot
 
 ### 4.3 Exercises
 
-1. Plot the UKgas consumption by year as a line graph, with quarters shown in different colours. Change the axes labels to something of your choice and add a title. Use the `UKgas_l` data set created in exercise 3.2.
+1.  Plot the UKgas consumption by year as a line graph, with quarters shown in different colours. Change the axes labels to something of your choice and add a title. Use the `UKgas_l` data set created in exercise 3.2.
 
-2. Plot the same as above, but include a line for the mean gas consumption across quarters. You will first need to append the UKgas_by_year to your data
+2.  Plot the same as above, but include a line for the mean gas consumption across quarters. You will first need to append the UKgas_by_year to your data
 
-3. Create the same plot as above (including the mean), but use thin lines for quarter, and a thick line for the mean. You will need to add a new numeric variable to the data used in the previous exercise that specifies a value for line thickness. See the examples in `?geom_line` for details around specifying aesthetics for the line graph and how to do this by group. You will also need to look at `?scale_linewidth`
-
+3.  Create the same plot as above (including the mean), but use thin lines for quarter, and a thick line for the mean. You will need to add a new numeric variable to the data used in the previous exercise that specifies a value for line thickness. See the examples in `?geom_line` for details around specifying aesthetics for the line graph and how to do this by group. You will also need to look at `?scale_linewidth`
 
 ## 5. Further training
 
-We have only touched on the capabilities of ggplot2. A good set of
-tutorials on ggplot can be found at
-<http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html>
+We have only touched on the capabilities of ggplot2. A good set of tutorials on ggplot can be found at <http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html>
