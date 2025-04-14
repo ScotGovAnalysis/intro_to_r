@@ -9,35 +9,35 @@ library(lubridate)
 ### 2.1 Examples (incomplete) ---------------------------------------------
 
 #2.1.1 import data
-benefits <- read_csv("./benefits.csv")
+benefits <- 
   
-#2.1.2 view the first few lines of the tibble
-head(benefits, n=10)  
+  #2.1.2 view the first few lines of the tibble
   
-#2.1.3 view the entire tibble in a new tab
-View(benefits)
   
-### 2.2 Examples (incomplete) ---------------------------------------------
+  #2.1.3 view the entire tibble in a new tab
+  
+  
+  ### 2.2 Examples (incomplete) ---------------------------------------------
 
 #2.2.1 data structure
-str(benefits)
+
 
 #2.2.2 summary statistics
-summary(benefits)
+
 
 #2.2.3 check for missing values
-is.na(benefits)
+
 
 #2.2.4 total missing values
-sum(is.na(benefits))
+
 
 ### 2.3 Examples (incomplete) ---------------------------------------------
 
 #2.3.1 quick plots
-plot(benefits$date, benefits$A)
-plot(benefits$date, benefits$B)
-plot(benefits$date, benefits$C)
-plot(benefits$date, benefits$D)
+plot()
+plot()
+plot()
+plot()
 
 
 ## Section 3: Data Wrangling ----------------------------------------------
@@ -49,10 +49,9 @@ plot(benefits$date, benefits$D)
 
 #3.1.2 wide to long
 benefit_long <- pivot_longer(
-  benefits,
-  cols = -date,
-  names_to = "benefit",
-  values_to = "apps"
+  
+  
+  
 )
 head(benefit_long)
 
@@ -66,18 +65,18 @@ head(benefit_long)
 
 #3.1.4 add total
 benefit_total <- benefit_long %>%
-  group_by(date) %>%
-  summarise(benefit = "Total",
-              apps = sum(apps), 
+  group_by() %>%
+  summarise(benefit = 
+              apps = , 
   ) %>%
   ungroup()
 
 head(benefit_total)
 
 #3.1.5 append benefit_total to benefit_long
-benefit_long <- bind_rows(benefit_long, benefit_total)
-
-
+benefit_long <-
+  
+  
 ### 3.2 Exercises ---------------------------------------------------------
 
 #1. Read in "UKgas.csv" and inspect the data. 
