@@ -991,7 +991,23 @@ staff_all <- full_join(staff_salaries,
 For more information about the different sorts of joins and other data transformation functions see the 'Data Transformation Cheat Sheet' at: https://rstudio.github.io/cheatsheets/html/data-transformation.html  
 
 
-### 4.2 Exporting data
+### 4.2 Exercises
+
+Load the World Health Organisation TB dataset, and the population dataset: (Further information about these datasets can be found in the help section `?who` )
+Note: if the who dataset isn't found, you may need to run `library(tidyr)` first
+
+```{r}
+who_data <- who
+who_population <- population
+```
+
+1. Create a new version of the `who_data` that just contains the rows relating to the UK (Hint: the ISO2 code for the UK is "GB")
+
+2. We want to be add in a column containing the population to this dataset. Merge the UK WHO data with the `who_population` dataset such that the final dataset still contains all the rows in the UK dataset
+
+3. Instead of retaining all the rows from the UK dataset, we now just want to create a combined dataset that merges rows that appear in both the UK Who dataset and the `who_population` data
+
+### 4.3 Exporting data
 
 
 
@@ -1013,7 +1029,7 @@ This assumes by default that the columns are separated by a comma symbol. The da
 
 
 
-### 4.3 Exercises
+### 4.4 Exercises
 
 
 
