@@ -76,6 +76,59 @@ head(benefit_total)
 benefit_long <- bind_rows(benefit_long, benefit_total)
 
 
+### 3.2 Exercises ---------------------------------------------------------
+
+#1. Read in "UKgas.csv" and inspect the data. 
+#   (The data has been created from one of R datasets https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas)
+
+UKgas <- read_csv("./UKgas.csv")
+head(UKgas)
+  
+  
+  
+#2. Create a new tibble of the data in long format with a column to specify the quarter.
+  
+UKgas_l <- UKgas %>% 
+  pivot_longer(cols = -year, 
+               names_to = "quarter", 
+               values_to = "gas_consumption")
+  
+  
+  
+#3. Compute the mean quarterly UKgas consumption across years (Your new tibble will have four rows and 2 columns)
+  
+UKgas_by_quarter <- UKgas_l %>% 
+  group_by(quarter) %>% 
+  summarise(mean_quarterly_gas = mean(gas_consumption, 
+                                      na.rm = TRUE))
+  
+  
+  
+  
+#4. Compute the mean gas consumption for each year (Your tibble will have 27 rows and 2 columns)
+  
+UKgas_by_year <- UKgas_l %>% 
+  group_by(year) %>% 
+  summarise(mean_annual_gas = mean(gas_consumption, 
+                                   na.rm = TRUE))
+  
+  
+  
+  
+#5. **Bonus:** Convert your long tibble back to wide. This should be the same as the UKgas data. 
+#   Compute the mean gas consumption by year. 
+#   Hint: Have a look at https://stackoverflow.com/questions/50352735/calculate-the-mean-of-some-columns-using-dplyrmutate 
+#   (Your tibble will have 27 rows and 6 columns). As you can see, working with long data is simpler in R.
+  
+UKgas <- UKgas %>% 
+  mutate(mean_annual_gas =rowMeans(select(., Qtr1,
+                                          Qtr2,
+                                          Qtr3, 
+                                          Qtr4)))
+  
+  
+  
+  
 ## Section 4: Data Wrangling ----------------------------------------------
 
 ### 4.1 Examples ----------------------------------------------------------
@@ -122,16 +175,14 @@ time_series_plot5 <- time_series_plot4 +
 
 time_series_plot5
 
-### 4.2 Exercises ---------------------------------------------------------
-
-#1. create the time_series_plot5 in a concise bit of code
+#4.1.6 combining wrangling and plotting in one concise chunk
 
 #Import
 benefits <- read_csv("./benefits.csv")
 
 #Wide to long
 benefit_long <- pivot_longer(benefits, 
-                             cols = -date, 
+                             cols = !date, 
                              names_to = "benefit", 
                              values_to = "apps")
 #Get total
@@ -145,7 +196,6 @@ benefit_total <- benefit_long %>%
 benefit_long <- benefit_long %>%
   bind_rows(benefit_total)
 
-#Plotting
 time_series_plot <-  ggplot(data = benefit_long,
                             aes(x=date,
                                 y = apps,  
@@ -163,14 +213,16 @@ time_series_plot <-  ggplot(data = benefit_long,
 time_series_plot
 
 
-### 4.3 Examples ----------------------------------------------------------
 
-#4.3.1 add a variable to the benefit_long tibble containing the year, and convert the variable to a factor
+
+### 4.2 Examples ----------------------------------------------------------
+
+#4.2.1 add a variable to the benefit_long tibble containing the year, and convert the variable to a factor
 benefit_long <- benefit_long %>%
   mutate(year = year(date)) %>%
   mutate(year = as.factor(year))  #These two lines could be combined: mutate(year = as.factor(year(date)))
 
-#4.3.2 summarise average number of benefits by year, and add error bar max/min values
+#4.2.2 summarise average number of benefits by year, and add error bar max/min values
 benefit_by_year <- benefit_long %>%
   filter(benefit != "Total") %>%
   group_by(year, benefit) %>%
@@ -181,7 +233,7 @@ benefit_by_year <- benefit_long %>%
 
 head(benefit_by_year)
 
-#4.3.3 plot as a bar chart
+#4.2.3 plot as a bar chart
 bar_graph_plot <- ggplot(data = benefit_by_year, 
                          aes(x = year,
                              y = average_apps, 
@@ -204,42 +256,9 @@ bar_graph_plot <- bar_graph_plot+
 
 bar_graph_plot
 
-## Additional Exercises ---------------------------------------------------
+### 4.3 Exercises ---------------------------------------------------------
 
-#1. Read in "UKgas.csv" from the `./additional_exercises/data` folder and inspect the data. 
-#   (The data has been created from one of R datasets https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas)
-UKgas <- read_csv("./additional_exercises/data/UKgas.csv")
-head(UKgas)
-
-#2. Create a new tibble of the data in long format with a column to specify the quarter.
-UKgas_l <- UKgas %>% 
-  pivot_longer(cols = -year, 
-               names_to = "quarter", 
-               values_to = "gas_consumption")
-
-#3. Compute the mean quarterly UKgas consumption across years (Your new tibble will have four rows and 2 columns)
-UKgas_by_quarter <- UKgas_l %>% 
-  group_by(quarter) %>% 
-  summarise(mean_quarterly_gas = mean(gas_consumption, 
-                                      na.rm = TRUE))
-
-#4. Compute the mean gas consumption for each year (Your tibble will have 27 rows and 2 columns)
-UKgas_by_year <- UKgas_l %>% 
-  group_by(year) %>% 
-  summarise(mean_annual_gas = mean(gas_consumption, 
-                                   na.rm = TRUE))
-
-#5. **Bonus:** Convert your long tibble back to wide. This should be the same as the UKgas data. 
-#   Compute the mean gas consumption by year. 
-#   Hint: Have a look at https://stackoverflow.com/questions/50352735/calculate-the-mean-of-some-columns-using-dplyrmutate 
-#   (Your tibble will have 27 rows and 6 columns). As you can see, working with long data is simpler in R.
-UKgas <- UKgas %>% 
-  mutate(mean_annual_gas =rowMeans(select(., Qtr1,
-                                          Qtr2,
-                                          Qtr3, 
-                                          Qtr4)))
-
-#6. Plot the UKgas consumption by year as a line graph, with quarters shown in different colours. 
+#1. Plot the UKgas consumption by year as a line graph, with quarters shown in different colours. 
 #   Change the axes labels to something of your choice and add a title.
 g <- ggplot(UKgas_l, aes(x = year, 
                          y = gas_consumption, 
@@ -251,8 +270,7 @@ g <- ggplot(UKgas_l, aes(x = year,
 
 g
 
-
-#7. Plot the same as above, but include a line for the mean gas consumption across quarters. 
+#2. Plot the same as above, but include a line for the mean gas consumption across quarters. 
 #   You will first need to append the UKgas_by_year to your data
 UKgas_l_with_mean <- UKgas_l %>% 
   bind_rows(UKgas_by_year %>% 
@@ -271,19 +289,22 @@ g2 <- ggplot(UKgas_l_with_mean, aes(x = year,
 
 g2
 
-
-#8. Create the same plot as above (including the mean), but use thin lines for quarter, and a thick line for the mean. 
+#3. Create the same plot as above (including the mean), but use thin lines for quarter, and a thick line for the mean. 
 #   You will need to add a new numeric variable to the data used in the previous exercise that specifies a value for line thickness. 
 #   See the examples in `?geom_line` for details around specifying aesthetics for the line graph and how to do this by group. 
 #   You will also need to look at `?scale_linewidth`
+
+# Add a linewidth value, to do this you will have to create a new column with a condition. 
+# Look at ?if_else to see how to make a new column that shows '2' when "quarter == 'Mean'" and '1' otherwise.
+# The numbers are not crucial as these will be rescaled in the plot.
 UKgas_l_with_mean <- UKgas_l_with_mean %>% 
-  # Add a linewidth value. The numbers are not crucial as these will be rescaled in the plot
   mutate(linewidth = if_else(quarter == "Mean", 2, 1))
 
 g3 <- ggplot(UKgas_l_with_mean, aes(x = year, 
                                     y = gas_consumption, 
                                     group = quarter, 
                                     colour = quarter)) + 
+  #Implement the linewidth using geom_line()
   geom_line(aes(linewidth = linewidth)) +
   #specify the range that the linewidths should span, and disable the linewidth legend
   scale_linewidth(range = c(0.1, 2), guide = "none") +
@@ -291,6 +312,8 @@ g3 <- ggplot(UKgas_l_with_mean, aes(x = year,
   ylab("Gas consumption (mTherms)")
 
 g3
+
+
 
 
 

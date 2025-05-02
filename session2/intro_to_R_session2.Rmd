@@ -182,6 +182,23 @@ benefit_long <- bind_rows(benefit_long, benefit_total)
 ```
 
 
+### 3.2 Exercises
+
+1. Read in "UKgas.csv" and inspect the data. 
+(The data has been created from one of R datasets https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas)
+
+2. Create a new tibble of the data in long format with a column to specify the quarter.
+
+3. Compute the mean quarterly UKgas consumption across years (Your new tibble will have four rows and 2 columns)
+
+4. Compute the mean gas consumption for each year (Your tibble will have 27 rows and 2 columns)
+
+5. **Bonus:** Convert your long tibble back to wide. This should be the same as the UKgas data. 
+Compute the mean gas consumption by year. 
+Hint: Have a look at https://stackoverflow.com/questions/50352735/calculate-the-mean-of-some-columns-using-dplyrmutate 
+(Your tibble will have 27 rows and 6 columns). As you can see, working with long data is simpler in R.
+
+
 ## 4. Plotting with ggplot
 
 ### 4.1 ggplot syntax
@@ -232,7 +249,7 @@ time_series_plot3
 ```
 
 
-Now that we can see the plots, let's fit lines, to the points, and a straigh line for the trend
+Now that we can see the plots, let's fit lines, to the points, and a straight line for the trend
 
 ```{r TimeSeriesPlot4}
 
@@ -263,11 +280,10 @@ time_series_plot5
 
 ```
 
-### 4.2 Exercise
 
-Finally, we could perform the wrangling and plotting  in a concise chunk
+Finally, we could perform the wrangling and plotting in one concise chunk
 
-```{r AllAnalysis}
+```{r CombineSteps}
 #Import
 benefits <- read_csv("./benefits.csv")
 
@@ -314,7 +330,7 @@ time_series_plot
 ```
 
 
-### 4.3 Plotting the mean applications per year as a bar graph
+### 4.2 Plotting the mean applications per year as a bar graph
 
 To take the average  by year, we need to create a factor variable for the year which we can use for grouping. The lubridate package which comes with tidyverse has a convenient function year(). We will need to mutate benefit_long to append this factor variable
 
@@ -327,7 +343,7 @@ benefit_long <- benefit_long %>%
   mutate(year = year(date)) %>%
   mutate(year = as.factor(year))  #These two lines could be combined: mutate(year = as.factor(year(date)))
 
-
+head(benefit_long)
 ```
 
 Now we group the data and summarise. The summary statistics that we will evaluate are the +- sd which will be used as error bars. We only want the yearly averages by benefit, so we will (un)select "Total"
@@ -352,7 +368,7 @@ head(benefit_by_year)
 
 Now we create a ggplot object. The x-axis will show the year, and will use colour for the benefit.
 
-We will apply the geom_col and geom_errorbar geometries. Note that geom_col by default plots a stacked bar graph. To unstack the graph you will need to use the function dodge <- position_dodge(...) and then the argument "position = dodge" needs to be passed to the geometries.
+We will apply the geom_col and geom_errorbar geometries. Note that geom_col by default plots a stacked bar graph. To unstack the graph you will need to use the function dodge `<- position_dodge(...)` and then the argument `"position = dodge"` needs to be passed to the geometries.
 
 We will remove the label from the x-axis and change the labels for the y-axis to "Average yearly applications"
 
@@ -381,6 +397,14 @@ bar_graph_plot <- bar_graph_plot+
 bar_graph_plot
 
 ```
+
+### 4.3 Exercises
+
+1. Plot the UKgas consumption by year as a line graph, with quarters shown in different colours. Change the axes labels to something of your choice and add a title. Use the `UKgas_l` data set created in exercise 3.2.
+
+2. Plot the same as above, but include a line for the mean gas consumption across quarters. You will first need to append the UKgas_by_year to your data
+
+3. Create the same plot as above (including the mean), but use thin lines for quarter, and a thick line for the mean. You will need to add a new numeric variable to the data used in the previous exercise that specifies a value for line thickness. See the examples in `?geom_line` for details around specifying aesthetics for the line graph and how to do this by group. You will also need to look at `?scale_linewidth`
 
 ## 5. Further training
 
