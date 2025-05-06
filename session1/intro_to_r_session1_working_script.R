@@ -284,13 +284,26 @@ staff_sickness_preserved_with_salaries_joined <-
 #4.1.7
 staff_all <- 
   
-### 4.2 Examples ----------------------------------------------------------
+### 4.2 Exercises ---------------------------------------------------------
+
+#load the WHO datasets
+library(tidyverse)
+who_data <- who
+who_population <- population
+
+#4.2.1
+
+#4.2.2
+
+#4.2.3
+
+### 4.3 Examples ----------------------------------------------------------
 
 #4.2.1
 write_csv(iris_petals, file = "iris_petals.csv")
 
 
-### 4.3 Exercises ---------------------------------------------------------
+### 4.4 Exercises ---------------------------------------------------------
 
 # reload the iris dataset, and load tidyverse
 

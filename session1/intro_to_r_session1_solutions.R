@@ -278,13 +278,38 @@ staff_all <- full_join(staff_salaries,
                        by="staff_id")
 
 
-### 4.2 Examples ----------------------------------------------------------
+### 4.2 Exercises ---------------------------------------------------------
+
+#load the WHO datasets
+
+library(tidyverse)
+who_data <- who
+who_population <- population
+
+# 1. Create a new version of the `who_data` that just contains the rows relating to the UK (Hint: the ISO2 code for the UK is "GB")
+
+who_uk <- who %>%
+  filter(iso2 == "GB")
+
+# 2. We want to be add in a column containing the population to this dataset. Merge the UK WHO data with the `who_population` dataset such that the final dataset still contains all the rows in the UK dataset
+
+who_uk_pop <- who_uk %>%
+  left_join(who_population,
+            join_by(year, country))
+
+# 3. Instead of retaining all the rows from the UK dataset, we now just want to create a combined dataset that merges rows that appear in both the UK Who dataset and the `who_population` data
+
+who_uk_pop2 <- who_uk %>%
+  inner_join(who_population,
+            join_by(year, country))
+
+### 4.3 Examples ----------------------------------------------------------
 
 #4.2.1
 write_csv(iris_petals, file = "iris_petals.csv")
 
 
-### 4.3 Exercises ---------------------------------------------------------
+### 4.4 Exercises ---------------------------------------------------------
 
 # reload the iris dataset, and load tidyverse
 
