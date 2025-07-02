@@ -226,6 +226,15 @@ There is also a help menu. You can either use this or type ? into the console an
 Of course, you can also use Google, Stack Overflow, R-Yammer or the R-user group to try and find the solution to the problem. 
 
 
+Generative AI tools such as Copilot Chat can also create code, and can be of some very limited use. 
+See the Saltire pages on SG policy to use of this technology in the first instance: 
+https://scotsconnect.sharepoint.com/sites/MyWork/SitePages/Using-generative-artificial-intelligence-in-the-Scottish-Government.aspx#scottish-government-policy-on-artificial-intelligence
+
+Code produced by AI cannot replace learning to code, and it is essential to check all outputs from 
+these tools thoroughly before implementing them. A use cases might be asking the model to provide 
+syntax for e.g. filtering data, this might point you to the 'filter' function in tidyverse 
+which you could then research and test yourself. 
+
 
 ### 1.7 Exercises
 
