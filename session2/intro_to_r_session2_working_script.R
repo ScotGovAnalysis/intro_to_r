@@ -67,7 +67,7 @@ head(benefit_long)
 benefit_total <- benefit_long %>%
   group_by() %>%
   summarise(benefit = 
-              apps = , 
+              apps =  
   ) %>%
   ungroup()
 
@@ -80,15 +80,18 @@ benefit_long <-
 ### 3.2 Exercises ---------------------------------------------------------
 
 #1. Read in "UKgas.csv" and inspect the data. 
-#   (The data has been created from one of R datasets https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas)
+#   The data has been created from one of R data sets https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas
+#   The data set is a time series of gas consumption in the UK from 1960Q1 to 1986Q4, in millions of therms (a unit of heat energy).
+
 
 UKgas <-  
   
   
   
   
-#2. Create a new tibble of the data in long format with a column to specify the quarter.
-  
+#2. Create a new tibble of the data in long format with a column to specify the quarter, and a column called "gas_consumption" to show the values.
+#   Note that the data set created here will be re-used in later exercises.  
+
 UKgas_l <-
   
   
@@ -101,26 +104,27 @@ UKgas_by_quarter <-
   
   
   
-#4. Compute the mean gas consumption for each year (Your tibble will have 27 rows and 2 columns)
+#4. Compute the mean gas consumption for each year (Your tibble will have 27 rows and 2 columns).
+#   Note that the data set created here will be re-used in later exercises.
   
 UKgas_by_year <- 
   
   
   
   
-#5. **Bonus:** Convert your long tibble back to wide. This should be the same as the UKgas data. 
-#   Compute the mean gas consumption by year. 
+#5. **Bonus:** Convert your long tibble back to wide using the 'pivot_wider' function. This should be the same as the UKgas data. 
+#   Use the wide data set to compute the mean gas consumption by year. 
 #   Hint: Have a look at https://stackoverflow.com/questions/50352735/calculate-the-mean-of-some-columns-using-dplyrmutate 
-#   (Your tibble will have 27 rows and 6 columns). As you can see, working with long data is simpler in R.
+#   (Your final tibble will have 27 rows and 6 columns). As you can see, working with long data is simpler in R.
   
 UKgas <-
   
   
   
   
-## Section 4: Data Wrangling ----------------------------------------------
+## Section 4: Plotting with ggplot ----------------------------------------------
 
-### 4.1 Examples ----------------------------------------------------------
+### 4.1 Examples  ---------------------------------------------------------------
 
 #4.1.1 Time series plot
 time_series_plot <- ggplot(data = benefit_long,
@@ -201,7 +205,14 @@ time_series_plot <-  ggplot(data = benefit_long,
 
 time_series_plot
 
+#4.1.7 using sgplot
+library(sgplot)
 
+time_series_plot_sg <- time_series_plot + 
+  scale_colour_discrete_sg("main") + # set the colours to SG approved palette
+  theme_sg() # overwrite with SG theme
+
+time_series_plot_sg
 
 
 ### 4.2 Examples (incomplete) ---------------------------------------------
@@ -243,6 +254,18 @@ bar_graph_plot <- bar_graph_plot +
 
 bar_graph_plot
 
+# use sgplot with the bar chart: consult the documentation of sgplot.
+# This page describes which functions to use colour the chart
+# https://scotgovanalysis.github.io/sgplot/reference/scale_colour_discrete_sg.html
+library(sgplot)
+
+bar_graph_plot_sg <- bar_graph_plot + 
+  scale_xxx_sg() + # set the bar colours to SG approved palette
+  scale_xxx_sg() + # set error bar colours to SG palette
+  theme_sg() # overwrite with SG theme
+
+bar_graph_plot_sg
+
 
 ### 4.3 Exercises ---------------------------------------------------------
 
@@ -266,7 +289,7 @@ UKgas_l_with_mean <- UKgas_l %>%
               # Specify the value that should appear in the "quarter" column
               mutate() %>%
               # ensure that column names match
-              rename()
+              rename())
 
 g2 <- ggplot(UKgas_l_with_mean, aes(x = , 
                                     y = , 
