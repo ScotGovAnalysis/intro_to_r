@@ -178,14 +178,14 @@ benefit_long <-
     <https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas>).
     The data set is a time series of gas consumption in the UK from 1960Q1 to 1986Q4, in millions of therms (a unit of heat           energy).
 
-2.  Create a new tibble of the data in long format with a column to specify the quarter, and a column called "gas_consumption" to     show the values.
+2.  Create a new tibble of the data in long format with a column to specify the quarter, and a column called "gas_consumption" to     show the values. Note that the data set created here will be re-used in later exercises.
 
 
 3.  Compute the mean quarterly UKgas consumption across years (Your new
     tibble will have four rows and 2 columns)
 
 4.  Compute the mean gas consumption for each year (Your tibble will
-    have 27 rows and 2 columns)
+    have 27 rows and 2 columns). Note that the data set created here will be re-used in later exercises.
 
 5.  **Bonus:** Convert your long tibble back to wide using the 'pivot_wider' function. This should be the same as the UKgas data.     Use the wide data set to compute the mean gas consumption by year. Hint: Have a look at <https://stackoverflow.com/questions/50352735/calculate-the-mean-of-some-columns-using-dplyrmutate> (Your final tibble will have      27 rows and 6 columns). As you can see, working with long data is simpler in R.
 
@@ -306,6 +306,27 @@ time_series_plot
   
 ```
 
+#### sgplot
+
+An internal R package was developed by Alice Hannah called [sgplot](https://scotgovanalysis.github.io/sgplot/), which allows us to easily style the charts we make in an accessible way with an SG theme.
+
+We can install sgplot in the same way would with other packages, by going to tools > install packages.
+
+The [documentation](https://scotgovanalysis.github.io/sgplot/) of sgplot gives us some instructions of how to use it, but for this demonstration we will just manually implement the theme and the colours.
+
+To add these on to our last chart, we can use the code below. Note that our chart has 5 colours so we have to use the extended palette. Accessibility publication guidelines recommend no more than 4 colours in one chart.
+
+```{r sgplot}
+# load the sgplot package
+library(sgplot)
+
+time_series_plot_sg <- time_series_plot + 
+  scale_colour_discrete_sg("main-extended") + # set the colours to SG approved palette
+  theme_sg() # overwrite with SG theme
+
+time_series_plot_sg
+```
+
 ### 4.2 Plotting the mean applications per year as a bar graph
 
 #### Wrangling
@@ -367,6 +388,25 @@ bar_graph_plot <- bar_graph_plot +
   ylab()
 
 bar_graph_plot
+
+```
+
+#### sgplot bar chart
+
+In section 4.1 we saw how we can use sgplot to style our charts. We can also apply this to our bar chart in a similar way to how we did before.
+
+Looking at the [documentation](https://scotgovanalysis.github.io/sgplot/reference/scale_colour_discrete_sg.html) for sgplot to see how to use the functions to change the colours of our bar chart and error bars.
+
+```{r}
+
+library(sgplot)
+
+bar_graph_plot_sg <- bar_graph_plot + 
+  scale_xxx_sg() + # set the bar colours to SG approved palette
+  scale_xxx_sg() + # set error bar colours to SG palette
+  theme_sg() # overwrite with SG theme
+
+bar_graph_plot_sg
 
 ```
 

@@ -90,7 +90,8 @@ UKgas <-
   
   
 #2. Create a new tibble of the data in long format with a column to specify the quarter, and a column called "gas_consumption" to show the values.
-  
+#   Note that the data set created here will be re-used in later exercises.  
+
 UKgas_l <-
   
   
@@ -103,7 +104,8 @@ UKgas_by_quarter <-
   
   
   
-#4. Compute the mean gas consumption for each year (Your tibble will have 27 rows and 2 columns)
+#4. Compute the mean gas consumption for each year (Your tibble will have 27 rows and 2 columns).
+#   Note that the data set created here will be re-used in later exercises.
   
 UKgas_by_year <- 
   
@@ -120,9 +122,9 @@ UKgas <-
   
   
   
-## Section 4: Data Wrangling ----------------------------------------------
+## Section 4: Plotting with ggplot ----------------------------------------------
 
-### 4.1 Examples ----------------------------------------------------------
+### 4.1 Examples  ---------------------------------------------------------------
 
 #4.1.1 Time series plot
 time_series_plot <- ggplot(data = benefit_long,
@@ -203,7 +205,14 @@ time_series_plot <-  ggplot(data = benefit_long,
 
 time_series_plot
 
+#4.1.7 using sgplot
+library(sgplot)
 
+time_series_plot_sg <- time_series_plot + 
+  scale_colour_discrete_sg("main") + # set the colours to SG approved palette
+  theme_sg() # overwrite with SG theme
+
+time_series_plot_sg
 
 
 ### 4.2 Examples (incomplete) ---------------------------------------------
@@ -245,6 +254,18 @@ bar_graph_plot <- bar_graph_plot +
 
 bar_graph_plot
 
+# use sgplot with the bar chart: consult the documentation of sgplot.
+# This page describes which functions to use colour the chart
+# https://scotgovanalysis.github.io/sgplot/reference/scale_colour_discrete_sg.html
+library(sgplot)
+
+bar_graph_plot_sg <- bar_graph_plot + 
+  scale_xxx_sg() + # set the bar colours to SG approved palette
+  scale_xxx_sg() + # set error bar colours to SG palette
+  theme_sg() # overwrite with SG theme
+
+bar_graph_plot_sg
+
 
 ### 4.3 Exercises ---------------------------------------------------------
 
@@ -268,7 +289,7 @@ UKgas_l_with_mean <- UKgas_l %>%
               # Specify the value that should appear in the "quarter" column
               mutate() %>%
               # ensure that column names match
-              rename()
+              rename())
 
 g2 <- ggplot(UKgas_l_with_mean, aes(x = , 
                                     y = , 

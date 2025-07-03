@@ -87,7 +87,8 @@ head(UKgas)
   
   
 #2. Create a new tibble of the data in long format with a column to specify the quarter, and a column called "gas_consumption" to show the values.
-  
+#   Note that the data set created here will be re-used in later exercises.
+
 UKgas_l <- UKgas %>% 
   pivot_longer(cols = -year, 
                names_to = "quarter", 
@@ -105,6 +106,7 @@ UKgas_by_quarter <- UKgas_l %>%
   
   
 #4. Compute the mean gas consumption for each year (Your tibble will have 27 rows and 2 columns)
+#   Note that the data set created here will be re-used in later exercises.
 
 UKgas_by_year <- UKgas_l %>% 
   group_by(year) %>% 
@@ -137,7 +139,7 @@ UKgas <- UKgas %>%
   
   
   
-## Section 4: Data Wrangling ----------------------------------------------
+## Section 4: Plotting with ggplot ----------------------------------------------
 
 ### 4.1 Examples ----------------------------------------------------------
 
@@ -220,8 +222,14 @@ time_series_plot <-  ggplot(data = benefit_long,
 
 time_series_plot
 
+#4.1.7 using sgplot
+library(sgplot)
 
+time_series_plot_sg <- time_series_plot + 
+  scale_colour_discrete_sg("main") + # set the colours to SG approved palette
+  theme_sg() # overwrite with SG theme
 
+time_series_plot_sg
 
 ### 4.2 Examples ----------------------------------------------------------
 
@@ -263,6 +271,17 @@ bar_graph_plot <- bar_graph_plot+
   ylab("Average yearly applications")
 
 bar_graph_plot
+
+# use sgplot with the bar chart
+library(sgplot)
+
+bar_graph_plot_sg <- bar_graph_plot + 
+  scale_fill_discrete_sg("main") + # set the bar colours to SG approved palette
+  scale_colour_discrete_sg("main") + # set error bar colours to SG palette
+  theme_sg() # overwrite with SG theme
+
+bar_graph_plot_sg
+
 
 ### 4.3 Exercises ---------------------------------------------------------
 
