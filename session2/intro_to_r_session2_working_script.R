@@ -67,7 +67,7 @@ head(benefit_long)
 benefit_total <- benefit_long %>%
   group_by() %>%
   summarise(benefit = 
-              apps = , 
+              apps =  
   ) %>%
   ungroup()
 
@@ -80,14 +80,16 @@ benefit_long <-
 ### 3.2 Exercises ---------------------------------------------------------
 
 #1. Read in "UKgas.csv" and inspect the data. 
-#   (The data has been created from one of R datasets https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas)
+#   The data has been created from one of R data sets https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/UKgas
+#   The data set is a time series of gas consumption in the UK from 1960Q1 to 1986Q4, in millions of therms (a unit of heat energy).
+
 
 UKgas <-  
   
   
   
   
-#2. Create a new tibble of the data in long format with a column to specify the quarter.
+#2. Create a new tibble of the data in long format with a column to specify the quarter, and a column called "gas_consumption" to show the values.
   
 UKgas_l <-
   
@@ -108,10 +110,10 @@ UKgas_by_year <-
   
   
   
-#5. **Bonus:** Convert your long tibble back to wide. This should be the same as the UKgas data. 
-#   Compute the mean gas consumption by year. 
+#5. **Bonus:** Convert your long tibble back to wide using the 'pivot_wider' function. This should be the same as the UKgas data. 
+#   Use the wide data set to compute the mean gas consumption by year. 
 #   Hint: Have a look at https://stackoverflow.com/questions/50352735/calculate-the-mean-of-some-columns-using-dplyrmutate 
-#   (Your tibble will have 27 rows and 6 columns). As you can see, working with long data is simpler in R.
+#   (Your final tibble will have 27 rows and 6 columns). As you can see, working with long data is simpler in R.
   
 UKgas <-
   
